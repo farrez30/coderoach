@@ -170,6 +170,66 @@
 }
 
 /* ============================================================
+   NARRATIVE MOTION — the drawings in the landing's narrative sections.
+   Each one waits for its card to be revealed; --n-i staggers a group.
+   ============================================================ */
+@layer utilities {
+  /* Chart bars rise from the axis */
+  @keyframes narrativeGrow { from { transform: scaleY(0); } }
+  .narrative-grow {
+    transform-origin: center bottom;
+    animation: narrativeGrow 800ms var(--ease-out-quint) both;
+    animation-delay: calc(var(--n-i, 0) * 70ms + 200ms);
+  }
+
+  /* Meter segments fill from the left */
+  @keyframes narrativeFill { from { transform: scaleX(0); } }
+  .narrative-fill {
+    transform-origin: left center;
+    animation: narrativeFill 520ms var(--ease-out-quint) both;
+    animation-delay: calc(var(--n-i, 0) * 110ms + 700ms);
+  }
+
+  /* Check marks land one after another */
+  @keyframes narrativePop {
+    0% { opacity: 0; transform: scale(0.5); }
+    70% { opacity: 1; transform: scale(1.12); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  .narrative-pop {
+    animation: narrativePop 260ms var(--ease-out-quint) both;
+    animation-delay: calc(var(--n-i, 0) * 110ms + 350ms);
+  }
+
+  /* Rows of a drawing: chat bubbles, the closing note */
+  @keyframes narrativeRise {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: none; }
+  }
+  .narrative-rise {
+    animation: narrativeRise 420ms var(--ease-out-quint) both;
+    animation-delay: calc(var(--n-i, 0) * 140ms + 300ms);
+  }
+
+  :is(.reveal, .reveal-stagger):not(.in) :is(.narrative-grow, .narrative-fill, .narrative-pop, .narrative-rise) {
+    animation-play-state: paused;
+  }
+
+  /* Warning dot on the missing-figure tile */
+  @keyframes pulseWarn {
+    0%, 70%, 100% { box-shadow: 0 0 0 0 rgba(242, 169, 59, 0); }
+    35%           { box-shadow: 0 0 0 5px rgba(242, 169, 59, 0.4); }
+  }
+  .animate-pulse-warn { animation: pulseWarn 2.6s var(--ease-out-quint) infinite; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .narrative-grow, .narrative-fill, .narrative-pop, .narrative-rise, .animate-pulse-warn {
+      animation: none !important;
+    }
+  }
+}
+
+/* ============================================================
    OPSSCORE MOTION — quiz, results, and report (docs/opsscore-brief.md §7).
    Question transitions run in JS (Web Animations API); everything here is CSS.
    All of it is switched off for prefers-reduced-motion.

@@ -13,6 +13,9 @@ import { StudioWaveBg } from '../ui/StudioWaveBg';
 import { CostChart, Glow, MissingFigure, SCENES } from './illustrations';
 import { parseNarrative, splitItem, type NarrativeGroup } from './parse';
 
+/** Position in a staggered group, read by the narrative-* animations in globals.css. */
+const nth = (i: number) => ({ '--n-i': i }) as React.CSSProperties;
+
 const SECTION = 'relative py-[clamp(72px,9vw,120px)]';
 const CONTAINER = 'max-w-[1180px] mx-auto px-8 flex flex-col gap-[clamp(36px,4.5vw,56px)]';
 const CARD = 'rounded-[20px] p-7 sm:p-9';
@@ -25,7 +28,7 @@ const READINESS = { label: 'Cek kesiapan (5 menit)', href: productPath() };
 
 function Head({ label, title, lede }: { label: string; title: string; lede: string[] }) {
   return (
-    <header className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
+    <header className="reveal-stagger flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
       <div className="flex flex-col gap-5">
         <span className="font-mono text-xs font-medium tracking-[0.05em] text-mist-600">[ {label} ]</span>
         <h2 className="max-w-[640px] text-[clamp(36px,4.6vw,56px)] font-bold leading-[1.04] tracking-[-0.025em] text-balance m-0">
@@ -55,7 +58,7 @@ export function SymptomsSection({ content }: { content: unknown }) {
       <div className={CONTAINER}>
         <Head label="Gejala" title={title} lede={intro} />
 
-        <ol className="grid grid-cols-1 gap-5 lg:grid-cols-3 list-none p-0 m-0">
+        <ol className="reveal-stagger grid grid-cols-1 gap-5 lg:grid-cols-3 list-none p-0 m-0">
           {items.map((item, i) => {
             const { text, detail } = splitItem(item);
             const scene = SCENES[i];
@@ -85,7 +88,7 @@ export function SymptomsSection({ content }: { content: unknown }) {
         {statement && (
           <div
             data-theme="dark"
-            className="relative isolate flex flex-col gap-8 overflow-hidden rounded-[20px] bg-ink p-7 sm:p-12 lg:flex-row lg:items-center lg:gap-10"
+            className="reveal relative isolate flex flex-col gap-8 overflow-hidden rounded-[20px] bg-ink p-7 sm:p-12 lg:flex-row lg:items-center lg:gap-10"
           >
             <Glow className="-right-[84px] -top-[160px] size-[560px]" />
             <div aria-hidden className="absolute inset-x-0 -top-10 -z-10 h-[1159px] opacity-50">
@@ -170,9 +173,13 @@ function LedgerSide({ group, side }: { group: NarrativeGroup; side: Side }) {
         </span>
       </div>
       <ul className="list-none p-0 m-0">
-        {group.items.map((item) => (
+        {group.items.map((item, i) => (
           <li key={item} className={`flex items-center gap-3.5 border-t py-[15px] text-[17px] ${side.row}`}>
-            <span aria-hidden className={`grid size-6 shrink-0 place-items-center rounded-full ${side.markTone}`}>
+            <span
+              aria-hidden
+              style={nth(i)}
+              className={`narrative-pop grid size-6 shrink-0 place-items-center rounded-full ${side.markTone}`}
+            >
               <Icon name={side.mark} size={14} />
             </span>
             {item}
@@ -193,7 +200,7 @@ export function LedgerSection({ content }: { content: unknown }) {
       <div className={CONTAINER}>
         <Head label="Sewa vs Punya" title={title} lede={intro} />
 
-        <div className="relative grid grid-cols-1 gap-5 lg:grid-cols-2">
+        <div className="reveal-stagger relative grid grid-cols-1 gap-5 lg:grid-cols-2">
           {rented && <LedgerSide group={rented} side={RENTED} />}
           {owned && <LedgerSide group={owned} side={OWNED} />}
           {rented && owned && (
@@ -207,7 +214,7 @@ export function LedgerSection({ content }: { content: unknown }) {
         </div>
 
         {rented && owned && chart && (
-          <div className={`flex flex-col gap-10 bg-white lg:flex-row lg:gap-12 ${CARD} ${CARD_SHADOW}`}>
+          <div className={`reveal flex flex-col gap-10 bg-white lg:flex-row lg:gap-12 ${CARD} ${CARD_SHADOW}`}>
             <div className="flex flex-col justify-between gap-8 lg:w-[320px] lg:shrink-0">
               <div className="flex flex-col gap-3.5">
                 <span className={`${LABEL} text-mist-600`}>Biaya kumulatif · ilustrasi</span>
@@ -247,7 +254,7 @@ export function FitSection({ content }: { content: unknown }) {
       <div className={CONTAINER}>
         <Head label="Jujur dulu" title={title} lede={intro} />
 
-        <div className="flex flex-col gap-5 lg:flex-row">
+        <div className="reveal-stagger flex flex-col gap-5 lg:flex-row">
           {fits && (
             <article className={`flex flex-1 flex-col gap-7 bg-white ${CARD} ${CARD_SHADOW}`}>
               <div className="flex items-center justify-between gap-4">
@@ -273,7 +280,11 @@ export function FitSection({ content }: { content: unknown }) {
                     <span className="flex-1 text-[clamp(17px,1.7vw,19px)] font-medium tracking-[-0.01em] text-ink">
                       {item}
                     </span>
-                    <span aria-hidden className="grid size-7 shrink-0 place-items-center rounded-lg bg-electric text-white">
+                    <span
+                      aria-hidden
+                      style={nth(i)}
+                      className="narrative-pop grid size-7 shrink-0 place-items-center rounded-lg bg-electric text-white"
+                    >
                       <Icon name="check" size={18} />
                     </span>
                   </li>
@@ -286,7 +297,8 @@ export function FitSection({ content }: { content: unknown }) {
                     {fits.items.map((item, i) => (
                       <span
                         key={item}
-                        className={`h-1.5 flex-1 rounded-[3px] ${i < fits.items.length - 1 ? 'bg-electric' : 'bg-electric/25'}`}
+                        style={nth(i)}
+                        className={`narrative-fill h-1.5 flex-1 rounded-[3px] ${i < fits.items.length - 1 ? 'bg-electric' : 'bg-electric/25'}`}
                       />
                     ))}
                   </div>
@@ -298,10 +310,14 @@ export function FitSection({ content }: { content: unknown }) {
                 </div>
                 <a
                   href={READINESS.href}
-                  className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-lg bg-ink pl-5 pr-4 text-sm font-semibold text-paper hover:bg-shadow-900 transition-colors"
+                  className="group inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-lg bg-ink pl-5 pr-4 text-sm font-semibold text-paper hover:bg-shadow-900 transition-colors"
                 >
                   {READINESS.label}
-                  <Icon name="arrowRight" size={16} />
+                  <Icon
+                    name="arrowRight"
+                    size={16}
+                    className="transition-transform duration-300 ease-[var(--ease-out-quint)] group-hover:translate-x-0.5"
+                  />
                 </a>
               </div>
             </article>
@@ -344,7 +360,7 @@ export function FitSection({ content }: { content: unknown }) {
               </ul>
 
               {doesNot.paragraphs.length > 0 && (
-                <div className="mt-auto flex flex-col gap-2">
+                <div style={nth(3)} className="narrative-rise mt-auto flex flex-col gap-2">
                   {doesNot.paragraphs.map((line) => (
                     <p key={line} className="font-mono text-[11px] leading-[1.6] tracking-[0.03em] text-mist-600 m-0">
                       {line}
