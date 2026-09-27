@@ -2,75 +2,111 @@
  * Narrative sections: the three arguments the landing page makes between the product sections.
  *
  * Each is a rich-text block in the CMS, drawn by its own composition instead of as prose. They share
- * a language — rules that run past the container, type that carries the contrast, one accent — but
- * no two are laid out alike, so the page reads as an argument rather than a list.
+ * a head (mono label, display heading, lede on the right) and the same cards, but each makes its
+ * point with a different drawing: three scenes, a side-by-side with a chart, a checklist.
  *
- * Content renders without JavaScript; only the rules animate, and they stop under
- * prefers-reduced-motion.
+ * The words come from the CMS. The labels and drawings around them are part of the layout.
  */
-import { parseNarrative } from './parse';
+import { Icon, type IconName } from '@/lib/icons';
+import { productPath } from '@/lib/opsscore/config';
+import { StudioWaveBg } from '../ui/StudioWaveBg';
+import { CostChart, Glow, MissingFigure, SCENES } from './illustrations';
+import { parseNarrative, splitItem, type NarrativeGroup } from './parse';
 
-const SECTION = 'relative overflow-hidden py-[clamp(72px,9vw,132px)]';
-const CONTAINER = 'max-w-[1180px] mx-auto px-8';
-const COLUMNS = 'grid grid-cols-1 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]';
-const DISPLAY = 'text-[clamp(32px,4.4vw,60px)] font-bold tracking-[-0.03em] leading-[1.02] text-balance';
+const SECTION = 'relative py-[clamp(72px,9vw,120px)]';
+const CONTAINER = 'max-w-[1180px] mx-auto px-8 flex flex-col gap-[clamp(36px,4.5vw,56px)]';
+const CARD = 'rounded-[20px] p-7 sm:p-9';
+const CARD_SHADOW = 'shadow-[0_0_1px_rgba(0,0,0,0.12),0_1px_2px_rgba(0,0,0,0.05),0_8px_24px_rgba(0,0,0,0.04)]';
+const CARD_TITLE = 'text-[clamp(26px,3vw,34px)] font-bold tracking-[-0.026em] leading-none m-0';
+const LABEL = 'font-mono text-[11px] uppercase tracking-[0.09em]';
+const ICON_BOX = 'grid size-11 shrink-0 place-items-center rounded-[10px]';
 
-/** A hairline that runs off one side of the viewport, past the container it belongs to. */
-function BleedRule({
-  side = 'left',
-  className = '',
-  delay = 0,
-}: {
-  side?: 'left' | 'right';
-  className?: string;
-  delay?: number;
-}) {
-  const bleed = side === 'left' ? 'left-[-100vw] right-0 origin-right' : 'left-0 right-[-100vw] origin-left';
+const READINESS = { label: 'Cek kesiapan (5 menit)', href: productPath() };
+
+function Head({ label, title, lede }: { label: string; title: string; lede: string[] }) {
   return (
-    <span
-      aria-hidden
-      className={`pointer-events-none absolute h-px bg-paper-200 animate-rule-draw ${bleed} ${className}`}
-      style={delay ? { animationDelay: `${delay}ms` } : undefined}
-    />
+    <header className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
+      <div className="flex flex-col gap-5">
+        <span className="font-mono text-xs font-medium tracking-[0.05em] text-mist-600">[ {label} ]</span>
+        <h2 className="max-w-[640px] text-[clamp(36px,4.6vw,56px)] font-bold leading-[1.04] tracking-[-0.025em] text-balance m-0">
+          {title}
+        </h2>
+      </div>
+      {lede.length > 0 && (
+        <div className="flex max-w-[340px] flex-col gap-3 lg:shrink-0">
+          {lede.map((line) => (
+            <p key={line} className="text-[17px] leading-[1.55] text-mist-600 text-pretty m-0">
+              {line}
+            </p>
+          ))}
+        </div>
+      )}
+    </header>
   );
 }
 
-/** "Kapan bisnis butuh sistem sendiri" — symptoms, each one cut off by a rule. */
+/** "Kapan bisnis butuh sistem sendiri?" — three scenes, then the one figure none of them can give. */
 export function SymptomsSection({ content }: { content: unknown }) {
-  const { title, items, outro } = parseNarrative(content);
+  const { title, intro, items, outro } = parseNarrative(content);
+  const [statement, ...explanation] = outro;
+
   return (
     <section className={SECTION}>
       <div className={CONTAINER}>
-        <div className={`${COLUMNS} gap-y-10 lg:gap-x-16`}>
-          <h2 className={`${DISPLAY} max-w-[13ch] lg:sticky lg:top-28 self-start`}>{title}</h2>
+        <Head label="Gejala" title={title} lede={intro} />
 
-          <div className="relative">
-            {items.map((item, i) => (
-              <p
-                key={item}
-                className="relative py-[clamp(18px,2.2vw,28px)] text-[clamp(19px,2.1vw,27px)] leading-[1.25] tracking-[-0.015em] text-ink m-0"
-              >
-                <BleedRule className="top-0" delay={i * 90} />
-                {item}
-              </p>
-            ))}
-            <BleedRule className="bottom-0" delay={items.length * 90} />
-          </div>
-        </div>
+        <ol className="grid grid-cols-1 gap-5 lg:grid-cols-3 list-none p-0 m-0">
+          {items.map((item, i) => {
+            const { text, detail } = splitItem(item);
+            const scene = SCENES[i];
+            return (
+              <li key={item} className={`flex flex-col overflow-hidden rounded-2xl bg-white ${CARD_SHADOW}`}>
+                {scene && (
+                  <div
+                    aria-hidden
+                    className={`flex h-[196px] flex-col justify-center border-b border-paper-200 p-5 ${scene.surface}`}
+                  >
+                    <scene.Scene />
+                  </div>
+                )}
+                <div className="flex flex-col gap-2.5 px-6 pt-[22px] pb-[26px]">
+                  <span className={`${LABEL} text-mist-600`}>
+                    {String(i + 1).padStart(2, '0')}
+                    {scene && ` · ${scene.label}`}
+                  </span>
+                  <h3 className="text-[22px] font-bold leading-[1.2] tracking-[-0.02em] text-ink m-0">{text}</h3>
+                  {detail && <p className="text-[15px] leading-[1.5] text-mist-600 m-0">{detail}</p>}
+                </div>
+              </li>
+            );
+          })}
+        </ol>
 
-        {outro.length > 0 && (
-          <div className={`${COLUMNS} lg:gap-x-16 mt-[clamp(36px,4.5vw,64px)]`}>
-            <span aria-hidden className="hidden lg:block" />
-            <div className="max-w-[46ch]">
-              <p className="text-[clamp(21px,2.5vw,32px)] font-semibold leading-[1.22] tracking-[-0.02em] text-ink text-pretty m-0">
-                {outro[0]}
+        {statement && (
+          <div
+            data-theme="dark"
+            className="relative isolate flex flex-col gap-8 overflow-hidden rounded-[20px] bg-ink p-7 sm:p-12 lg:flex-row lg:items-center lg:gap-10"
+          >
+            <Glow className="-right-[84px] -top-[160px] size-[560px]" />
+            <div aria-hidden className="absolute inset-x-0 -top-10 -z-10 h-[1159px] opacity-50">
+              <StudioWaveBg />
+            </div>
+
+            <div className="flex flex-1 flex-col gap-[18px]">
+              <span className="font-mono text-xs font-semibold tracking-[0.1em] text-mist-500">
+                [ LALU SUATU HARI ]
+              </span>
+              <p className="text-[clamp(24px,2.9vw,34px)] font-semibold leading-[1.2] tracking-[-0.024em] text-paper text-pretty m-0">
+                {statement}
               </p>
-              {outro.slice(1).map((line) => (
-                <p key={line} className="mt-5 text-[16px] leading-[1.55] text-mist-600 m-0">
+              {explanation.map((line) => (
+                <p key={line} className="text-[16px] leading-[1.55] text-mist-500 m-0">
                   {line}
                 </p>
               ))}
             </div>
+
+            <MissingFigure count={items.length} />
           </div>
         )}
       </div>
@@ -78,111 +114,247 @@ export function SymptomsSection({ content }: { content: unknown }) {
   );
 }
 
-/** "Langganan atau bangun sendiri?" — a ledger: each line on the left has its answer on the right. */
+type Side = {
+  icon: IconName;
+  mark: IconName;
+  tag: string;
+  card: string;
+  iconBox: string;
+  title: string;
+  tagTone: string;
+  row: string;
+  markTone: string;
+};
+
+const RENTED: Side = {
+  icon: 'repeat',
+  mark: 'minus',
+  tag: 'Tagihan ∞',
+  card: `bg-white ${CARD_SHADOW}`,
+  iconBox: 'bg-paper text-mist-600',
+  title: 'text-mist-600',
+  tagTone: 'border-paper-200 text-mist-600',
+  row: 'border-paper-200 text-mist-600',
+  markTone: 'bg-paper text-mist-500',
+};
+
+const OWNED: Side = {
+  icon: 'key',
+  mark: 'check',
+  tag: 'Jadi aset',
+  card: 'bg-ink shadow-[0_24px_48px_rgba(8,9,10,0.2)]',
+  iconBox: 'bg-electric text-white',
+  title: 'text-paper',
+  tagTone: 'border-white/15 text-mist-500',
+  row: 'border-white/8 font-medium text-paper',
+  markTone: 'bg-electric/20 text-[#6F9BFF]',
+};
+
+function LedgerSide({ group, side }: { group: NarrativeGroup; side: Side }) {
+  const dark = side === OWNED;
+  return (
+    <article
+      data-theme={dark ? 'dark' : undefined}
+      className={`relative isolate flex flex-col gap-7 overflow-hidden ${CARD} ${side.card}`}
+    >
+      {dark && <Glow className="-right-[192px] -top-[240px] size-[480px]" />}
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center gap-3.5">
+          <span className={`${ICON_BOX} ${side.iconBox}`}>
+            <Icon name={side.icon} size={22} />
+          </span>
+          <h3 className={`${CARD_TITLE} ${side.title}`}>{group.title}</h3>
+        </div>
+        <span className={`${LABEL} hidden rounded-full border px-3 py-1.5 whitespace-nowrap sm:block ${side.tagTone}`}>
+          {side.tag}
+        </span>
+      </div>
+      <ul className="list-none p-0 m-0">
+        {group.items.map((item) => (
+          <li key={item} className={`flex items-center gap-3.5 border-t py-[15px] text-[17px] ${side.row}`}>
+            <span aria-hidden className={`grid size-6 shrink-0 place-items-center rounded-full ${side.markTone}`}>
+              <Icon name={side.mark} size={14} />
+            </span>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </article>
+  );
+}
+
+/** "Langganan atau bangun sendiri?" — the two sides face each other, then the chart settles it. */
 export function LedgerSection({ content }: { content: unknown }) {
   const { title, intro, groups } = parseNarrative(content);
-  const [rented, owned] = groups;
-  const rows = Math.max(rented?.items.length ?? 0, owned?.items.length ?? 0);
+  const [rented, owned, chart] = groups;
 
   return (
     <section className={`${SECTION} bg-paper-50 border-y border-paper-200`}>
       <div className={CONTAINER}>
-        <h2 className={`${DISPLAY} max-w-[16ch]`}>{title}</h2>
-        {intro.map((line) => (
-          <p key={line} className="mt-6 max-w-[54ch] text-[17px] leading-[1.55] text-mist-600 text-pretty">
-            {line}
-          </p>
-        ))}
+        <Head label="Sewa vs Punya" title={title} lede={intro} />
 
-        {/* One DOM order (each column whole, so it stacks on a phone); subgrid pairs the rows on a wide screen. */}
-        <div
-          className="mt-[clamp(40px,5vw,72px)] lg:grid lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]"
-          style={{ gridTemplateRows: `auto repeat(${rows}, auto)` }}
-        >
-          <div className="lg:grid lg:grid-rows-subgrid" style={{ gridRow: `span ${rows + 1}` }}>
-            <h3 className="flex items-end text-[clamp(30px,5vw,68px)] font-bold tracking-[-0.035em] leading-none text-mist-600 m-0">
-              {rented?.title}
-            </h3>
-            {Array.from({ length: rows }).map((_, i) => (
-              <p
-                key={rented?.items[i] ?? `rented-${i}`}
-                className="flex items-center border-t border-paper-200 py-[clamp(14px,1.6vw,20px)] lg:pr-10 text-[15px] leading-[1.45] text-ink/70 m-0"
-              >
-                {rented?.items[i]}
-              </p>
-            ))}
-          </div>
-
-          <div
-            className="mt-10 lg:mt-0 lg:grid lg:grid-rows-subgrid lg:border-l lg:border-paper-200 lg:pl-[clamp(24px,3vw,48px)]"
-            style={{ gridRow: `span ${rows + 1}` }}
-          >
-            <h3 className="flex items-end text-[clamp(30px,5vw,68px)] font-bold tracking-[-0.035em] leading-none text-ink m-0">
-              {owned?.title}
-            </h3>
-            {Array.from({ length: rows }).map((_, i) => (
-              <p
-                key={owned?.items[i] ?? `owned-${i}`}
-                className="relative flex items-center border-t border-paper-200 py-[clamp(14px,1.6vw,20px)] text-[16px] leading-[1.45] font-medium text-ink m-0 after:absolute after:left-0 after:top-0 after:h-px after:w-[clamp(10px,1.4vw,18px)] after:bg-electric lg:after:left-[calc(clamp(24px,3vw,48px)*-1)]"
-              >
-                {owned?.items[i]}
-              </p>
-            ))}
-          </div>
+        <div className="relative grid grid-cols-1 gap-5 lg:grid-cols-2">
+          {rented && <LedgerSide group={rented} side={RENTED} />}
+          {owned && <LedgerSide group={owned} side={OWNED} />}
+          {rented && owned && (
+            <span
+              aria-hidden
+              className="absolute left-1/2 top-[34px] hidden size-12 -translate-x-1/2 place-items-center rounded-full border border-paper-200 bg-paper-50 font-mono text-xs font-bold tracking-[0.04em] text-ink lg:grid"
+            >
+              VS
+            </span>
+          )}
         </div>
+
+        {rented && owned && chart && (
+          <div className={`flex flex-col gap-10 bg-white lg:flex-row lg:gap-12 ${CARD} ${CARD_SHADOW}`}>
+            <div className="flex flex-col justify-between gap-8 lg:w-[320px] lg:shrink-0">
+              <div className="flex flex-col gap-3.5">
+                <span className={`${LABEL} text-mist-600`}>Biaya kumulatif · ilustrasi</span>
+                <h3 className="text-[26px] font-bold leading-[1.2] tracking-[-0.023em] text-ink text-balance m-0">
+                  {chart.title}
+                </h3>
+                {chart.paragraphs[0] && (
+                  <p className="text-[15px] leading-[1.55] text-mist-600 m-0">{chart.paragraphs[0]}</p>
+                )}
+              </div>
+              <div className="flex gap-5 text-[14px] font-medium text-ink">
+                <span className="flex items-center gap-2">
+                  <span aria-hidden className="size-3 rounded-[3px] bg-mist-400" />
+                  {rented.title}
+                </span>
+                <span className="flex items-center gap-2">
+                  <span aria-hidden className="size-3 rounded-[3px] bg-electric" />
+                  {owned.title}
+                </span>
+              </div>
+            </div>
+            <CostChart rented={rented.title} owned={owned.title} note={chart.paragraphs[1]} />
+          </div>
+        )}
       </div>
     </section>
   );
 }
 
-/** "Cocok untuk siapa" — the two answers pull to opposite edges of the page. */
+/** "Cocok untuk siapa?" — a checklist that leads to the readiness check, and an honest "not yet". */
 export function FitSection({ content }: { content: unknown }) {
-  const { title, groups, outro } = parseNarrative(content);
+  const { title, intro, groups } = parseNarrative(content);
   const [fits, doesNot] = groups;
 
   return (
     <section className={SECTION}>
       <div className={CONTAINER}>
-        <h2 className={`${DISPLAY} max-w-[14ch]`}>{title}</h2>
+        <Head label="Jujur dulu" title={title} lede={intro} />
 
-        <div className="mt-[clamp(36px,4.5vw,64px)] max-w-[52ch]">
-          <h3 className="text-[clamp(24px,3vw,40px)] font-bold tracking-[-0.03em] leading-none text-ink m-0">
-            {fits?.title}
-          </h3>
-          <ul className="mt-6 list-none p-0 m-0">
-            {fits?.items.map((item) => (
-              <li
-                key={item}
-                className="relative border-t border-paper-200 py-[clamp(12px,1.4vw,18px)] text-[clamp(16px,1.7vw,19px)] leading-[1.4] text-ink after:absolute after:left-0 after:top-0 after:h-px after:w-[clamp(10px,1.4vw,18px)] after:bg-electric"
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
+        <div className="flex flex-col gap-5 lg:flex-row">
+          {fits && (
+            <article className={`flex flex-1 flex-col gap-7 bg-white ${CARD} ${CARD_SHADOW}`}>
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center gap-3.5">
+                  <span className={`${ICON_BOX} bg-electric text-white`}>
+                    <Icon name="checkCircle" size={22} />
+                  </span>
+                  <h3 className={`${CARD_TITLE} text-ink`}>{fits.title}</h3>
+                </div>
+                <span
+                  className={`${LABEL} hidden rounded-full bg-electric/8 px-3 py-1.5 font-semibold whitespace-nowrap text-electric sm:block`}
+                >
+                  Cek kesiapan
+                </span>
+              </div>
+
+              <ol className="list-none p-0 m-0">
+                {fits.items.map((item, i) => (
+                  <li key={item} className="flex items-center gap-[18px] border-t border-paper-200 py-[18px]">
+                    <span aria-hidden className="font-mono text-xs tracking-[0.05em] text-mist-500 tabular">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <span className="flex-1 text-[clamp(17px,1.7vw,19px)] font-medium tracking-[-0.01em] text-ink">
+                      {item}
+                    </span>
+                    <span aria-hidden className="grid size-7 shrink-0 place-items-center rounded-lg bg-electric text-white">
+                      <Icon name="check" size={18} />
+                    </span>
+                  </li>
+                ))}
+              </ol>
+
+              <div className="flex flex-col gap-5 rounded-[14px] bg-paper p-5 sm:flex-row sm:items-center">
+                <div className="flex flex-1 flex-col gap-2.5">
+                  <div aria-hidden className="flex gap-1.5">
+                    {fits.items.map((item, i) => (
+                      <span
+                        key={item}
+                        className={`h-1.5 flex-1 rounded-[3px] ${i < fits.items.length - 1 ? 'bg-electric' : 'bg-electric/25'}`}
+                      />
+                    ))}
+                  </div>
+                  {fits.paragraphs.map((line) => (
+                    <p key={line} className="text-[15px] font-semibold text-ink m-0">
+                      {line}
+                    </p>
+                  ))}
+                </div>
+                <a
+                  href={READINESS.href}
+                  className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-lg bg-ink pl-5 pr-4 text-sm font-semibold text-paper hover:bg-shadow-900 transition-colors"
+                >
+                  {READINESS.label}
+                  <Icon name="arrowRight" size={16} />
+                </a>
+              </div>
+            </article>
+          )}
+
+          {doesNot && (
+            <article className={`flex flex-col gap-7 border border-mist-400 lg:w-[440px] lg:shrink-0 ${CARD}`}>
+              <div className="flex items-center gap-3.5">
+                <span className={`${ICON_BOX} bg-ink/5 text-mist-600`}>
+                  <Icon name="pause" size={20} />
+                </span>
+                <h3 className="text-[clamp(22px,2.4vw,26px)] font-bold leading-none tracking-[-0.023em] text-mist-600 m-0">
+                  {doesNot.title}
+                </h3>
+              </div>
+
+              <ul className="list-none p-0 m-0">
+                {doesNot.items.map((item) => {
+                  const { text, detail } = splitItem(item);
+                  return (
+                    <li key={item} className="flex gap-3.5 border-t border-paper-200 py-[18px]">
+                      <span
+                        aria-hidden
+                        className="grid size-6 shrink-0 place-items-center rounded-full bg-ink/5 text-mist-600"
+                      >
+                        <Icon name="x" size={13} />
+                      </span>
+                      <div className="flex flex-col gap-1.5">
+                        <span className="text-[16px] font-medium leading-[1.4] text-ink">{text}</span>
+                        {detail && (
+                          <span className="flex items-start gap-1.5 text-[13.5px] leading-[1.4] text-mist-600">
+                            <Icon name="cornerRight" size={13} className="mt-[3px] shrink-0 text-electric" />
+                            {detail}
+                          </span>
+                        )}
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+
+              {doesNot.paragraphs.length > 0 && (
+                <div className="mt-auto flex flex-col gap-2">
+                  {doesNot.paragraphs.map((line) => (
+                    <p key={line} className="font-mono text-[11px] leading-[1.6] tracking-[0.03em] text-mist-600 m-0">
+                      {line}
+                    </p>
+                  ))}
+                </div>
+              )}
+            </article>
+          )}
         </div>
-
-        <div className="relative mt-[clamp(52px,6vw,92px)] max-w-[52ch] lg:ml-auto lg:text-right">
-          <BleedRule side="right" className="-top-[clamp(26px,3vw,46px)]" />
-          <h3 className="text-[clamp(22px,2.6vw,34px)] font-bold tracking-[-0.03em] leading-none text-mist-600 m-0">
-            {doesNot?.title}
-          </h3>
-          <ul className="mt-6 list-none p-0 m-0">
-            {doesNot?.items.map((item) => (
-              <li
-                key={item}
-                className="border-t border-paper-200 py-[clamp(12px,1.4vw,18px)] text-[15px] leading-[1.45] text-ink/70"
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {outro.map((line) => (
-          <p key={line} className="mt-[clamp(32px,4vw,56px)] max-w-[46ch] text-[16px] leading-[1.55] text-mist-600 m-0">
-            {line}
-          </p>
-        ))}
       </div>
     </section>
   );

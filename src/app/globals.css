@@ -149,10 +149,6 @@
   /* Section reveal stagger (IntersectionObserver-driven) */
   .reveal { opacity: 0; transform: translateY(14px); transition: opacity 720ms var(--ease-out-quint), transform 720ms var(--ease-out-quint); }
   .reveal.in { opacity: 1; transform: none; }
-  /* Narrative sections: the rules draw themselves in, and the copy never depends on it. */
-  @keyframes ruleDraw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-  .animate-rule-draw { animation: ruleDraw 900ms var(--ease-out-quint) both; }
-
   .reveal-stagger > * { opacity: 0; transform: translateY(10px); transition: opacity 640ms var(--ease-out-quint), transform 640ms var(--ease-out-quint); }
   .reveal-stagger.in > * { opacity: 1; transform: none; }
   .reveal-stagger.in > *:nth-child(1) { transition-delay: 0ms; }
@@ -170,7 +166,6 @@
       animation: none;
     }
     .reveal, .reveal-stagger > * { opacity: 1; transform: none; transition: none; }
-    .animate-rule-draw { animation: none; transform: none; }
   }
 }
 

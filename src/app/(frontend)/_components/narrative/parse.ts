@@ -3,7 +3,8 @@
  *
  * The editor still writes ordinary headings, paragraphs and lists, so these sections stay editable
  * in the admin. The layout is what changes: an h3 starts a new group, and the list under it belongs
- * to that group.
+ * to that group. A list item may carry a second line (Shift+Enter in the editor): the first line is
+ * the item, the rest is its detail.
  */
 
 export type NarrativeGroup = { title: string; paragraphs: string[]; items: string[] };
@@ -21,8 +22,15 @@ export type Narrative = {
 
 function textOf(node: any): string {
   if (!node) return '';
+  if (node.type === 'linebreak') return '\n';
   if (typeof node.text === 'string') return node.text;
   return (node.children ?? []).map(textOf).join('');
+}
+
+/** Splits a list item into its first line and the detail under it. */
+export function splitItem(item: string): { text: string; detail: string } {
+  const [text, ...rest] = item.split('\n').map((line) => line.trim()).filter(Boolean);
+  return { text: text ?? '', detail: rest.join(' ') };
 }
 
 export function parseNarrative(data: any): Narrative {
