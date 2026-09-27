@@ -2,7 +2,8 @@ import * as React from 'react';
 
 /**
  * Icon library — outlined SVG primitives.
- * currentColor stroke at 1.75px. Used in Services, Process, Studio tenets, and the OpsScore scale.
+ * currentColor stroke at 1.75px. Used in Services, Process, Studio tenets, the OpsScore scale, and
+ * the landing's narrative sections.
  */
 
 export type IconName =
@@ -24,7 +25,23 @@ export type IconName =
   | 'app'
   | 'system'
   // OpsScore gate
-  | 'lock';
+  | 'lock'
+  // Narrative sections
+  | 'fileSheet'
+  | 'calculator'
+  | 'cart'
+  | 'syncOff'
+  | 'message'
+  | 'repeat'
+  | 'key'
+  | 'minus'
+  | 'check'
+  | 'checkCircle'
+  | 'x'
+  | 'pause'
+  | 'trendDown'
+  | 'arrowRight'
+  | 'cornerRight';
 
 const PATHS: Record<IconName, React.ReactNode> = {
   build: (
@@ -130,6 +147,101 @@ const PATHS: Record<IconName, React.ReactNode> = {
     <>
       <rect x="5" y="11" width="14" height="10" rx="2" />
       <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+    </>
+  ),
+  fileSheet: (
+    <>
+      <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+      <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+      <path d="M8 13h2" />
+      <path d="M14 13h2" />
+      <path d="M8 17h2" />
+      <path d="M14 17h2" />
+    </>
+  ),
+  calculator: (
+    <>
+      <rect width="16" height="20" x="4" y="2" rx="2" />
+      <line x1="8" x2="16" y1="6" y2="6" />
+      <line x1="16" x2="16" y1="14" y2="18" />
+      <path d="M16 10h.01" />
+      <path d="M12 10h.01" />
+      <path d="M8 10h.01" />
+      <path d="M12 14h.01" />
+      <path d="M8 14h.01" />
+      <path d="M12 18h.01" />
+      <path d="M8 18h.01" />
+    </>
+  ),
+  cart: (
+    <>
+      <circle cx="8" cy="21" r="1" />
+      <circle cx="19" cy="21" r="1" />
+      <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+    </>
+  ),
+  syncOff: (
+    <>
+      <path d="M21 8L18.74 5.74A9.75 9.75 0 0 0 12 3C11 3 10.03 3.16 9.13 3.47" />
+      <path d="M8 16H3v5" />
+      <path d="M3 12C3 9.51 4 7.26 5.64 5.64" />
+      <path d="m3 16 2.26 2.26A9.75 9.75 0 0 0 12 21c2.49 0 4.74-1 6.36-2.64" />
+      <path d="M21 12c0 1-.16 1.97-.47 2.87" />
+      <path d="M21 3v5h-5" />
+      <path d="M22 22 2 2" />
+    </>
+  ),
+  message: <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />,
+  repeat: (
+    <>
+      <path d="m17 2 4 4-4 4" />
+      <path d="M3 11v-1a4 4 0 0 1 4-4h14" />
+      <path d="m7 22-4-4 4-4" />
+      <path d="M21 13v1a4 4 0 0 1-4 4H3" />
+    </>
+  ),
+  key: (
+    <>
+      <path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z" />
+      <circle cx="16.5" cy="7.5" r=".5" fill="currentColor" />
+    </>
+  ),
+  minus: <path d="M5 12h14" />,
+  check: <path d="M20 6 9 17l-5-5" />,
+  checkCircle: (
+    <>
+      <path d="M21.801 10A10 10 0 1 1 17 3.335" />
+      <path d="m9 11 3 3L22 4" />
+    </>
+  ),
+  x: (
+    <>
+      <path d="M18 6 6 18" />
+      <path d="m6 6 12 12" />
+    </>
+  ),
+  pause: (
+    <>
+      <rect x="14" y="4" width="4" height="16" rx="1" />
+      <rect x="6" y="4" width="4" height="16" rx="1" />
+    </>
+  ),
+  trendDown: (
+    <>
+      <polyline points="22 17 13.5 8.5 8.5 13.5 2 7" />
+      <polyline points="16 17 22 17 22 11" />
+    </>
+  ),
+  arrowRight: (
+    <>
+      <path d="M5 12h14" />
+      <path d="m12 5 7 7-7 7" />
+    </>
+  ),
+  cornerRight: (
+    <>
+      <polyline points="15 10 20 15 15 20" />
+      <path d="M4 4v7a4 4 0 0 0 4 4h12" />
     </>
   ),
 };

@@ -93,18 +93,23 @@ export const BLOCK_COPY: Record<string, Record<string, unknown>> = {
   },
 };
 
+/**
+ * The narrative sections. Their layouts (narrative/sections.tsx) read the structure: the paragraph
+ * under the h2 is the lede, and the second line of a list item is its detail.
+ */
 export const SECTIONS: LandingSection[] = [
   {
     name: 'kapan-butuh-sistem',
     after: 'hero',
     maxWidth: 'narrow',
     body: [
-      { h2: 'Kapan bisnis butuh sistem sendiri' },
+      { h2: 'Kapan bisnis butuh sistem sendiri?' },
+      'Kalau tiga pemandangan ini terasa akrab, masalahnya bukan di tim Anda.',
       {
         ul: [
-          'Gudang pakai spreadsheet.',
-          'Keuangan pakai aplikasi lain.',
-          'Lapangan lapor lewat grup chat.',
+          'Gudang pakai spreadsheet.\nTiga orang edit file yang sama. Angka yang benar tergantung siapa yang terakhir simpan.',
+          'Keuangan pakai aplikasi lain.\nTiap aplikasi rapi sendiri, tapi tidak saling bicara. Tagihannya naik tiap tambah orang.',
+          'Lapangan lapor lewat grup chat.\nLaporannya ada. Mencarinya yang makan waktu — dan tidak pernah jadi data.',
         ],
       },
       'Semua jalan, sampai Anda butuh satu angka yang menyatukan ketiganya.',
@@ -138,6 +143,10 @@ export const SECTIONS: LandingSection[] = [
           'Satu tempat untuk semua data',
         ],
       },
+      // The cost chart: its heading, its explanation, then the note under the plot.
+      { h3: 'Murah di awal belum tentu murah di akhir.' },
+      'Langganan naik tiap tambah orang dan tiap kurs menguat. Sistem sendiri dibayar di awal, lalu grafiknya melandai.',
+      'Setelah titik balik, tiap bulan adalah penghematan',
     ],
   },
   {
@@ -145,7 +154,8 @@ export const SECTIONS: LandingSection[] = [
     after: 'process',
     maxWidth: 'narrow',
     body: [
-      { h2: 'Cocok untuk siapa' },
+      { h2: 'Cocok untuk siapa?' },
+      'Kami lebih suka bilang "belum" di awal daripada membangun sistem yang akhirnya tidak dipakai.',
       { h3: 'Cocok kalau' },
       {
         ul: [
@@ -155,15 +165,16 @@ export const SECTIONS: LandingSection[] = [
           'Ada pekerjaan berulang tiap hari',
         ],
       },
+      'Centang 3 dari 4? Saatnya kita ngobrol.',
       { h3: 'Belum cocok kalau' },
       {
         ul: [
-          'Butuhnya cuma satu formulir atau satu laporan',
-          'Prosesnya masih berubah tiap minggu',
-          'Belum ada yang bisa menjawab soal proses',
+          'Butuhnya cuma satu formulir atau satu laporan\nPakai form atau spreadsheet dulu — lebih murah.',
+          'Prosesnya masih berubah tiap minggu\nStabilkan prosesnya dulu, baru dibangun.',
+          'Belum ada yang bisa menjawab soal proses\nTunjuk satu pemilik proses di internal.',
         ],
       },
-      'Kalau belum cocok, kami bilang di awal.',
+      'Tetap boleh konsultasi — kami arahkan ke opsi yang lebih murah.',
     ],
   },
 ];

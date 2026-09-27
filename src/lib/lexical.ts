@@ -2,7 +2,8 @@
  * Minimal builder for Payload's Lexical richText fields.
  *
  * Covers what ProseRenderer draws: headings, paragraphs and bullet lists. Content modules
- * describe a section as an array of blocks and call `toLexical` to store it.
+ * describe a section as an array of blocks and call `toLexical` to store it. A "\n" in a list item
+ * becomes a line break inside that item.
  */
 
 export type LexicalBlock = string | { h2: string } | { h3: string } | { ul: string[] };
@@ -33,7 +34,9 @@ const list = (items: string[]) => ({
     type: 'listitem',
     value: i + 1,
     ...base,
-    children: [textNode(text)],
+    children: text
+      .split('\n')
+      .flatMap((line, n) => (n ? [{ type: 'linebreak', version: 1 }, textNode(line)] : [textNode(line)])),
   })),
 });
 
