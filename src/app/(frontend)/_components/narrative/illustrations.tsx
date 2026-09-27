@@ -7,6 +7,9 @@
  */
 import { Icon, type IconName } from '@/lib/icons';
 
+/** Position in a staggered group, read by the narrative-* animations in globals.css. */
+const nth = (i: number) => ({ '--n-i': i }) as React.CSSProperties;
+
 const SHEET_ROWS = [
   { sku: 'AYM-01', qty: '142', broken: false },
   { sku: 'AYM-02', qty: '#REF!', broken: true },
@@ -72,8 +75,8 @@ const CHAT = [
 function ChatScene() {
   return (
     <div className="flex flex-col gap-2">
-      {CHAT.map((message) => (
-        <div key={message.text} className={`flex ${message.mine ? 'justify-end' : ''}`}>
+      {CHAT.map((message, i) => (
+        <div key={message.text} style={nth(i)} className={`narrative-rise flex ${message.mine ? 'justify-end' : ''}`}>
           <span
             className={`rounded-[10px] px-[11px] py-[7px] text-[12px] text-ink ${message.mine ? 'bg-[#D9FDD3]' : 'bg-white'}`}
           >
@@ -125,10 +128,16 @@ export function MissingFigure({ count }: { count: number }) {
       </div>
       <div className="flex items-end gap-2.5">
         <span className="text-[22px] font-semibold text-mist-500">Rp</span>
-        <span className="text-[52px] font-bold leading-none tracking-[-0.02em] text-paper">? ? ?</span>
+        <span className="flex gap-[0.22em] text-[52px] font-bold leading-none tracking-[-0.02em] text-paper">
+          {[0, 1, 2].map((i) => (
+            <span key={i} className="animate-live-blink" style={{ animationDelay: `${i * 260}ms` }}>
+              ?
+            </span>
+          ))}
+        </span>
       </div>
       <div className="flex items-center gap-2 self-start rounded-lg bg-warning/12 px-3 py-2 text-[13px] font-medium text-warning">
-        <span className="size-2 shrink-0 rounded-full bg-warning" />
+        <span className="size-2 shrink-0 rounded-full bg-warning animate-pulse-warn" />
         {sources.length} sumber data belum nyambung
       </div>
       <div className="flex gap-2 border-t border-white/8 pt-4">
@@ -168,10 +177,13 @@ export function CostChart({ rented, owned, note }: { rented: string; owned: stri
       >
         {COST.map((point, i) => (
           <div key={point.label} className="flex flex-1 items-end justify-center gap-1.5">
-            <span className="w-full max-w-7 rounded-t-md bg-mist-400" style={{ height: point.rented }} />
             <span
-              className={`w-full max-w-7 rounded-t-md ${i >= turn ? 'bg-electric' : 'bg-electric/60'}`}
-              style={{ height: point.owned }}
+              className="narrative-grow w-full max-w-7 rounded-t-md bg-mist-400"
+              style={{ height: point.rented, ...nth(i) }}
+            />
+            <span
+              className={`narrative-grow w-full max-w-7 rounded-t-md ${i >= turn ? 'bg-electric' : 'bg-electric/60'}`}
+              style={{ height: point.owned, ...nth(i + 0.5) }}
             />
           </div>
         ))}
@@ -184,7 +196,7 @@ export function CostChart({ rented, owned, note }: { rented: string; owned: stri
         ))}
       </div>
       {note && (
-        <p className="m-0 flex justify-end">
+        <p style={nth(COST.length)} className="narrative-rise m-0 flex justify-end">
           <span className="inline-flex items-center gap-2 rounded-full bg-electric/8 px-3 py-1.5 text-[13px] font-medium text-electric">
             <Icon name="trendDown" size={14} className="shrink-0" />
             {note}
