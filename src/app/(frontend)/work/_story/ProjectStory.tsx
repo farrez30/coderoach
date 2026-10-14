@@ -17,13 +17,15 @@ import { TourChapter } from './TourChapter';
 /** The new template takes over once a project has its problem written; until then the old one stays. */
 export const hasStory = (project: Project) => Boolean(project.summary?.problem);
 
+export type StoryMode = 'page' | 'overlay' | 'present';
+
 /**
  * A project page in the apple.com manner (ADR 0003): light, one idea per section, the real product
  * in a drawn frame, at most one dark chapter. Complete as server-rendered HTML; StoryEnhancer only
- * adds motion on the full page. The overlay renders the same thing, still.
+ * adds motion on a full page, on the site or in the presentation. The overlay renders it still.
  */
-export async function ProjectStory({ project, mode }: { project: Project; mode: 'page' | 'overlay' }) {
-  const Root = mode === 'page' ? 'main' : 'div';
+export async function ProjectStory({ project, mode }: { project: Project; mode: StoryMode }) {
+  const Root = mode === 'overlay' ? 'div' : 'main';
   const rootId = `story-${project.slug}`;
   const metrics = project.metrics ?? [];
   const links = await linkViews(project.links ?? []);
@@ -77,7 +79,7 @@ export async function ProjectStory({ project, mode }: { project: Project; mode: 
       )}
 
       <Sources metrics={metrics} demoNote={project.showcase?.demoNote} />
-      {mode === 'page' && <StoryEnhancer rootId={rootId} />}
+      {mode !== 'overlay' && <StoryEnhancer rootId={rootId} />}
     </Root>
   );
 }

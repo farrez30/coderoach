@@ -41,3 +41,8 @@ next-env.d.ts
 .claude/
 .agents/
 skills-lock.json
+
+# Built by @serwist/next (src/sw/presentasi.ts)
+/public/presentasi-sw.js
+/public/presentasi-sw.js.map
+/public/swe-worker-*.js

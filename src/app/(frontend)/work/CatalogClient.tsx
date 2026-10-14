@@ -100,8 +100,15 @@ export function CatalogClient({
     <main>
       <section className="pt-16 pb-12 border-b border-paper-200">
         <div className="max-w-[1180px] mx-auto px-8">
-          <div className="mb-8">
+          <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
             <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Work' }]} />
+            {/* A plain link: a soft navigation would be caught by the @modal intercept as a project slug. */}
+            <a
+              href="/work/presentasi"
+              className="font-mono text-xs uppercase tracking-wider text-ink/65 hover:text-ink transition-colors tabular focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric"
+            >
+              Mode presentasi →
+            </a>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-12 items-end mb-12">
             <div>

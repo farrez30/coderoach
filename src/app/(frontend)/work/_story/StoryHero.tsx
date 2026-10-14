@@ -4,12 +4,13 @@ import { Breadcrumbs } from '../../_components/detail/Breadcrumbs';
 import { DeviceFrame } from './DeviceFrame';
 import { LinkChips, type LinkView } from './LinkChips';
 import { asMedia, MediaImg } from './MediaImg';
+import type { StoryMode } from './ProjectStory';
 
 /**
  * The first screen: name, one line, then problem, solution, and result before any picture, so the
  * answer is on screen before the show. The product sits below in a drawn frame.
  */
-export function StoryHero({ project, links, mode }: { project: Project; links: LinkView[]; mode: 'page' | 'overlay' }) {
+export function StoryHero({ project, links, mode }: { project: Project; links: LinkView[]; mode: StoryMode }) {
   const sc = project.showcase;
   const screen = asMedia(sc?.screen);
   // No recording yet: the cover the old page used, shown as it is (it is often already a composite).

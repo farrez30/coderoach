@@ -1,25 +1,10 @@
 import type { Metadata } from 'next';
-import localFont from 'next/font/local';
-import { JetBrains_Mono } from 'next/font/google';
 import { getPayload } from 'payload';
 import config from '@payload-config';
 import '../globals.css';
+import { jetbrainsMono, satoshi } from '../fonts';
 import { ToastProvider } from './_components/ui/Toast';
 import { Analytics } from './_components/Analytics';
-
-const satoshi = localFont({
-  src: '../../../public/fonts/Satoshi-Variable.ttf',
-  variable: '--font-sans',
-  display: 'swap',
-  weight: '100 900',
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-mono',
-  display: 'swap',
-  weight: ['400', '500', '700'],
-});
 
 // Media URLs are relative (/api/media/file/...). Without a base, Next resolved og:image against
 // localhost, so every shared project link previewed without its image.

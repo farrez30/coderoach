@@ -23,10 +23,12 @@
     "@payloadcms/email-resend": "^3.84.1",
     "@payloadcms/next": "^3.0.0",
     "@payloadcms/richtext-lexical": "^3.0.0",
+    "@serwist/next": "9.5.13",
     "next": "~15.4.11",
     "payload": "^3.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "serwist": "9.5.13",
     "sharp": "^0.33.5"
   },
   "devDependencies": {

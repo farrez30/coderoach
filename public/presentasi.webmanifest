@@ -1,0 +1,10 @@
+{
+  "name": "Coderoach · Presentasi",
+  "short_name": "Presentasi",
+  "start_url": "/work/presentasi",
+  "scope": "/work/presentasi",
+  "display": "fullscreen",
+  "background_color": "#08090A",
+  "theme_color": "#08090A",
+  "icons": [{ "src": "/assets/coderoach_logo.svg", "sizes": "any", "type": "image/svg+xml" }]
+}
