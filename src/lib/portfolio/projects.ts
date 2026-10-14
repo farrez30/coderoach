@@ -7,6 +7,8 @@
  */
 
 import { toLexical, type LexicalBlock } from '../lexical';
+import type { Consent } from './consent';
+import { toFeaturedMetric, type Metric } from './metrics';
 
 export { toLexical };
 
@@ -26,6 +28,8 @@ export type PortfolioCover = {
 
 export type PortfolioEntry = {
   slug: string;
+  /** What lets this entry be shown at all: its name, copy, and cover (see consent.ts). */
+  consent: Consent;
   order: number;
   kind: 'client' | 'studio';
   client: string;
@@ -39,6 +43,8 @@ export type PortfolioEntry = {
   excerpt: string;
   body: PortfolioBlock[];
   cover?: PortfolioCover;
+  /** Sourced numbers. The featured ones also fill the home page card. */
+  metrics?: Metric[];
   /** Kept in the database as a draft: off the site, copy preserved for later. */
   hidden?: boolean;
   featured?: boolean;
@@ -65,9 +71,52 @@ export const HIDDEN_PROJECT_SLUGS = ['ads-multiplatform-dashboard', 'viralytics'
 
 const kw = (s: string) => `<span style="color:#C4C0C5">${s}</span>`;
 
+/** Measured on Laporta itself and written down in the commit that changed it (repo mwafiudin/laporta_v2). */
+const LAPORTA_METRICS: Metric[] = [
+  {
+    key: 'input-penjualan-layar',
+    value: '1,7',
+    unit: 'layar',
+    label: 'Input penjualan di ponsel crew',
+    baseline: { value: '2,7', unit: 'layar' },
+    status: 'measured',
+    measuredAt: '2026-07-29',
+    method: 'Tinggi formulir input penjualan per shift di ponsel crew, sebelum dan sesudah grup channel bisa dilipat.',
+    sourceRef: 'laporta_v2@7d244f9',
+    consent: 'studio',
+    featured: true,
+  },
+  {
+    key: 'jadwal-ubah-sel',
+    value: '76–101',
+    unit: 'ms',
+    label: 'Ubah satu sel jadwal',
+    baseline: { value: '0,7–1,2', unit: 'dtk' },
+    status: 'measured',
+    measuredAt: '2026-08-31',
+    method: 'Waktu dari klik sampai sel jadwal berubah di layar, diukur sebelum dan sesudah pembaruan optimistik.',
+    sourceRef: 'laporta_v2@69ab349',
+    consent: 'studio',
+    featured: true,
+  },
+  {
+    key: 'ocr-bukti-transfer',
+    value: '14/14',
+    unit: '',
+    label: 'Bukti transfer terbaca benar',
+    status: 'measured',
+    measuredAt: '2026-08-04',
+    method: 'Tujuh slip BCA, BRI, dan DANA sintetis (buram, miring, difoto dari jauh) dibaca dua putaran, rata-rata 1,4 dtk per bukti.',
+    sourceRef: 'laporta_v2@57435fc',
+    consent: 'studio',
+    featured: true,
+  },
+];
+
 export const PORTFOLIO: PortfolioEntry[] = [
   {
     slug: 'laporta',
+    consent: 'studio',
     order: 1,
     kind: 'studio',
     client: 'Laporta',
@@ -75,17 +124,18 @@ export const PORTFOLIO: PortfolioEntry[] = [
     meta: 'F&B OPS · STUDIO PRODUCT',
     industry: 'fb',
     service: 'build',
-    publishedYear: '2024',
+    publishedYear: '2026',
     featured: true,
     pills: ['NEXT.JS', 'POSTGRES', 'DRIZZLE', 'RLS'],
     excerpt:
-      'Menjembatani SPV dan Accounting di operasi F&B multi-cabang. Memangkas 50% budget salary accounting, memangkas waktu processing data, sistem yang scalable.',
+      'Menjembatani SPV dan Accounting di operasi F&B multi-cabang: tutup shift dari ponsel crew, serah terima kas sampai setoran bank, dan jurnal double-entry sampai tutup buku.',
     cover: {
       file: 'portfolio-laporta.webp',
       alt: 'Laporta di tablet dan ponsel: daftar penjualan harian per shift dan checklist Tutup Shift crew outlet Geprek Wow',
       focalX: 100,
       focalY: 40,
     },
+    metrics: LAPORTA_METRICS,
     featuredDetails: {
       badgeLabel: 'FEATURED · STUDIO PRODUCT',
       shippedLabel: '✓ SHIPPED',
@@ -93,11 +143,7 @@ export const PORTFOLIO: PortfolioEntry[] = [
       headline: 'Laporta — bridging SPV dan Accounting di operasi F&B multi-cabang.',
       description:
         'Aplikasi yang menyederhanakan alur data dari cabang ke head office. Petty Cash, Stock Opname, Waste, dan data non-POS lainnya diproses cepat melalui satu workflow — termonitor langsung oleh Area Manager, Investor, dan Decision Maker. Dibangun untuk operator F&B Indonesia yang sudah melampaui kapasitas spreadsheet, namun belum cocok dengan enterprise ERP.',
-      metrics: [
-        { num: '50', accent: '%', label: 'CUT BUDGET ACCOUNTING' },
-        { num: '↓', accent: '4×', label: 'WAKTU PROCESSING' },
-        { num: '∞', accent: '', label: 'SCALABLE MULTI-CABANG' },
-      ],
+      metrics: LAPORTA_METRICS.filter((m) => m.featured).map(toFeaturedMetric),
       codePanel: {
         tag: '[ .TS ]',
         path: 'apps/laporta/sync.ts',
@@ -127,7 +173,7 @@ export const PORTFOLIO: PortfolioEntry[] = [
     },
     body: [
       { h2: 'Masalahnya bukan POS' },
-      'Jaringan Geprek Wow menjalankan belasan outlet. POS mencatat penjualan dengan rapi, tapi semua yang bukan penjualan (kas kecil, stock opname, waste, setoran ke bank, absensi, belanja ke distribution center) tersebar di spreadsheet dan grup WhatsApp. Angka dari cabang harus disalin ulang sebelum bisa dibaca head office, dan masalah di outlet baru terlihat setelah laporannya dirapikan.',
+      'Jaringan Geprek Wow menjalankan banyak outlet sekaligus. POS mencatat penjualan dengan rapi, tapi semua yang bukan penjualan (kas kecil, stock opname, waste, setoran ke bank, absensi, belanja ke distribution center) tersebar di spreadsheet dan grup WhatsApp. Angka dari cabang harus disalin ulang sebelum bisa dibaca head office, dan masalah di outlet baru terlihat setelah laporannya dirapikan.',
       { h2: 'Satu sistem, lima peran' },
       'Laporta dibangun untuk lima peran: Super Admin, Akuntansi, Crew dan SPV Outlet, Investor, dan Maintenance. Semuanya berjalan di atas Postgres dengan Row Level Security per outlet, sehingga crew satu outlet secara teknis tidak bisa membaca data outlet lain.',
       'Alurnya mengikuti hari kerja outlet, bukan struktur database. Di akhir shift, crew menjalankan satu checklist Tutup Shift dari ponselnya: absen pulang, penjualan, stock opname, kas kecil, waste, lalu serah terima kas. Data yang sudah diserahkan terkunci. Kalau ada yang keliru, koreksinya punya jalur sendiri dan tercatat.',
@@ -141,6 +187,7 @@ export const PORTFOLIO: PortfolioEntry[] = [
   },
   {
     slug: 'rpn-os',
+    consent: 'legacy',
     order: 2,
     kind: 'client',
     client: 'RPN OS',
@@ -174,6 +221,7 @@ export const PORTFOLIO: PortfolioEntry[] = [
   },
   {
     slug: 'locascore',
+    consent: 'studio',
     order: 3,
     kind: 'studio',
     client: 'LocaScore',
@@ -210,6 +258,7 @@ export const PORTFOLIO: PortfolioEntry[] = [
   },
   {
     slug: 'the-global-review',
+    consent: 'legacy',
     order: 4,
     kind: 'client',
     client: 'The Global Review',
@@ -236,6 +285,7 @@ export const PORTFOLIO: PortfolioEntry[] = [
   },
   {
     slug: 'uruzin',
+    consent: 'legacy',
     order: 5,
     kind: 'client',
     client: 'Uruzin OS',
@@ -267,6 +317,7 @@ export const PORTFOLIO: PortfolioEntry[] = [
   },
   {
     slug: 'chicken-wow',
+    consent: 'legacy',
     order: 6,
     kind: 'client',
     client: 'Chicken Wow',
@@ -292,6 +343,7 @@ export const PORTFOLIO: PortfolioEntry[] = [
   },
   {
     slug: 'pt-raja-roti-cemerlang',
+    consent: 'legacy',
     hidden: true,
     order: 7,
     kind: 'client',
@@ -315,6 +367,7 @@ export const PORTFOLIO: PortfolioEntry[] = [
   },
   {
     slug: 'tumtim-cookies',
+    consent: 'legacy',
     hidden: true,
     order: 8,
     kind: 'client',
