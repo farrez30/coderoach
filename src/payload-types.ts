@@ -81,7 +81,9 @@ export interface Config {
     submissions: Submission;
     'assessment-sessions': AssessmentSession;
     'assessment-leads': AssessmentLead;
+    'link-checks': LinkCheck;
     'payload-kv': PayloadKv;
+    'payload-jobs': PayloadJob;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -102,7 +104,9 @@ export interface Config {
     submissions: SubmissionsSelect<false> | SubmissionsSelect<true>;
     'assessment-sessions': AssessmentSessionsSelect<false> | AssessmentSessionsSelect<true>;
     'assessment-leads': AssessmentLeadsSelect<false> | AssessmentLeadsSelect<true>;
+    'link-checks': LinkChecksSelect<false> | LinkChecksSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
+    'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -118,6 +122,7 @@ export interface Config {
     'top-bar': TopBar;
     'site-settings': SiteSetting;
     'blog-settings': BlogSetting;
+    'payload-jobs-stats': PayloadJobsStat;
   };
   globalsSelect: {
     hero: HeroSelect<false> | HeroSelect<true>;
@@ -126,6 +131,7 @@ export interface Config {
     'top-bar': TopBarSelect<false> | TopBarSelect<true>;
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
     'blog-settings': BlogSettingsSelect<false> | BlogSettingsSelect<true>;
+    'payload-jobs-stats': PayloadJobsStatsSelect<false> | PayloadJobsStatsSelect<true>;
   };
   locale: null;
   widgets: {
@@ -133,7 +139,13 @@ export interface Config {
   };
   user: User;
   jobs: {
-    tasks: unknown;
+    tasks: {
+      checkLinks: TaskCheckLinks;
+      inline: {
+        input: unknown;
+        output: unknown;
+      };
+    };
     workflows: unknown;
   };
 }
@@ -182,7 +194,7 @@ export interface User {
   collection: 'users';
 }
 /**
- * Image library. Variants auto-generated on upload (thumbnail / card / hero / og).
+ * Images, plus mp4/webm video and WebVTT captions for the portfolio (ADR 0006). Image variants are generated on upload.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
@@ -214,6 +226,14 @@ export interface Media {
       filename?: string | null;
     };
     card?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    screen?: {
       url?: string | null;
       width?: number | null;
       height?: number | null;
@@ -681,7 +701,7 @@ export interface Project {
   /**
    * Client = case study render. Studio = product-landing render.
    */
-  kind: 'client' | 'studio';
+  kind: 'client' | 'studio' | 'lab';
   /**
    * Sort order in lists. Lower = earlier.
    */
@@ -690,7 +710,25 @@ export interface Project {
    * Renders as homepage feature card. Only one at a time (auto-unset on others).
    */
   featured?: boolean | null;
-  industry?: ('fb' | 'logistics' | 'finance' | 'agency' | 'vc' | 'manufacturing' | 'other') | null;
+  industry?:
+    | (
+        | 'fb'
+        | 'manufacturing'
+        | 'legal'
+        | 'media'
+        | 'health'
+        | 'education'
+        | 'finance'
+        | 'construction'
+        | 'travel'
+        | 'community'
+        | 'technology'
+        | 'other'
+        | 'logistics'
+        | 'agency'
+        | 'vc'
+      )
+    | null;
   /**
    * Primary service used. Drives related-projects on Service detail page.
    */
@@ -807,10 +845,130 @@ export interface Project {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Problem, solution, result: the first screen of the page.
+   */
+  summary?: {
+    problem?: string | null;
+    solution?: string | null;
+    result?: string | null;
+  };
+  showcase?: {
+    frame?: ('laptop' | 'phone' | 'browser') | null;
+    /**
+     * Hero screenshot inside the device frame.
+     */
+    screen?: (number | null) | Media;
+    /**
+     * Optional phone screenshot beside the laptop.
+     */
+    screenPhone?: (number | null) | Media;
+    /**
+     * Muted 3-6 s preview loop (mp4, at most 600 KB).
+     */
+    loop?: (number | null) | Media;
+    loopPoster?: (number | null) | Media;
+    /**
+     * Tour recording (mp4, at most 8 MB).
+     */
+    tour?: (number | null) | Media;
+    tourPoster?: (number | null) | Media;
+    /**
+     * WebVTT captions for the tour.
+     */
+    tourCaptions?: (number | null) | Media;
+    /**
+     * Text alternative for the tour.
+     */
+    tourTranscript?: string | null;
+    /**
+     * e.g. "Data contoh, bukan data klien."
+     */
+    demoNote?: string | null;
+  };
+  links?:
+    | {
+        kind?: ('live' | 'demo' | 'archive' | 'repo') | null;
+        label?: string | null;
+        href?: string | null;
+        /**
+         * Probed by the checkLinks job.
+         */
+        check?: boolean | null;
+        /**
+         * Dated screenshot shown when the link is down.
+         */
+        snapshot?: (number | null) | Media;
+        snapshotTakenAt?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Sourced numbers (src/lib/portfolio/metrics.ts).
+   */
+  metrics?:
+    | {
+        key?: string | null;
+        value?: string | null;
+        unit?: string | null;
+        label?: string | null;
+        baselineValue?: string | null;
+        baselineUnit?: string | null;
+        status?: ('measured' | 'target') | null;
+        measuredAt?: string | null;
+        method?: string | null;
+        sourceRef?: string | null;
+        verifyUrl?: string | null;
+        featured?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  beforeAfter?:
+    | {
+        label?: string | null;
+        before?: (number | null) | Media;
+        after?: (number | null) | Media;
+        beforeDate?: string | null;
+        afterDate?: string | null;
+        caption?: string | null;
+        sourceUrl?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  features?:
+    | {
+        title?: string | null;
+        body?: string | null;
+        screen?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  timeline?:
+    | {
+        /**
+         * As shown, e.g. "29 Jul 2026".
+         */
+        date?: string | null;
+        title?: string | null;
+        detail?: string | null;
+        sourceRef?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * At most one dark section per page, never the hero.
+   */
+  darkChapter?: {
+    eyebrow?: string | null;
+    title?: string | null;
+    body?: string | null;
+  };
   testimonial?: {
     quote?: string | null;
     author?: string | null;
     role?: string | null;
+    company?: string | null;
+    givenAt?: string | null;
   };
   /**
    * Manual override. If empty, auto-pick by industry/service.
@@ -894,6 +1052,26 @@ export interface Client {
    * Optional outbound URL, wraps the logo in an <a>.
    */
   website?: string | null;
+  /**
+   * Shown on the site. Set by the landing sync from permissions recorded in Coderoach OS.
+   */
+  listed?: boolean | null;
+  industry?:
+    | (
+        | 'fb'
+        | 'manufacturing'
+        | 'legal'
+        | 'media'
+        | 'health'
+        | 'education'
+        | 'finance'
+        | 'construction'
+        | 'travel'
+        | 'community'
+        | 'technology'
+        | 'other'
+      )
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1110,6 +1288,33 @@ export interface AssessmentLead {
   createdAt: string;
 }
 /**
+ * Live-link history for /work. Written by the checkLinks job; pruned after 90 days.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "link-checks".
+ */
+export interface LinkCheck {
+  id: number;
+  url: string;
+  project?: (number | null) | Project;
+  linkKind?: ('live' | 'demo' | 'archive' | 'repo') | null;
+  status: 'hidup' | 'login' | 'mati';
+  httpStatus?: number | null;
+  /**
+   * Why it is mati or login (http-404, dns, timeout, blocked-…).
+   */
+  reason?: string | null;
+  /**
+   * Origin + path where the link ended up (no query string).
+   */
+  finalUrl?: string | null;
+  title?: string | null;
+  durationMs?: number | null;
+  checkedAt: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -1125,6 +1330,107 @@ export interface PayloadKv {
     | number
     | boolean
     | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-jobs".
+ */
+export interface PayloadJob {
+  id: number;
+  /**
+   * Input data provided to the job
+   */
+  input?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  taskStatus?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  completedAt?: string | null;
+  totalTried?: number | null;
+  /**
+   * If hasError is true this job will not be retried
+   */
+  hasError?: boolean | null;
+  /**
+   * If hasError is true, this is the error that caused it
+   */
+  error?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  /**
+   * Task execution log
+   */
+  log?:
+    | {
+        executedAt: string;
+        completedAt: string;
+        taskSlug: 'inline' | 'checkLinks';
+        taskID: string;
+        input?:
+          | {
+              [k: string]: unknown;
+            }
+          | unknown[]
+          | string
+          | number
+          | boolean
+          | null;
+        output?:
+          | {
+              [k: string]: unknown;
+            }
+          | unknown[]
+          | string
+          | number
+          | boolean
+          | null;
+        state: 'failed' | 'succeeded';
+        error?:
+          | {
+              [k: string]: unknown;
+            }
+          | unknown[]
+          | string
+          | number
+          | boolean
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  taskSlug?: ('inline' | 'checkLinks') | null;
+  queue?: string | null;
+  waitUntil?: string | null;
+  processing?: boolean | null;
+  meta?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1285,6 +1591,16 @@ export interface MediaSelect<T extends boolean = true> {
               filename?: T;
             };
         card?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        screen?:
           | T
           | {
               url?: T;
@@ -1677,12 +1993,99 @@ export interface ProjectsSelect<T extends boolean = true> {
         caption?: T;
         id?: T;
       };
+  summary?:
+    | T
+    | {
+        problem?: T;
+        solution?: T;
+        result?: T;
+      };
+  showcase?:
+    | T
+    | {
+        frame?: T;
+        screen?: T;
+        screenPhone?: T;
+        loop?: T;
+        loopPoster?: T;
+        tour?: T;
+        tourPoster?: T;
+        tourCaptions?: T;
+        tourTranscript?: T;
+        demoNote?: T;
+      };
+  links?:
+    | T
+    | {
+        kind?: T;
+        label?: T;
+        href?: T;
+        check?: T;
+        snapshot?: T;
+        snapshotTakenAt?: T;
+        id?: T;
+      };
+  metrics?:
+    | T
+    | {
+        key?: T;
+        value?: T;
+        unit?: T;
+        label?: T;
+        baselineValue?: T;
+        baselineUnit?: T;
+        status?: T;
+        measuredAt?: T;
+        method?: T;
+        sourceRef?: T;
+        verifyUrl?: T;
+        featured?: T;
+        id?: T;
+      };
+  beforeAfter?:
+    | T
+    | {
+        label?: T;
+        before?: T;
+        after?: T;
+        beforeDate?: T;
+        afterDate?: T;
+        caption?: T;
+        sourceUrl?: T;
+        id?: T;
+      };
+  features?:
+    | T
+    | {
+        title?: T;
+        body?: T;
+        screen?: T;
+        id?: T;
+      };
+  timeline?:
+    | T
+    | {
+        date?: T;
+        title?: T;
+        detail?: T;
+        sourceRef?: T;
+        id?: T;
+      };
+  darkChapter?:
+    | T
+    | {
+        eyebrow?: T;
+        title?: T;
+        body?: T;
+      };
   testimonial?:
     | T
     | {
         quote?: T;
         author?: T;
         role?: T;
+        company?: T;
+        givenAt?: T;
       };
   relatedProjects?: T;
   updatedAt?: T;
@@ -1736,6 +2139,8 @@ export interface ClientsSelect<T extends boolean = true> {
   logo?: T;
   logoDark?: T;
   website?: T;
+  listed?: T;
+  industry?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1848,11 +2253,61 @@ export interface AssessmentLeadsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "link-checks_select".
+ */
+export interface LinkChecksSelect<T extends boolean = true> {
+  url?: T;
+  project?: T;
+  linkKind?: T;
+  status?: T;
+  httpStatus?: T;
+  reason?: T;
+  finalUrl?: T;
+  title?: T;
+  durationMs?: T;
+  checkedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
   key?: T;
   data?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-jobs_select".
+ */
+export interface PayloadJobsSelect<T extends boolean = true> {
+  input?: T;
+  taskStatus?: T;
+  completedAt?: T;
+  totalTried?: T;
+  hasError?: T;
+  error?: T;
+  log?:
+    | T
+    | {
+        executedAt?: T;
+        completedAt?: T;
+        taskSlug?: T;
+        taskID?: T;
+        input?: T;
+        output?: T;
+        state?: T;
+        error?: T;
+        id?: T;
+      };
+  taskSlug?: T;
+  queue?: T;
+  waitUntil?: T;
+  processing?: T;
+  meta?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2165,6 +2620,24 @@ export interface BlogSetting {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-jobs-stats".
+ */
+export interface PayloadJobsStat {
+  id: number;
+  stats?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "hero_select".
  */
 export interface HeroSelect<T extends boolean = true> {
@@ -2378,6 +2851,16 @@ export interface BlogSettingsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-jobs-stats_select".
+ */
+export interface PayloadJobsStatsSelect<T extends boolean = true> {
+  stats?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "collections_widget".
  */
 export interface CollectionsWidget {
@@ -2385,6 +2868,17 @@ export interface CollectionsWidget {
     [k: string]: unknown;
   };
   width: 'full';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TaskCheckLinks".
+ */
+export interface TaskCheckLinks {
+  input?: unknown;
+  output: {
+    checked: number;
+    pruned: number;
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

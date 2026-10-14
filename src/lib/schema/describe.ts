@@ -84,8 +84,20 @@ export function nonAdditiveChanges(baseline: SchemaShape, next: SchemaShape): st
     const dropped = (before.options ?? []).filter((o) => !(after.options ?? []).includes(o));
     if (dropped.length) problems.push(`${path}: options removed (${dropped.join(', ')})`);
   }
+  const known = Object.keys(baseline);
   for (const [path, after] of Object.entries(next)) {
-    if (!baseline[path] && after.required) problems.push(`${path}: new field is required (NOT NULL on existing rows)`);
+    // NOT NULL only hurts when the column lands in a table that already has rows. A new collection,
+    // or a new array (its own table), starts empty.
+    if (!baseline[path] && after.required && tableExists(known, path)) {
+      problems.push(`${path}: new field is required (NOT NULL on existing rows)`);
+    }
   }
   return problems;
+}
+
+/** The table a field lives in: the nearest enclosing array/blocks, else its collection or global. */
+function tableExists(known: string[], path: string): boolean {
+  const cut = Math.max(path.lastIndexOf('[]'), path.lastIndexOf('>'));
+  const table = cut >= 0 ? path.slice(0, cut + (path[cut] === '>' ? 1 : 2)) : path.slice(0, path.indexOf('.'));
+  return known.some((k) => k.startsWith(cut >= 0 ? table : `${table}.`));
 }

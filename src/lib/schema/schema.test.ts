@@ -33,4 +33,16 @@ describe('payload schema', () => {
       'collection:x.added: new field is required (NOT NULL on existing rows)',
     ]);
   });
+
+  test('a required field in a new table is fine: it starts empty', () => {
+    const before: SchemaShape = { 'collection:x.rows': { type: 'array' }, 'collection:x.rows[].a': { type: 'text' } };
+    const after: SchemaShape = {
+      ...before,
+      'collection:x.rows[].b': { type: 'text', required: true },
+      'collection:x.items': { type: 'array' },
+      'collection:x.items[].c': { type: 'text', required: true },
+      'collection:y.d': { type: 'text', required: true },
+    };
+    assert.deepEqual(nonAdditiveChanges(before, after), ['collection:x.rows[].b: new field is required (NOT NULL on existing rows)']);
+  });
 });

@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload';
 import { imageField } from '../fields/imageField';
+import { INDUSTRIES } from '../lib/portfolio/taxonomy';
 
 export const Clients: CollectionConfig = {
   slug: 'clients',
@@ -9,7 +10,9 @@ export const Clients: CollectionConfig = {
     group: 'Content',
     description: 'Trusted-by marquee entries. Upload a logo for each (light variant required, dark optional).',
   },
-  access: { read: () => true },
+  // The REST API is public, so an unlisted client (no recorded permission) must not be readable
+  // there either; hiding it only in the marquee would still publish its name (ADR 0009).
+  access: { read: ({ req }) => (req.user ? true : { listed: { equals: true } }) },
   fields: [
     {
       name: 'order',
@@ -37,6 +40,23 @@ export const Clients: CollectionConfig = {
       name: 'website',
       type: 'text',
       admin: { description: 'Optional outbound URL, wraps the logo in an <a>.' },
+    },
+    {
+      name: 'listed',
+      type: 'checkbox',
+      defaultValue: false,
+      index: true,
+      admin: {
+        position: 'sidebar',
+        description: 'Shown on the site. Set by the landing sync from permissions recorded in Coderoach OS.',
+      },
+    },
+    {
+      name: 'industry',
+      type: 'select',
+      index: true,
+      options: INDUSTRIES.map((i) => ({ label: i.label, value: i.value })),
+      admin: { position: 'sidebar' },
     },
   ],
 };
