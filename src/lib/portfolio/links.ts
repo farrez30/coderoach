@@ -18,13 +18,15 @@ export function linkState(latest: LatestCheck | undefined, now: number): LatestC
 
 /**
  * Only plain https links reach an href. The field is filled in the admin, and a `javascript:` URL
- * there would run in every visitor's browser.
+ * there would run in every visitor's browser. The link comes back as written, not normalized: the
+ * checkLinks job stores it that way, and the page looks its status up by the same string.
  */
 export function safeHref(href: string | null | undefined): string | null {
-  if (!href) return null;
+  const raw = href?.trim();
+  if (!raw) return null;
   try {
-    const url = new URL(href);
-    return url.protocol === 'https:' && !url.username && !url.password ? url.href : null;
+    const url = new URL(raw);
+    return url.protocol === 'https:' && !url.username && !url.password ? raw : null;
   } catch {
     return null;
   }

@@ -21,6 +21,8 @@ describe('linkState', () => {
 describe('safeHref', () => {
   test('keeps https links', () => {
     assert.equal(safeHref('https://laporta.example/masuk'), 'https://laporta.example/masuk');
+    // As written, so it matches the URL the link checker stored.
+    assert.equal(safeHref('https://akarkita.example'), 'https://akarkita.example');
   });
 
   test('drops anything a click could abuse', () => {
