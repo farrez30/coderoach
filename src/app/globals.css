@@ -126,6 +126,14 @@
   /* Trusted-by marquee */
   @keyframes marquee { to { transform: translateX(-50%); } }
   .animate-marquee { animation: marquee 50s linear infinite; }
+  [data-marquee]:hover .animate-marquee,
+  [data-marquee]:focus-within .animate-marquee,
+  [data-marquee][data-paused] .animate-marquee { animation-play-state: paused; }
+  /* Still, the row would just be cut off at the edge: wrap it and drop the loop's second copy. */
+  @media (prefers-reduced-motion: reduce) {
+    [data-marquee] .marquee-track { flex-wrap: wrap; flex-shrink: 1; row-gap: 20px; }
+    [data-marquee] .marquee-track[aria-hidden] { display: none; }
+  }
 
   /* Octagon spinner (loading states) */
   @keyframes octagonSpin {

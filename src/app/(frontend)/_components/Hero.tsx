@@ -1,3 +1,4 @@
+import { MarqueePause } from './MarqueePause';
 import { OpsConsole } from './OpsConsole';
 import { OctagonMark } from './ui/OctagonMark';
 
@@ -61,7 +62,7 @@ export function Hero({ data, clients }: { data: HeroData | null; clients: Client
               {data?.ctaPrimary?.href && (
                 <a href={data.ctaPrimary.href} className="h-[52px] px-[22px] rounded-md bg-electric text-paper text-[15px] font-semibold inline-flex items-center gap-2 hover:bg-[#2562E0] transition-colors" data-cta-magnetic>
                   {data.ctaPrimary.label}
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg aria-hidden width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M5 12h14M13 5l7 7-7 7" />
                   </svg>
                 </a>
@@ -97,17 +98,25 @@ export function Hero({ data, clients }: { data: HeroData | null; clients: Client
 
       {/* Trusted-by marquee */}
       {clients.length > 0 && (
-        <div className="mt-16 lg:mt-24 pt-12 pb-14 border-t border-paper-200 bg-paper-50">
+        <div className="mt-16 lg:mt-24 pt-12 pb-14 border-t border-paper-200 bg-paper-50" data-marquee>
           <div className="max-w-[1180px] mx-auto px-8">
             <div className="flex items-baseline gap-3.5 flex-wrap mb-7 text-sm text-mist-600 leading-snug">
               <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-ink">
                 {data?.trustedBy?.label ?? 'Beberapa klien yang telah kami tangani'}
               </span>
               <p className="m-0">{data?.trustedBy?.tagline}</p>
+              <MarqueePause />
             </div>
             <div className="flex overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_5%,black_95%,transparent)]">
               {[0, 1].map((track) => (
-                <div key={track} className="flex items-center gap-[72px] flex-shrink-0 pr-[72px] animate-marquee" aria-hidden={track === 1}>
+                // The second track only exists to make the loop seamless: hidden from screen readers, and
+                // inert so keyboard users don't tab through every client twice.
+                <div
+                  key={track}
+                  className="marquee-track flex items-center gap-[72px] flex-shrink-0 pr-[72px] animate-marquee"
+                  aria-hidden={track === 1 || undefined}
+                  inert={track === 1}
+                >
                   {clients.map((c, i) => {
                     const inner = c.logo?.url ? (
                       // eslint-disable-next-line @next/next/no-img-element
@@ -117,7 +126,7 @@ export function Hero({ data, clients }: { data: HeroData | null; clients: Client
                         className="h-9 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity"
                       />
                     ) : (
-                      <span className="font-sans font-bold text-[32px] tracking-[-0.02em] text-mist-500 hover:text-ink transition-colors whitespace-nowrap">
+                      <span className="font-sans font-bold text-[32px] tracking-[-0.02em] text-mist-600 hover:text-ink transition-colors whitespace-nowrap">
                         {c.name}
                       </span>
                     );
