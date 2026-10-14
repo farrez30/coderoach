@@ -41,7 +41,7 @@ export function MediaImg({
       height={media.height ?? undefined}
       alt={alt ?? media.alt ?? ''}
       loading={priority ? 'eager' : 'lazy'}
-      decoding={priority ? 'sync' : 'async'}
+      decoding="async"
       fetchPriority={priority ? 'high' : 'auto'}
       className={className}
     />

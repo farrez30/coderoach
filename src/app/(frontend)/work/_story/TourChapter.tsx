@@ -1,5 +1,5 @@
 import type { Project } from '@/payload-types';
-import { asMedia } from './MediaImg';
+import { asMedia, MediaImg } from './MediaImg';
 
 /**
  * The page's one dark chapter, holding the tour. The video never autoplays and loads nothing until
@@ -25,14 +25,17 @@ export function TourChapter({ project }: { project: Project }) {
         {tour?.url && (
           <figure className="m-0 mt-12 sm:mt-16">
             <div data-scene="enter">
-              <div className="story-tour mx-auto overflow-hidden bg-shadow-900 border border-shadow-700 aspect-[16/10]">
+              <div className="story-tour relative mx-auto overflow-hidden bg-shadow-900 border border-shadow-700 aspect-[16/10]">
+                {/* The poster as a lazy image under the video: a poster attribute is fetched with the
+                    page, competing with the hero image for a section far below it. An unloaded
+                    video paints nothing, so the image shows through until playback starts. */}
+                {poster && <MediaImg media={poster} alt="" sizes="(min-width: 1180px) 1116px, 92vw" className="absolute inset-0 h-full w-full object-contain" />}
                 <video
                   controls
                   playsInline
                   preload="none"
-                  poster={poster?.url ?? undefined}
                   aria-label={tour.alt || `Tur ${project.client}`}
-                  className="block h-full w-full object-contain"
+                  className="relative block h-full w-full object-contain"
                 >
                   <source src={tour.url} type={tour.mimeType ?? 'video/mp4'} />
                   {captions?.url && <track kind="captions" src={captions.url} srcLang="id" label="Bahasa Indonesia" default />}

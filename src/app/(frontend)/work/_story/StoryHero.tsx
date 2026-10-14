@@ -12,6 +12,8 @@ import { asMedia, MediaImg } from './MediaImg';
 export function StoryHero({ project, links, mode }: { project: Project; links: LinkView[]; mode: 'page' | 'overlay' }) {
   const sc = project.showcase;
   const screen = asMedia(sc?.screen);
+  // No recording yet: the cover the old page used, shown as it is (it is often already a composite).
+  const cover = screen ? null : asMedia(project.coverImage);
   const phone = asMedia(sc?.screenPhone);
   const loop = asMedia(sc?.loop);
   const summary = [
@@ -57,6 +59,13 @@ export function StoryHero({ project, links, mode }: { project: Project; links: L
         )}
       </div>
 
+      {cover && (
+        <div className="max-w-[1180px] mx-auto px-5 sm:px-8 mt-12 sm:mt-20">
+          <div className="story-rise overflow-hidden rounded-2xl border border-paper-200 bg-paper-50">
+            <MediaImg media={cover} priority sizes="(min-width: 1180px) 1116px, 92vw" className="block w-full h-auto" />
+          </div>
+        </div>
+      )}
       {screen && (
         <div className="max-w-[1180px] mx-auto px-5 sm:px-8 mt-12 sm:mt-20">
           <div className={`relative mx-auto max-w-[1040px] ${phone ? 'pr-[11%] pb-[6%]' : ''}`}>
