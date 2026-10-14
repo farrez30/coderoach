@@ -8,6 +8,7 @@
 
 import { toLexical, type LexicalBlock } from '../lexical';
 import type { Consent } from './consent';
+import type { Industry } from './taxonomy';
 import { toFeaturedMetric, type Metric } from './metrics';
 
 export { toLexical };
@@ -26,16 +27,30 @@ export type PortfolioCover = {
   focalY?: number;
 };
 
+/** A file in scripts/portfolio-assets/, uploaded to Media by the sync. Versioned names: laporta-tour.v1.mp4. */
+export type PortfolioAsset = { file: string; alt: string };
+
+export type PortfolioLink = {
+  kind: 'live' | 'demo' | 'archive' | 'repo';
+  label: string;
+  href: string;
+  /** Probe it with the checkLinks job. Off for links that answer bots badly. */
+  check?: boolean;
+  consent: Consent;
+  /** Dated screenshot shown when the link is down. */
+  snapshot?: PortfolioAsset & { takenAt: string };
+};
+
 export type PortfolioEntry = {
   slug: string;
   /** What lets this entry be shown at all: its name, copy, and cover (see consent.ts). */
   consent: Consent;
   order: number;
-  kind: 'client' | 'studio';
+  kind: 'client' | 'studio' | 'lab';
   client: string;
   tagline: string;
   meta: string;
-  industry: 'fb' | 'logistics' | 'finance' | 'agency' | 'vc' | 'manufacturing' | 'other';
+  industry: Industry;
   /** Slug of the primary service. */
   service: 'build' | 'automate' | 'intelligence' | 'augment';
   publishedYear: string;
@@ -45,6 +60,28 @@ export type PortfolioEntry = {
   cover?: PortfolioCover;
   /** Sourced numbers. The featured ones also fill the home page card. */
   metrics?: Metric[];
+  /** The first screen of the project page: what was wrong, what was built, what changed. */
+  summary?: { problem: string; solution: string; result: string };
+  showcase?: {
+    frame: 'laptop' | 'phone' | 'browser';
+    screen?: PortfolioAsset;
+    screenPhone?: PortfolioAsset;
+    loop?: PortfolioAsset;
+    loopPoster?: PortfolioAsset;
+    tour?: PortfolioAsset;
+    tourPoster?: PortfolioAsset;
+    tourCaptions?: PortfolioAsset;
+    tourTranscript?: string;
+    /** Says the recording runs on made-up data, e.g. "Data contoh, bukan data klien." */
+    demoNote?: string;
+    /** Who allowed the recordings and screenshots: studio for our own products. */
+    consent: Consent;
+  };
+  links?: PortfolioLink[];
+  features?: Array<{ title: string; body: string; screen?: PortfolioAsset }>;
+  timeline?: Array<{ date: string; title: string; detail?: string; sourceRef?: string }>;
+  darkChapter?: { eyebrow: string; title: string; body: string };
+  testimonial?: { quote: string; author: string; role: string; company: string; givenAt: string; consent: Consent };
   /** Kept in the database as a draft: off the site, copy preserved for later. */
   hidden?: boolean;
   featured?: boolean;

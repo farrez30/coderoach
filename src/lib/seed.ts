@@ -10,6 +10,8 @@ import path from 'node:path';
 import { getPayload } from 'payload';
 import config from '../payload.config';
 import { HIDDEN_PROJECT_SLUGS, PORTFOLIO } from './portfolio/projects';
+import { refsIn } from './portfolio/gate';
+import { assumedGrants } from './portfolio/grants';
 import { syncPortfolio } from './portfolio/sync';
 
 async function seed() {
@@ -381,6 +383,8 @@ async function seed() {
     },
   ]);
   await syncPortfolio(payload, {
+    // The seed only runs on a local database (SEED_TARGET guard above), so every permission is assumed.
+    grants: assumedGrants(refsIn(PORTFOLIO), PORTFOLIO.flatMap((e) => (e.metrics ?? []).map((m) => m.key))),
     apply: true,
     assetsDir: path.resolve(process.cwd(), 'scripts/portfolio-assets'),
     log: () => {},
