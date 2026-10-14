@@ -13,6 +13,11 @@ import { HIDDEN_PROJECT_SLUGS, PORTFOLIO } from './portfolio/projects';
 import { syncPortfolio } from './portfolio/sync';
 
 async function seed() {
+  // reset() below deletes every document in the collections it seeds, projects included.
+  if (process.env.SEED_TARGET !== 'local') {
+    console.error('Seed refuses to run: set SEED_TARGET=local in .env.local to confirm this database is a local one.');
+    process.exit(1);
+  }
   const payload = await getPayload({ config });
   console.log('🌱 Seeding placeholder content...\n');
 

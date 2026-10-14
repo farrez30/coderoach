@@ -185,7 +185,7 @@ Situs berjalan di project Railway **coderoach-web** (workspace Coderoach):
 
 | Service | Isi |
 | --- | --- |
-| `web` | Deploy otomatis dari branch `main` di GitHub. Build `npm run build`, start `npm run start`, healthcheck `/opsscore` (`railway.json`). Volume di `/app/media` untuk upload Media. |
+| `web` | Deploy otomatis dari branch `main` di GitHub. Build `npm run build`, start `npm run start`, healthcheck `/api/health` (`railway.json`), yang membaca satu baris dari setiap collection dan global, sehingga build yang butuh kolom yang belum di-push gagal dan tidak dipromosikan. Volume di `/app/media` untuk upload Media. |
 | `Postgres` | PostgreSQL 18, hanya jaringan privat (tanpa akses publik). |
 
 Variabel `web`: `DATABASE_URI` (`${{Postgres.DATABASE_URL}}`), `NEXT_PUBLIC_SERVER_URL` (`https://${{RAILWAY_PUBLIC_DOMAIN}}`), `NEXT_PUBLIC_SITE_NAME`, `PAYLOAD_SECRET`, `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, `RESEND_TO_EMAIL`, dan opsional `NEXT_PUBLIC_GA4_ID` serta `NEXT_PUBLIC_META_PIXEL_ID`. Variabel `NEXT_PUBLIC_*` dibaca saat build, jadi redeploy setelah mengubahnya.

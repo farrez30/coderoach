@@ -21,6 +21,10 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ['400', '500', '700'],
 });
 
+// Media URLs are relative (/api/media/file/...). Without a base, Next resolved og:image against
+// localhost, so every shared project link previewed without its image.
+const metadataBase = new URL(process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000');
+
 export async function generateMetadata(): Promise<Metadata> {
   const fallbackName = process.env.NEXT_PUBLIC_SITE_NAME || 'Studio';
   const fallbackDescription =
@@ -41,6 +45,7 @@ export async function generateMetadata(): Promise<Metadata> {
     const faviconUrl = siteSettings?.favicon?.url;
     const ogImageUrl = siteSettings?.ogImage?.url;
     return {
+      metadataBase,
       title,
       description,
       icons: faviconUrl ? { icon: faviconUrl } : { icon: '/assets/coderoach_logo.svg' },
@@ -53,6 +58,7 @@ export async function generateMetadata(): Promise<Metadata> {
     };
   } catch {
     return {
+      metadataBase,
       title: fallbackName,
       description: fallbackDescription,
       icons: { icon: '/assets/coderoach_logo.svg' },
