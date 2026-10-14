@@ -33,6 +33,14 @@ What it should evoke: the feeling of talking to someone who has already run this
 4. **One accent.** Electric blue `#2C70FE` is the only colour that ever means something. Everything else is paper and ink.
 5. **Art direction per section.** Narrative sections may each have their own composition — asymmetry, oversized type, rules that cut across the grid — as long as the voice holds.
 
+## Exception: project pages (draft, to agree with wafi in the PR)
+
+ADR 0003 gives `/work/[slug]` the full apple.com product-page manner. That stretches two lines above, so the exception is written down instead of drifting:
+
+- **Allowed there only:** the product-page formula (name, one line, then one idea per section), motion bound to scroll, one dark chapter that holds the tour (never the hero), and the blueprint ornaments where a picture is missing.
+- **Still binding:** one accent (`#2C70FE`), proof over adjectives (every number footnoted to its source), plain Indonesian, and the accessibility rules below.
+- **Not extended:** the landing, services, notes, and studio pages keep the rules above as they are.
+
 ## Accessibility
 
 Body text ≥4.5:1 on its background; the mist ramp stops at `mist-600` for anything that must be read. Every reveal has a `prefers-reduced-motion` path, and content is visible by default rather than gated behind a transition.

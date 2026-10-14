@@ -265,6 +265,20 @@ A mono measurement line (`[ 02 / 07 ] · WORK` in mist-600 with a mist-400 dot) 
 ### Process Rail
 A 2px rail across four columns that fills with Signal Blue as the reader scrolls (`--progress`), 14px ring dots in ink sitting on it, each phase tagged `[ tag ]` in mono with a deliverable box (paper-50, 6px corners) beneath.
 
+### Project Story (`/work/[slug]`, ADR 0003)
+The project page in the manner of a product page, used once a project has its summary. The room stays light and the voice the same; what changes is scale and pacing.
+- **Hero:** a mono eyebrow (kind · industry · year), the project name at clamp(46px, 9vw, 112px), 700, -0.045em, 0.95 line height, one tagline at clamp(21px, 2.8vw, 34px) semibold, then problem, solution, and result as three Label-headed columns above a hairline. The answer is on screen before any picture: at 375×667 all three end inside the first screen.
+- **Device frames** are drawn in CSS: an ink laptop lid on a paper-200 base, an ink phone with 2.6rem corners, a browser window with three paper-200 dots. Never a manufacturer's bezel. The phone overlaps the laptop's right edge and can play a muted preview loop over its still, with a pause button.
+- **Numbers** sit in a paper-50 band at min(84px, 19cqi) so a range like "76–101 ms" holds one line in a third of the page, unit in Signal Blue, baseline in mono, and a `[n]` footnote to Sumber.
+- **Features** are rows of text beside a framed screen; on a wide screen with motion allowed they become one pinned scene where the screens share a sticky slot and cross-fade.
+- **The one dark chapter** is the tour: ink section, centred headline, a 16:10 video that never autoplays, the demo note under it, and the transcript in a disclosure.
+- **Timeline** on a 2px rail that fills with Signal Blue as the page is read; **Sumber** lists each number with its method, date, and `repo@commit`.
+- **Secondary text is ink at 65%** (6.3:1 on paper-100), not mist-600, which measures 4.13:1 and is too light for reading text.
+- **Motion** reads `--p` (0 to 1) with its resting value as the fallback, so no JS, reduced motion, and the overlay all show the finished page. Scroll is never hijacked; only the value read from it is smoothed.
+
+### Presentation Shelf (`/work/presentasi`)
+The ops console grown to a room: ink background, a mono header (`CODEROACH · PRESENTASI · 08 PROYEK`) with the offline readout, and one 640px shadow-900 card per project in a horizontal snap row, each with a `[ 01 / 08 ]` position. Keyboard first: arrows, Enter, F, Esc.
+
 ## Do's and Don'ts
 
 ### Do:
