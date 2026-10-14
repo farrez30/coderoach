@@ -248,6 +248,78 @@
 }
 
 /* ============================================================
+   PROJECT STORY — /work/[slug] (ADR 0003, work/_story/).
+   Every rule that moves something reads --p with its resting value as the fallback,
+   so without JS, with reduced motion, and in the overlay the page is simply finished.
+   StoryEnhancer writes --p (0 to 1) on [data-scene] and sets data-motion="on".
+   ============================================================ */
+@layer components {
+  /* Hero: the laptop and the phone drift up at different rates as the hero leaves. */
+  .story-hero .story-rise { translate: 0 calc(var(--p, 0) * -36px); }
+  .story-hero .story-phone { translate: 0 calc(var(--p, 0) * -96px); }
+  @keyframes storyFloat { to { transform: translateY(-8px); } }
+  .story[data-motion='on'] .story-float { animation: storyFloat 5s var(--ease-default) infinite alternate; }
+
+  .story-phone video { opacity: 0; transition: opacity 500ms var(--ease-out-quint); }
+  .story-phone video.is-playing { opacity: 1; }
+  .story-loop-toggle[aria-pressed='false'] .story-icon-play,
+  .story-loop-toggle[aria-pressed='true'] .story-icon-pause { display: none; }
+
+  /* Metrics come up one after another, and go back down when scrolled back. */
+  .story-metric {
+    --t: clamp(0, calc(var(--p, 1) * 2.4 - var(--i, 0) * 0.45), 1);
+    opacity: var(--t);
+    translate: 0 calc((1 - var(--t)) * 28px);
+  }
+
+  /* The tour grows into place and its corners tighten. */
+  .story-tour {
+    scale: calc(0.9 + 0.1 * var(--p, 1));
+    border-radius: calc(30px - 12px * var(--p, 1));
+  }
+
+  .story-timeline__fill { scale: 1 var(--p, 1); transform-origin: top; }
+
+  .story-transcript summary::marker { color: var(--color-mist-500); }
+
+  /* Features: rows by default (mobile, overlay, no JS, reduced motion)... */
+  .story-feature { display: grid; gap: 28px; align-items: center; }
+  .story-feature + .story-feature { margin-top: clamp(64px, 8vw, 112px); }
+  .story-feature__shot--tall { width: min(300px, 72%); margin-inline: auto; }
+  @media (min-width: 1024px) {
+    .story-feature { grid-template-columns: 1fr 1.35fr; gap: 64px; }
+
+    /* ...one pinned scene on a wide screen with motion: the shots share the second column's
+       full height, stick together, and cross-fade as each text reaches the middle. */
+    .story[data-motion='on'] .story-features { display: grid; grid-template-columns: 1fr 1.35fr; column-gap: 64px; }
+    .story[data-motion='on'] .story-feature { display: contents; }
+    .story[data-motion='on'] .story-feature__text {
+      grid-column: 1;
+      grid-row: var(--row);
+      min-height: 72vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      opacity: 0.28;
+      transition: opacity 400ms var(--ease-out-quint);
+    }
+    .story[data-motion='on'] .story-feature__shot {
+      grid-column: 2;
+      grid-row: 1 / span var(--n);
+      align-self: start;
+      position: sticky;
+      top: max(96px, calc(50vh - 230px));
+      opacity: 0;
+      scale: 0.96;
+      transition: opacity 500ms var(--ease-out-quint), scale 600ms var(--ease-out-quint);
+    }
+    .story[data-motion='on'] .story-feature__shot--tall { width: min(280px, 34vh); }
+    .story[data-motion='on'] .story-feature[data-current] .story-feature__text { opacity: 1; }
+    .story[data-motion='on'] .story-feature[data-current] .story-feature__shot { opacity: 1; scale: 1; }
+  }
+}
+
+/* ============================================================
    OPSSCORE MOTION — quiz, results, and report (docs/opsscore-brief.md §7).
    Question transitions run in JS (Web Animations API); everything here is CSS.
    All of it is switched off for prefers-reduced-motion.

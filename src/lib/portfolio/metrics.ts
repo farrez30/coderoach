@@ -56,7 +56,7 @@ export function metricProblems(m: Metric, today: string): string[] {
 }
 
 /** The number as a sentence fragment. Targets always say so. */
-export function formatMetric(m: Metric): string {
+export function formatMetric(m: Pick<Metric, 'value' | 'unit' | 'baseline' | 'status'>): string {
   const value = [m.value, m.unit].filter(Boolean).join(' ');
   const from = m.baseline ? ` (dari ${[m.baseline.value, m.baseline.unit].filter(Boolean).join(' ')})` : '';
   return `${m.status === 'target' ? 'Target ' : ''}${value}${from}`;

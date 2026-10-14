@@ -1,6 +1,7 @@
 import { getProject } from '@/lib/portfolio/queries';
 import { ClientCaseDetail } from '../../[slug]/ClientCaseDetail';
 import { StudioProductDetail } from '../../[slug]/StudioProductDetail';
+import { hasStory, ProjectStory } from '../../_story/ProjectStory';
 import { ProjectOverlay } from './ProjectOverlay';
 
 export const dynamic = 'force-dynamic';
@@ -25,7 +26,9 @@ export default async function ProjectOverlayPage({ params }: { params: Promise<{
 
   return (
     <ProjectOverlay slug={slug} title={project.client}>
-      {project.kind === 'client' ? (
+      {hasStory(project) ? (
+        <ProjectStory project={project} mode="overlay" />
+      ) : project.kind === 'client' ? (
         <ClientCaseDetail project={project} as="div" />
       ) : (
         <StudioProductDetail project={project} as="div" />

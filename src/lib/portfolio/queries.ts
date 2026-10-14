@@ -2,6 +2,7 @@ import config from '@payload-config';
 import { draftMode } from 'next/headers';
 import { getPayload } from 'payload';
 import { cache } from 'react';
+import type { LatestCheck } from './links';
 
 /**
  * One project with everything a detail view renders. The full page and the overlay share it, and
@@ -21,3 +22,27 @@ export const getProject = cache(async (slug: string) => {
   });
   return docs[0] ?? null;
 });
+
+/**
+ * The newest check per URL. link-checks is admin-only over REST; the page reads it here and passes
+ * on just the status and the time, never the reason, final URL, or title.
+ */
+export async function latestLinkChecks(urls: string[]): Promise<Map<string, LatestCheck>> {
+  const payload = await getPayload({ config });
+  const rows = await Promise.all(
+    [...new Set(urls)].map(async (url) => {
+      const { docs } = await payload.find({
+        collection: 'link-checks',
+        where: { url: { equals: url } },
+        sort: '-checkedAt',
+        limit: 1,
+        depth: 0,
+        select: { status: true, checkedAt: true },
+        overrideAccess: true,
+      });
+      const doc = docs[0];
+      return doc ? ([url, { status: doc.status, checkedAt: doc.checkedAt }] as const) : null;
+    }),
+  );
+  return new Map(rows.filter((r) => r !== null));
+}

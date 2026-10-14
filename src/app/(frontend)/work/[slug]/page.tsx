@@ -8,6 +8,7 @@ import { ClientCaseDetail } from './ClientCaseDetail';
 import { StudioProductDetail } from './StudioProductDetail';
 import { RelatedGrid } from '../../_components/detail/RelatedGrid';
 import { PrevNext } from '../../_components/detail/PrevNext';
+import { hasStory, ProjectStory } from '../_story/ProjectStory';
 
 export const dynamic = 'force-dynamic';
 
@@ -95,7 +96,9 @@ export default async function ProjectDetailPage({
 
   return (
     <SectionShell>
-      {project.kind === 'client' ? (
+      {hasStory(project) ? (
+        <ProjectStory project={project} mode="page" />
+      ) : project.kind === 'client' ? (
         <ClientCaseDetail project={project} />
       ) : (
         <StudioProductDetail project={project} />

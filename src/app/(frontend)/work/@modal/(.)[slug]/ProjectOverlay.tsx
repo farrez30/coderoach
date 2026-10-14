@@ -42,8 +42,19 @@ export function ProjectOverlay({ slug, title, children }: { slug: string; title:
         close();
       }}
       onClose={close}
-      // A click that lands on the dialog itself, not its content, is a click on the backdrop.
-      onClick={(e) => e.target === e.currentTarget && close()}
+      onClick={(e) => {
+        // A click that lands on the dialog itself, not its content, is a click on the backdrop.
+        if (e.target === e.currentTarget) return close();
+        // In-page links (#tur, #sumber-1) scroll the overlay without a history entry; otherwise
+        // the next Back would only drop the hash and leave the overlay open.
+        const link = (e.target as Element).closest<HTMLAnchorElement>('a[href^="#"]');
+        const target = link?.hash && ref.current?.querySelector<HTMLElement>(`#${CSS.escape(link.hash.slice(1))}`);
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ block: 'start' });
+        if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+        target.focus({ preventScroll: true });
+      }}
       className="project-overlay m-0 sm:m-auto p-0 w-full max-w-none h-[100dvh] max-h-none sm:w-[min(1180px,calc(100vw-48px))] sm:h-[calc(100dvh-48px)] sm:rounded-2xl border-0 sm:border sm:border-paper-200 bg-paper-100 text-ink overflow-hidden shadow-[0_40px_80px_-24px_rgba(8,9,10,0.45)] backdrop:bg-[rgba(8,9,10,0.45)]"
     >
       <div className="h-full overflow-y-auto overscroll-contain">
