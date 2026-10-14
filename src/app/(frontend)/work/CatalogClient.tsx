@@ -39,11 +39,14 @@ function hrefFor({ pilar, bidang }: Filters) {
  */
 export function CatalogClient({
   projects,
+  lab,
   initial,
   headline,
   industryLabels,
 }: {
   projects: CatalogProject[];
+  /** Personal projects, on their own shelf below the catalog and outside its filters. */
+  lab: CatalogProject[];
   initial: Filters;
   headline: string;
   industryLabels: Record<string, string>;
@@ -165,6 +168,27 @@ export function CatalogClient({
           )}
         </div>
       </section>
+
+      {lab.length > 0 && (
+        <section aria-labelledby="lab-judul" className="py-16 border-t border-paper-200">
+          <div className="max-w-[1180px] mx-auto px-8">
+            <span className="font-mono text-xs uppercase tracking-wider text-ink/65 tabular">Lab</span>
+            <h2 id="lab-judul" className="text-[clamp(28px,3.4vw,40px)] font-bold tracking-[-0.025em] leading-[1.1] mt-3 mb-0">
+              Proyek pribadi farrez
+            </h2>
+            <p className="mt-3 mb-0 max-w-[560px] text-[16px] leading-[1.55] text-ink/65 text-pretty">
+              Dibangun di luar pekerjaan klien dan produk studio, dengan cara kerja yang sama.
+            </p>
+            <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+              {lab.map((p) => (
+                <div key={p.id} className="h-full">
+                  <ProjectCard project={p} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="py-20 bg-paper-50 border-t border-paper-200">
         <div className="max-w-[1180px] mx-auto px-8">
