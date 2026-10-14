@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { FilterBar } from '../_components/archive/FilterBar';
+import type { CardPreviewMedia } from '../_components/archive/CardPreview';
 import { ProjectCard } from '../_components/archive/ProjectCard';
 import { Breadcrumbs } from '../_components/detail/Breadcrumbs';
 
@@ -17,6 +18,7 @@ export type CatalogProject = {
   pills?: Array<{ pill: string }> | null;
   excerpt?: string | null;
   coverImage?: any;
+  preview: CardPreviewMedia | null;
   pillar: { slug: string; label: string } | null;
 };
 

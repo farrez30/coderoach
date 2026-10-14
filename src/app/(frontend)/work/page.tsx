@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { getPayload } from 'payload';
 import { industryLabel } from '@/lib/portfolio/taxonomy';
 import { SectionShell } from '../_components/detail/SectionShell';
+import type { CardPreviewMedia } from '../_components/archive/CardPreview';
 import { CatalogClient, type CatalogProject } from './CatalogClient';
 
 export const dynamic = 'force-dynamic';
@@ -39,6 +40,7 @@ export default async function WorkArchivePage({ searchParams }: { searchParams: 
       pills: true,
       excerpt: true,
       coverImage: true,
+      showcase: { loop: true, loopPoster: true },
       featured: true,
       order: true,
     },
@@ -56,6 +58,7 @@ export default async function WorkArchivePage({ searchParams }: { searchParams: 
     pills: p.pills,
     excerpt: p.excerpt,
     coverImage: p.coverImage,
+    preview: previewOf(p.showcase),
     pillar: typeof p.service === 'object' && p.service ? { slug: p.service.slug, label: p.service.title } : null,
   }));
 
@@ -71,4 +74,17 @@ export default async function WorkArchivePage({ searchParams }: { searchParams: 
       />
     </SectionShell>
   );
+}
+
+/** Only what the card's player needs, not the whole Media documents. */
+function previewOf(showcase: any): CardPreviewMedia | null {
+  const loop = showcase?.loop;
+  const poster = showcase?.loopPoster;
+  if (!loop?.url || typeof loop !== 'object') return null;
+  return {
+    src: loop.url,
+    poster: poster?.url ?? null,
+    width: poster?.width ?? 9,
+    height: poster?.height ?? 16,
+  };
 }

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { industryLabel } from '@/lib/portfolio/taxonomy';
 import { Badge } from '../ui/Badge';
+import { CardPreview, type CardPreviewMedia } from './CardPreview';
 import { ProjectCover } from './ProjectCover';
 
 type Project = {
@@ -15,6 +16,8 @@ type Project = {
   pills?: Array<{ pill: string }> | null;
   excerpt?: string | null;
   coverImage?: any;
+  /** A short muted loop, played over the cover on request (catalog only). */
+  preview?: CardPreviewMedia | null;
 };
 
 type Variant = 'default' | 'feature' | 'wide';
@@ -70,6 +73,7 @@ export function ProjectCard({
         <div className="absolute top-4 left-4 z-[1] rounded-full bg-paper-50">
           <Badge variant={project.kind === 'client' ? 'neutral' : 'electric'}>{KIND_BADGE[project.kind] ?? 'KLIEN'}</Badge>
         </div>
+        {project.preview && <CardPreview preview={project.preview} label={project.client} />}
         {project.publishedYear && (
           <div className="absolute top-4 right-4 z-[1]">
             <span className="font-mono text-[11px] uppercase tracking-wider text-mist-600 bg-paper-50 px-2 py-1 rounded-md tabular">
