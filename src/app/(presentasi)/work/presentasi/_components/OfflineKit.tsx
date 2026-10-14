@@ -40,14 +40,19 @@ export function OfflineKit({ enabled, pages }: { enabled: boolean; pages: string
       setState({ kind: 'unavailable', why: 'Peramban ini tidak mendukung mode offline.' });
       return;
     }
-    navigator.serviceWorker
-      .register('/presentasi-sw.js', { scope: SCOPE })
-      .then(async () => {
-        const saved = readSaved();
-        const cached = await caches.open(CACHES.pages).then((c) => c.match(new URL(SCOPE, location.origin).href));
-        setState(saved && cached ? { kind: 'ready', ...saved } : { kind: 'idle' });
-      })
-      .catch(() => setState({ kind: 'unavailable', why: 'Service worker tidak bisa dipasang.' }));
+    navigator.serviceWorker.register('/presentasi-sw.js', { scope: SCOPE }).then(
+      async () => {
+        try {
+          const saved = readSaved();
+          const cached = await caches.open(CACHES.pages).then((c) => c.match(new URL(SCOPE, location.origin).href, { ignoreVary: true }));
+          setState(saved && cached ? { kind: 'ready', ...saved } : { kind: 'idle' });
+        } catch (e) {
+          // The worker is in; it's the browser's storage that refused (full, or blocked).
+          setState({ kind: 'error', message: `penyimpanan peramban menolak (${e instanceof Error ? e.message : String(e)})` });
+        }
+      },
+      () => setState({ kind: 'unavailable', why: 'Service worker tidak bisa dipasang.' }),
+    );
   }, [enabled]);
 
   const prepare = useCallback(async () => {

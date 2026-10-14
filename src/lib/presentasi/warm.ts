@@ -21,6 +21,10 @@ export async function warmUp(pages: string[], onProgress: (done: number, total: 
     const res = await fetch(url, { cache: 'no-store', credentials: 'same-origin' });
     if (!res.ok) throw new Error(`${page} membalas ${res.status}`);
     for (const a of assetUrls(await res.clone().text(), origin)) assets.add(a);
+    // Next varies its HTML on router headers and client hints, so an entry the worker stored for a
+    // navigation doesn't match this request: put() then fails with "Entry already exists" and a
+    // plain delete() finds nothing. Clear every entry for the URL first, whatever it varied on.
+    await pageCache.delete(url, { ignoreVary: true });
     await pageCache.put(url, res);
     keep.get(CACHES.pages)?.add(url);
     onProgress(i + 1, pages.length);
@@ -38,8 +42,7 @@ export async function warmUp(pages: string[], onProgress: (done: number, total: 
     for (let url = queue.shift(); url; url = queue.shift()) {
       const name = cacheFor(new URL(url).pathname);
       if (name) {
-        // add() stores the whole file; a video the browser streamed with Range requests never was.
-        await (await caches.open(name)).add(url);
+        await store(await caches.open(name), url);
         keep.get(name)?.add(url);
       }
       onProgress(++done, total);
@@ -66,6 +69,17 @@ export async function warmUp(pages: string[], onProgress: (done: number, total: 
   return { files, bytes };
 }
 
+/**
+ * Static chunks and media files have versioned names, so one already cached (by the worker or an
+ * earlier warm-up) is current. Otherwise add() stores the whole file: a video the browser streamed
+ * with Range requests never was. Matching ignores Vary for the same reason as pages above.
+ */
+async function store(cache: Cache, url: string): Promise<void> {
+  if (await cache.match(url, { ignoreVary: true })) return;
+  await cache.delete(url, { ignoreVary: true });
+  await cache.add(url);
+}
+
 /** Takes the presentation offline mode down: the kill switch, and what a build without the flag runs. */
 export async function removeOffline(): Promise<void> {
   if ('serviceWorker' in navigator) {
@@ -73,5 +87,10 @@ export async function removeOffline(): Promise<void> {
       if (new URL(reg.scope).pathname.startsWith('/work/presentasi')) await reg.unregister();
     }
   }
-  if ('caches' in window) for (const name of Object.values(CACHES)) await caches.delete(name);
+  if ('caches' in window) {
+    // Serwist keeps an (empty) precache of its own next to ours; it goes too.
+    for (const name of await caches.keys()) {
+      if ((Object.values(CACHES) as string[]).includes(name) || name.startsWith('serwist-')) await caches.delete(name);
+    }
+  }
 }
