@@ -101,9 +101,10 @@ function HeroVisual({ project }: { project: Project }) {
   );
 }
 
-export function StudioProductDetail({ project }: { project: Project }) {
+/** `as="div"` inside the overlay, where the catalog page already holds the <main> landmark. */
+export function StudioProductDetail({ project, as: Root = 'main' }: { project: Project; as?: 'main' | 'div' }) {
   return (
-    <main>
+    <Root>
       {/* Hero — light, product-landing style */}
       <section className="pt-12 pb-16 border-b border-paper-200">
         <div className="max-w-[1180px] mx-auto px-8">
@@ -187,6 +188,6 @@ export function StudioProductDetail({ project }: { project: Project }) {
           </p>
         </div>
       </section>
-    </main>
+    </Root>
   );
 }

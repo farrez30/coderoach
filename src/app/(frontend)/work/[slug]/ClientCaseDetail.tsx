@@ -6,12 +6,13 @@ import { ProjectCover } from '../../_components/archive/ProjectCover';
 
 type Project = any;
 
-export function ClientCaseDetail({ project }: { project: Project }) {
+/** `as="div"` inside the overlay, where the catalog page already holds the <main> landmark. */
+export function ClientCaseDetail({ project, as: Root = 'main' }: { project: Project; as?: 'main' | 'div' }) {
   // featuredDetails carries default badge labels on every project, so only the featured one may use it.
   const fd = project.featured ? project.featuredDetails : null;
   const cover = project.coverImage;
   return (
-    <main>
+    <Root>
       {/* Hero — dark cinematic */}
       <section className="relative bg-ink text-paper overflow-hidden isolate" data-theme="dark">
         <div
@@ -160,6 +161,6 @@ export function ClientCaseDetail({ project }: { project: Project }) {
           </div>
         </section>
       )}
-    </main>
+    </Root>
   );
 }

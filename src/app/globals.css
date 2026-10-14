@@ -60,6 +60,9 @@
 
   a { color: inherit; text-decoration: none; }
 
+  /* The project overlay scrolls on its own; the catalog behind it stays put. */
+  html:has(dialog.project-overlay[open]) { overflow: hidden; }
+
   /* View Transitions API — smooth cross-fade between routes */
   ::view-transition-old(root) {
     animation: fadeOut 200ms var(--ease-out-quint);

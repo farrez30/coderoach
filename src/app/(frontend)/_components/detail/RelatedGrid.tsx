@@ -22,7 +22,7 @@ export function RelatedGrid({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {items.slice(0, 3).map((item) =>
             type === 'projects' ? (
-              <ProjectCard key={item.id} project={item} />
+              <ProjectCard key={item.id} project={item} intercept={false} />
             ) : (
               <PostCard key={item.id} post={item} />
             ),
