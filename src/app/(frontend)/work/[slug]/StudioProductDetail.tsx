@@ -13,16 +13,10 @@ function ProductViz({ vizType }: { vizType?: string | null }) {
       <div className="aspect-video rounded-2xl bg-paper-100 border border-paper-200 p-6 grid grid-cols-[1.4fr_1fr] grid-rows-[auto_1fr] gap-3 font-mono text-xs tabular shadow-[inset_0_1px_0_rgba(255,255,255,0.6)]">
         <div className="col-span-full flex justify-between text-mist-600 tracking-wide text-sm">
           <span>[ LAPORTA · OUTLET-04 ]</span>
-          <span className="inline-flex items-center gap-1.5 text-[#5DD79A]">
-            <span className="relative flex w-1.5 h-1.5">
-              <span className="absolute inset-0 rounded-full bg-success animate-pulse-dot" />
-              <span className="relative w-1.5 h-1.5 rounded-full bg-success" />
-            </span>
-            LIVE
-          </span>
+          <span title="Gambar contoh, bukan data langsung">ILUSTRASI</span>
         </div>
         <div className="bg-paper-50 rounded-lg relative overflow-hidden p-4">
-          <svg viewBox="0 0 200 80" preserveAspectRatio="none" className="w-full h-full">
+          <svg aria-hidden viewBox="0 0 200 80" preserveAspectRatio="none" className="w-full h-full">
             <path d="M0,55 L20,48 L40,52 L60,38 L80,42 L100,28 L120,32 L140,18 L160,22 L180,12 L200,8" stroke="var(--color-electric)" strokeWidth="1.5" fill="none" pathLength="1" className="animate-draw-line" />
             <path d="M0,55 L20,48 L40,52 L60,38 L80,42 L100,28 L120,32 L140,18 L160,22 L180,12 L200,8 L200,80 L0,80 Z" fill="var(--color-electric)" opacity="0.10" />
             <line x1="0" y1="60" x2="200" y2="60" stroke="var(--color-paper-200)" strokeDasharray="2 2" />
@@ -49,15 +43,15 @@ function ProductViz({ vizType }: { vizType?: string | null }) {
   }
   if (vizType === 'viralytics') {
     const rows = [
-      { av: 'RA', bg: 'linear-gradient(135deg,var(--color-electric),#5DD79A)', name: '@rara.makan', tier: 'tier-3 · F&B', reach: '412k', delta: '+38%' },
-      { av: 'BD', bg: 'linear-gradient(135deg,#F2A93B,#E5484D)', name: '@bagasdoyan', tier: 'tier-2 · lifestyle', reach: '186k', delta: '+12%' },
-      { av: 'NK', bg: 'linear-gradient(135deg,#A7A2A9,#3A4140)', name: '@niko.kuliner', tier: 'tier-2 · review', reach: '94k', delta: '-3%', deltaColor: '#E5484D' },
-      { av: 'AS', bg: 'linear-gradient(135deg,#5DD79A,#2C70FE)', name: '@aulia.story', tier: 'tier-1 · macro', reach: '1.4M', delta: '+92%' },
+      { av: 'RA', bg: 'linear-gradient(135deg,var(--color-electric),#5DD79A)', name: '@contoh.kuliner', tier: 'tier-3 · F&B', reach: '412k', delta: '+38%' },
+      { av: 'BD', bg: 'linear-gradient(135deg,#F2A93B,#E5484D)', name: '@contoh.gaya', tier: 'tier-2 · lifestyle', reach: '186k', delta: '+12%' },
+      { av: 'NK', bg: 'linear-gradient(135deg,#A7A2A9,#3A4140)', name: '@contoh.ulasan', tier: 'tier-2 · review', reach: '94k', delta: '-3%', deltaColor: '#E5484D' },
+      { av: 'AS', bg: 'linear-gradient(135deg,#5DD79A,#2C70FE)', name: '@contoh.cerita', tier: 'tier-1 · macro', reach: '1.4M', delta: '+92%' },
     ];
     return (
       <div className="aspect-video rounded-2xl bg-shadow-900 text-paper p-6 font-mono text-xs flex flex-col gap-2.5 overflow-hidden tabular">
         <div className="flex justify-between text-mist-500 tracking-wider text-sm mb-2">
-          <span>[ AYANA-Q3 · 12/40 LIVE ]</span>
+          <span>[ CONTOH KAMPANYE · ILUSTRASI ]</span>
           <span className="inline-flex items-center gap-1.5 text-[#5DD79A]">
             <span className="relative flex w-1.5 h-1.5">
               <span className="absolute inset-0 rounded-full bg-success animate-pulse-dot" />

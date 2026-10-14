@@ -99,12 +99,13 @@ export function Work({ cases, head }: { cases: Project[]; head?: SectionHeadCopy
                 </p>
               )}
               {featured.featuredDetails.metrics && featured.featuredDetails.metrics.length > 0 && (
-                <div className="flex gap-10 mb-7 tabular">
+                <div className="flex flex-wrap gap-x-10 gap-y-6 mb-7 tabular">
                   {featured.featuredDetails.metrics.map((m, i) => (
-                    <div key={i}>
-                      <div className="text-[44px] font-bold tracking-[-0.02em] leading-none">
+                    <div key={i} className="max-w-[200px]">
+                      {/* A value like "76–101 ms" must not break across lines; the unit sits smaller beside it. */}
+                      <div className="text-[44px] font-bold tracking-[-0.02em] leading-none whitespace-nowrap">
                         {m.num}
-                        {m.accent && <span className="text-electric">{m.accent}</span>}
+                        {m.accent && <span className="text-electric text-[0.55em] tracking-normal">{m.accent}</span>}
                       </div>
                       <div className="font-mono text-[11px] text-mist-500 tracking-wider mt-1.5">{m.label}</div>
                     </div>

@@ -20,17 +20,19 @@ const CATEGORY_STYLES: Record<EventCategory, { color: string; label: string }> =
   ship: { color: 'text-[#5DD79A]', label: 'ship' },
 };
 
+// An illustration of the kind of work the studio's systems do, not a live feed: no versions,
+// timings, or counts that could be read as measurements (PRODUCT.md, proof over adjectives).
 const POOL: Omit<OpsEvent, 'id'>[] = [
-  { category: 'build', subject: 'laporta@v4.2.1', status: '✓ shipped in 23s' },
-  { category: 'alert', subject: 'sync queue latency', status: '→ auto-resolved' },
-  { category: 'query', subject: 'ads-warehouse refresh', status: '+38% throughput' },
-  { category: 'trace', subject: 'multi-cabang sync', status: '12 outlet · live' },
-  { category: 'ship', subject: 'company-site@v2.0', status: '✓ deployed ap-se-1' },
-  { category: 'build', subject: 'monthly-reports', status: '✓ shipped in 11s' },
-  { category: 'alert', subject: 'pipeline cron', status: '→ escalated to ops' },
-  { category: 'query', subject: 'p&l aggregator', status: 'refresh complete' },
-  { category: 'trace', subject: 'meta + tiktok pull', status: '3.2k rows synced' },
-  { category: 'ship', subject: 'laporta@hotfix-4.2.2', status: '✓ rolled forward' },
+  { category: 'build', subject: 'laporta · tutup shift', status: '✓ data terkunci' },
+  { category: 'alert', subject: 'antrean sinkron', status: '→ pulih sendiri' },
+  { category: 'query', subject: 'laporan laba rugi', status: 'diperbarui' },
+  { category: 'trace', subject: 'serah terima kas', status: 'jejak tercatat' },
+  { category: 'ship', subject: 'situs perusahaan', status: '✓ terbit' },
+  { category: 'build', subject: 'laporan bulanan', status: '✓ dibuat' },
+  { category: 'alert', subject: 'cron pipeline', status: '→ diteruskan ke ops' },
+  { category: 'query', subject: 'rekonsiliasi bank', status: 'cocok' },
+  { category: 'trace', subject: 'tarik data iklan', status: 'tersinkron' },
+  { category: 'ship', subject: 'perbaikan cepat', status: '✓ dirilis' },
 ];
 
 const formatTime = (date: Date) => {
@@ -44,6 +46,8 @@ export function OpsConsole() {
   const [now, setNow] = useState<Date | null>(null);
   const [events, setEvents] = useState<OpsEvent[]>([]);
   const [paused, setPaused] = useState(false);
+  // WCAG 2.2.2: content that updates on its own needs a pause control, not only a hover.
+  const [held, setHeld] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
   const idRef = useRef(0);
   const poolIndexRef = useRef(0);
@@ -70,7 +74,7 @@ export function OpsConsole() {
 
   // Event ticker — every 3.2s, push new event, drop oldest
   useEffect(() => {
-    if (reduceMotion || paused) return;
+    if (reduceMotion || paused || held) return;
     const id = setInterval(() => {
       setEvents((prev) => {
         const next = POOL[poolIndexRef.current % POOL.length];
@@ -80,13 +84,15 @@ export function OpsConsole() {
       });
     }, 3200);
     return () => clearInterval(id);
-  }, [paused, reduceMotion]);
+  }, [paused, held, reduceMotion]);
 
   return (
     <div
       className="bg-shadow-900 text-paper rounded-2xl border border-shadow-700 overflow-hidden font-mono text-[12px] tabular shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_24px_48px_-24px_rgba(8,9,10,0.4)]"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
     >
       {/* Header */}
       <div className="flex items-center justify-between px-5 py-3 border-b border-shadow-700">
@@ -109,9 +115,18 @@ export function OpsConsole() {
       </div>
 
       {/* Footer */}
-      <div className="px-5 py-2.5 border-t border-shadow-700 flex items-center justify-between text-[10px] text-mist-600 tracking-[0.06em]">
-        <span>{paused ? 'paused' : 'streaming'} · 8 services · 3 regions</span>
-        <span>{paused ? '⏸' : '▮'}</span>
+      <div className="px-5 py-2 border-t border-shadow-700 flex items-center justify-between text-[10px] text-mist-500 tracking-[0.06em]">
+        <span>contoh alur kerja · bukan data langsung</span>
+        {!reduceMotion && (
+          <button
+            type="button"
+            onClick={() => setHeld((h) => !h)}
+            aria-pressed={held}
+            className="px-2 py-1 -mr-2 rounded text-mist-400 hover:text-paper focus-visible:outline-2 focus-visible:outline-electric"
+          >
+            {held ? 'lanjutkan' : 'jeda'}
+          </button>
+        )}
       </div>
     </div>
   );
