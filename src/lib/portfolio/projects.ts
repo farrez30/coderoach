@@ -166,13 +166,69 @@ export const PORTFOLIO: PortfolioEntry[] = [
     pills: ['NEXT.JS', 'POSTGRES', 'DRIZZLE', 'RLS'],
     excerpt:
       'Menjembatani SPV dan Accounting di operasi F&B multi-cabang: tutup shift dari ponsel crew, serah terima kas sampai setoran bank, dan jurnal double-entry sampai tutup buku.',
+    // From the demo database. The earlier cover showed a live outlet's sales and the production URL.
     cover: {
-      file: 'portfolio-laporta.webp',
-      alt: 'Laporta di tablet dan ponsel: daftar penjualan harian per shift dan checklist Tutup Shift crew outlet Geprek Wow',
-      focalX: 100,
-      focalY: 40,
+      file: 'laporta-setoran.v2.webp',
+      alt: 'Laporta, halaman Setoran Tunai: uang yang sudah masuk bank, setoran yang perlu diperiksa, dan pembanding per rekening',
+      focalX: 30,
+      focalY: 0,
     },
     metrics: LAPORTA_METRICS,
+    summary: {
+      problem:
+        'POS mencatat penjualan, tapi kas kecil, stok, waste, setoran bank, dan absensi tersebar di spreadsheet dan WhatsApp, dan harus disalin ulang untuk head office.',
+      solution:
+        'Satu sistem untuk lima peran: crew menutup shift dari ponsel, kas punya rantai serah terima sampai bank, dan setiap transaksi masuk jurnal double-entry.',
+      result:
+        'Input penjualan crew turun dari 2,7 ke 1,7 layar, dan mengubah sel jadwal dari 0,7–1,2 detik jadi 76–101 ms.',
+    },
+    showcase: {
+      frame: 'laptop',
+      screen: { file: 'laporta-setoran.v2.webp', alt: 'Laporta, halaman Setoran Tunai: uang yang sudah masuk bank, setoran yang perlu diperiksa, dan pembanding per rekening' },
+      screenPhone: { file: 'laporta-tutup-shift.v2.webp', alt: 'Laporta di ponsel crew: checklist Tutup Shift dengan tujuh langkah' },
+      loop: { file: 'laporta-tutup-shift-loop.v2.mp4', alt: 'Checklist Tutup Shift digulir di ponsel crew' },
+      loopPoster: { file: 'laporta-tutup-shift-loop.v2.poster.webp', alt: 'Checklist Tutup Shift di ponsel crew' },
+      tour: { file: 'laporta-tur.v2.mp4', alt: 'Tur Laporta: setoran tunai, serah terima shift, kontrol harian, stock opname, laba rugi, katalog resep, dan jurnal umum' },
+      tourPoster: { file: 'laporta-tur.v2.poster.webp', alt: 'Laporta, halaman Setoran Tunai' },
+      tourTranscript:
+        'Tur tanpa suara, sekitar 50 detik. Halaman Setoran Tunai: uang yang sudah masuk bank, yang masih di outlet, dan setoran yang perlu diperiksa, dicocokkan per rekening. Serah Terima Shift: kas berpindah dari shift ke shift dengan jejak, termasuk yang masih menunggu diterima dan yang selisih. Beranda Eksekutif: kontrol harian pekerjaan shift tiap cabang dan omset hari itu. Stock opname: pemakaian aktual dibanding kebutuhan ideal dari resep. Laba rugi bulan berjalan dari buku besar, katalog resep beserta HPP, dan jurnal umum.',
+      demoNote: 'Direkam dari database demo. Nama cabang, karyawan, dan angka adalah data contoh, bukan data klien.',
+      consent: 'studio',
+    },
+    features: [
+      {
+        title: 'Tutup shift dari ponsel crew',
+        body: 'Tujuh langkah berurutan: absen, penjualan, stock opname, kas kecil, waste, kebersihan, lalu serah terima kas. Data yang sudah diserahkan terkunci; koreksi punya jalur sendiri dan tercatat.',
+        screen: { file: 'laporta-tutup-shift.v2.webp', alt: 'Checklist Tutup Shift di ponsel crew' },
+      },
+      {
+        title: 'Rantai kas sampai rekening bank',
+        body: 'Uang berpindah dari orang ke orang dengan jejak, sampai ke setoran. Foto bukti transfer dibaca OCR untuk dicocokkan dengan nominal yang diklaim, bukan untuk mengisinya.',
+        screen: { file: 'laporta-setoran.v2.webp', alt: 'Setoran tunai per rekening dan status pemeriksaannya' },
+      },
+      {
+        title: 'Selisih stok terhadap resep',
+        body: 'Kebutuhan bahan ideal dihitung dari resep dikali penjualan menu, disandingkan dengan pemakaian aktual dari opname, lalu diurutkan menurut nilai rupiahnya.',
+        screen: { file: 'laporta-stock-opname.v2.webp', alt: 'Stock opname: pemakaian aktual dibanding kebutuhan ideal' },
+      },
+      {
+        title: 'Jurnal yang menutup buku',
+        body: 'Setiap transaksi memposting jurnal double-entry: bagan akun, buku besar, laba rugi, rekonsiliasi bank, dan tutup buku.',
+        screen: { file: 'laporta-laba-rugi.v2.webp', alt: 'Laba rugi Juli dari buku besar: konsolidasi tiga belas outlet dan margin per outlet' },
+      },
+    ],
+    timeline: [
+      { date: '6 Mei 2026', title: 'Versi 2 dimulai', sourceRef: 'laporta_v2@8c85f7e' },
+      { date: '2 Jul 2026', title: 'Modul pertama pindah dari data contoh ke database', sourceRef: 'laporta_v2@14f2777' },
+      { date: '29 Jul 2026', title: 'Buku besar jadi sumber kebenaran, siap pilot', sourceRef: 'laporta_v2@7d244f9' },
+      { date: '4 Agu 2026', title: 'Model OCR dipilih lewat uji tujuh model', sourceRef: 'laporta_v2@57435fc' },
+      { date: '31 Agu 2026', title: 'Jadwal mingguan diubah tanpa menunggu server', sourceRef: 'laporta_v2@69ab349' },
+    ],
+    darkChapter: {
+      eyebrow: 'TUR · 50 DETIK',
+      title: 'Satu hari outlet, dari laci kas sampai buku besar.',
+      body: 'Rekaman berikut berjalan di database demo dengan data contoh. Yang Anda lihat adalah aplikasinya sendiri, bukan maket.',
+    },
     featuredDetails: {
       badgeLabel: 'FEATURED · STUDIO PRODUCT',
       shippedLabel: '✓ SHIPPED',
@@ -242,6 +298,14 @@ export const PORTFOLIO: PortfolioEntry[] = [
       focalX: 1,
       focalY: 50,
     },
+    summary: {
+      problem:
+        'Bahan dibeli dari pasar dan supplier, diolah bertahap, lalu dikirim dan ditagih ke outlet. HPP yang bisa dipertanggungjawabkan harus bisa ditelusuri sampai harga bahan yang benar-benar terpakai.',
+      solution:
+        'Satu rantai dokumen dari PO sampai pembayaran, persediaan FIFO per lapisan harga, batch produksi dengan HPP dan yield aktual, dan jurnal double-entry di bawah setiap dokumen.',
+      result:
+        'Pembukuan dimulai dari posisi yang diketahui benar setelah masa uji, dengan invoice historis termigrasi dan pembayaran ganda dibersihkan sebelum buku dibuka.',
+    },
     body: [
       { h2: 'Rumah produksi dengan rantai yang panjang' },
       'RPN Agro memproduksi sambal dan greens untuk jaringan outlet Geprek Wow. Bahan datang dari pasar dan supplier, diolah bertahap, lalu dikirim dengan surat jalan dan ditagih dengan invoice. Setiap tahap punya biaya, dan HPP yang bisa dipertanggungjawabkan harus bisa ditelusuri sampai ke harga bahan yang benar-benar terpakai.',
@@ -281,6 +345,14 @@ export const PORTFOLIO: PortfolioEntry[] = [
         'Laporan PDF dan share link publik',
       ],
     },
+    summary: {
+      problem:
+        'Lokasi outlet sering dipilih dari firasat dan kunjungan satu sore, padahal kontrak sewanya mengikat bertahun-tahun.',
+      solution:
+        'Tempel satu link Google Maps: kompetitor, fasilitas sekitar, demografi kelurahan, dan arus jalan dikumpulkan otomatis, bisa dikoreksi surveyor, lalu dinilai jadi rekomendasi GO atau NO-GO.',
+      result:
+        'Skor yang bisa dijelaskan alasannya, dikalibrasi dari performa outlet yang sudah berjalan, dan keluar sebagai laporan PDF serta tautan yang bisa dibagikan ke investor.',
+    },
     body: [
       { h2: 'Keputusan mahal yang diambil cepat' },
       'Memilih lokasi outlet sering berakhir sebagai rapat berisi firasat: "ramai kok", "dekat sekolah", "kompetitornya cuma satu". Tidak jarang, kontrak sewa tiga tahun ditandatangani berdasarkan kunjungan satu sore.',
@@ -301,12 +373,20 @@ export const PORTFOLIO: PortfolioEntry[] = [
     client: 'The Global Review',
     tagline: 'Frontend baru untuk media geopolitik, dengan redaksi yang tetap menulis di WordPress.',
     meta: 'MEDIA · HEADLESS CMS',
-    industry: 'other',
+    industry: 'media',
     service: 'build',
     publishedYear: '2026',
     pills: ['NEXT.JS', 'HEADLESS WORDPRESS', 'I18N'],
     excerpt:
       'Situs baru untuk kanal analisis geopolitik milik Global Future Institute. Redaksi tetap bekerja di wp-admin; pembaca mendapat situs dua bahasa, dan redaksi mendapat halaman statistiknya sendiri.',
+    summary: {
+      problem:
+        'Tampilan situs tertinggal dari bobot tulisannya, tetapi redaksi terbiasa menulis di wp-admin. Memaksa mereka pindah CMS adalah cara tercepat membuat proyek ini gagal.',
+      solution:
+        'WordPress tetap jadi tempat menulis; frontend dibangun ulang dengan Next.js dan membaca konten lewat REST API, ditambah mu-plugin untuk podcast, galeri, jajak pendapat, dan webhook pembaruan.',
+      result:
+        'Pembaca mendapat situs dua bahasa dengan arsip yang bisa disaring lewat URL, dan redaksi mendapat halaman statistik sendiri di wp-admin tanpa pelacak pihak ketiga.',
+    },
     body: [
       { h2: 'Mengganti situs tanpa mengganti kebiasaan redaksi' },
       'The Global Review adalah kanal analisis geopolitik milik Global Future Institute, dengan arsip bertahun-tahun di WordPress. Tampilannya sudah tertinggal dari bobot tulisannya, tetapi redaksinya terbiasa dengan wp-admin, dan memaksa mereka pindah ke CMS baru adalah cara tercepat membuat proyek ini gagal.',
@@ -328,7 +408,7 @@ export const PORTFOLIO: PortfolioEntry[] = [
     client: 'Uruzin OS',
     tagline: 'Sistem operasional dan keuangan untuk konsultan perizinan usaha.',
     meta: 'LEGAL SERVICES · ERP',
-    industry: 'other',
+    industry: 'legal',
     service: 'build',
     publishedYear: '2026',
     pills: ['OPERASIONAL', 'KEUANGAN', 'TASK BOARD'],
@@ -339,6 +419,14 @@ export const PORTFOLIO: PortfolioEntry[] = [
       alt: 'Uruzin OS: halaman login, dashboard pendapatan dan piutang, serta papan tugas per tim',
       focalX: 1,
       focalY: 50,
+    },
+    summary: {
+      problem:
+        'Satu klien perizinan berarti rangkaian pekerjaan panjang, dari konsultasi sampai izin terbit. Makin banyak klien, makin sulit melihat pekerjaan yang tertahan dan tagihan yang belum dibayar.',
+      solution:
+        'Satu sistem yang mengikuti perjalanan klien dari peluang dan penawaran sampai pengurusan izin, dengan keuangan penuh di sisi yang sama: invoice, piutang, kas, aset, dan pajak.',
+      result:
+        'Dashboard membuka hari dengan yang perlu ditagih dan yang lewat jatuh tempo, dan papan tugas per tim memperlihatkan pekerjaan yang tertahan sebelum klien menanyakannya.',
     },
     body: [
       { h2: 'Satu klien, satu rangkaian pekerjaan panjang' },
@@ -366,6 +454,14 @@ export const PORTFOLIO: PortfolioEntry[] = [
     pills: ['STATIC SITE', 'LARAVEL', 'FILAMENT', 'CPANEL'],
     excerpt:
       'Situs untuk jaringan gerai Chicken Wow (Masaya Food), dengan menu dan daftar gerai yang dibaca dari berkas data dan halaman link-in-bio milik sendiri. Aset dipangkas dari 20,3 MB menjadi 9,4 MB.',
+    summary: {
+      problem:
+        'Menu dan daftar gerai tertanam di HTML, jadi setiap perubahan berarti seseorang menyunting markup lalu mengunggahnya manual, dan beberapa halaman utama berujung 404.',
+      solution:
+        'Situs yang membaca menu dan gerai dari berkas data yang diterbitkan panel CMS multi-tenant, plus halaman link-in-bio sendiri yang mengurutkan gerai dari yang terdekat.',
+      result:
+        'Perubahan menu dan gerai tidak lagi lewat developer, aset gambar menyusut lebih dari separuh, dan lalu lintas dari media sosial mendarat di situs sendiri.',
+    },
     body: [
       { h2: 'Setiap perubahan harus lewat developer' },
       'Chicken Wow punya jaringan gerai yang terus bertambah dan menu yang berubah. Selama isinya tertanam di HTML, setiap perubahan berarti seseorang harus menyunting markup lalu mengunggahnya secara manual.',
@@ -376,6 +472,127 @@ export const PORTFOLIO: PortfolioEntry[] = [
       'Berkas data itu dirancang untuk diterbitkan oleh panel CMS Laravel dan Filament yang kami bangun sebagai aplikasi multi-tenant: satu aplikasi untuk beberapa klien sekaligus, dengan setiap situs sebagai batas tenant. Dari panel, tim mengelola kategori menu, item, varian, dan paket bundling; saat diterbitkan, panel menulis menu.json dan outlets.json langsung ke document root situsnya. Pipeline CI-nya menjalankan lint, test, build produksi, dan smoke test tiga kali deploy berturut-turut sebelum server menarik rilis baru.',
       { h2: 'Halaman kecil yang berdampak besar' },
       'Tautan di bio Instagram dan TikTok Chicken Wow sebelumnya mengarah ke Linktree. Kami membuat penggantinya: /info, halaman link-in-bio milik sendiri dengan daftar gerai berhalaman, banner kemitraan, dan tombol "cari gerai terdekat" yang membaca lokasi ponsel pengunjung lalu mengurutkan gerai dari yang paling dekat, supaya lalu lintas dari media sosial mendarat di situs sendiri, bukan di properti orang lain.',
+    ],
+  },
+  {
+    slug: 'coderoach-os',
+    consent: 'studio',
+    order: 9,
+    kind: 'studio',
+    client: 'Coderoach OS',
+    tagline: 'Sistem operasi dan keuangan studio kami sendiri, dari penawaran sampai buku besar.',
+    meta: 'OPS + FINANCE · STUDIO PRODUCT',
+    industry: 'technology',
+    service: 'build',
+    publishedYear: '2026',
+    pills: ['NEXT.JS', 'POSTGRES', 'DRIZZLE', 'MCP'],
+    excerpt:
+      'Alat internal yang menjalankan studio dua orang: klien, penawaran, proyek dan story, jam kerja, invoice, kas, dan pembukuan double-entry yang dijaga database, ditambah server MCP supaya Claude Code membaca status story dari sumbernya.',
+    summary: {
+      problem:
+        'Penawaran, proyek, jam kerja, tagihan, dan pajak studio tersebar di spreadsheet terpisah, sehingga margin sebuah proyek baru ketahuan setelah semuanya direkap.',
+      solution:
+        'Satu aplikasi dari penawaran sampai buku besar. Setiap transaksi memposting jurnal double-entry, jam kerja langsung menjadi biaya proyek, dan status story naik sendiri dari PR, CI, dan deploy.',
+      result:
+        'Margin tiap proyek terbaca kapan saja, bukan menunggu tutup buku, dan jurnal yang timpang ditolak database sebelum tersimpan.',
+    },
+    showcase: {
+      frame: 'laptop',
+      screen: { file: 'coderoach-os-beranda.v2.webp', alt: 'Coderoach OS, Beranda: saldo kas, piutang, pendapatan dan laba bulan berjalan, tugas, dan proyek berjalan' },
+      tour: { file: 'coderoach-os-tur.v2.mp4', alt: 'Tur Coderoach OS: beranda, proyek, papan kerja, invoice, kas dan bank, laporan laba rugi, dan grid jam' },
+      tourPoster: { file: 'coderoach-os-tur.v2.poster.webp', alt: 'Coderoach OS, Beranda' },
+      tourTranscript:
+        'Tur tanpa suara, sekitar 80 detik. Beranda: saldo kas, piutang terbuka, pendapatan dan laba bulan berjalan, tugas yang menunggu, dan proyek berjalan. Daftar proyek, lalu satu proyek: nilai kontrak, biaya, jam, margin riil, progres story, dan rilis dengan gate. Papan kerja berisi fase, story, dan tugas lepas. Penagihan. Kas dan bank dengan mutasi dan transfer antar-kas. Laporan laba rugi per lini layanan. Grid jam mingguan dan utilisasi tim.',
+      demoNote: 'Direkam dari database demo. Klien, orang, dan angka adalah data contoh.',
+      consent: 'studio',
+    },
+    features: [
+      {
+        title: 'Margin proyek yang selalu terkini',
+        body: 'Nilai kontrak, biaya proyek, dan jam kerja dikali rate internal dihitung ulang setiap kali salah satunya berubah, jadi margin riil tidak menunggu rekap akhir bulan.',
+        screen: { file: 'coderoach-os-proyek-detail.v2.webp', alt: 'Detail proyek: nilai kontrak, total jam, biaya, margin riil, dan progres story' },
+      },
+      {
+        title: 'Story yang statusnya diisi mesin',
+        body: 'Status pengembangan naik sendiri dari PR, hasil tes CI per kriteria penerimaan, dan deploy produksi. Orang tetap bisa menimpanya, dengan alasan yang tercatat.',
+        screen: { file: 'coderoach-os-tugas.v2.webp', alt: 'Papan kerja: fase, story, dan tugas lepas dalam empat kolom status' },
+      },
+      {
+        title: 'Pembukuan yang dijaga database',
+        body: 'Trigger memeriksa setiap jurnal saat transaksi selesai, dan jurnal yang timpang ditolak. Laba rugi, posisi kas, aging piutang, dan utilisasi dibaca dari buku yang sama.',
+        screen: { file: 'coderoach-os-laporan.v2.webp', alt: 'Laporan laba rugi bulan berjalan, dengan margin per lini layanan' },
+      },
+      {
+        title: 'Angka keuangan hanya untuk yang berhak',
+        body: 'Staff melihat proyek, tugas, dan jamnya sendiri. Rate, biaya, saldo, dan nomor rekening disaring di query SQL, jadi tidak pernah sampai ke peramban mereka.',
+      },
+    ],
+    timeline: [
+      { date: '21 Agu 2026', title: 'Versi pertama: operasi dan pembukuan studio', sourceRef: 'coderoach-app@adfa743' },
+      { date: '25 Agu 2026', title: 'Modul Repo: insiden, change failure rate, dan MTTR', sourceRef: 'coderoach-app@0f11f9e' },
+      { date: '8 Sep 2026', title: 'Peta arsitektur dibangun dari fakta repo', sourceRef: 'coderoach-app@64b3348' },
+      { date: '12 Okt 2026', title: 'Webhook diterima sebagai inbox, diproses terpisah', sourceRef: 'coderoach-app@3d830f4' },
+      { date: '13 Okt 2026', title: 'Hasil tes per kriteria penerimaan dari CI klien lewat OIDC', sourceRef: 'coderoach-app@520495a' },
+      { date: '13 Okt 2026', title: 'Server MCP untuk Claude Code dan rilis dengan gate', sourceRef: 'coderoach-app@c799399' },
+    ],
+    darkChapter: {
+      eyebrow: 'TUR · 80 DETIK',
+      title: 'Satu minggu studio, dari papan kerja sampai laba rugi.',
+      body: 'Rekaman berikut berjalan di database demo dengan klien dan angka contoh. Yang Anda lihat adalah aplikasinya sendiri, bukan maket.',
+    },
+    body: [
+      { h2: 'Alat yang kami pakai sendiri setiap hari' },
+      'Coderoach OS menjalankan studio ini: klien dan penawaran, proyek yang dipecah jadi fase dan story, jam kerja per orang, invoice dan termin, biaya, kas, sampai laporan keuangan. Semua yang kami sarankan ke klien soal sistem internal, kami jalankan dulu di sini.',
+      { h2: 'Pembukuan yang tidak bisa berbohong diam-diam' },
+      'Setiap pembayaran, biaya, dan transfer memposting jurnal double-entry. Keseimbangannya dijaga trigger di Postgres yang baru memeriksa di akhir transaksi, dan pemeriksaan otomatis membuktikannya dengan sengaja memposting jurnal timpang lalu memastikan database menolaknya.',
+      'Tanggal "hari ini" selalu tanggal WIB, bukan tanggal server, supaya transaksi tengah malam tidak jatuh ke hari yang salah.',
+      { h2: 'Story yang statusnya tidak diisi tangan' },
+      'Repo klien terhubung lewat webhook yang diterima sebagai inbox: route hanya memverifikasi dan menyimpan, pemrosesan berjalan terpisah. Dari situ status story naik sendiri saat PR dibuka, tes untuk tiap kriteria penerimaan lulus di CI, dan deploy produksi berhasil.',
+      'Claude Code membaca dan mencatat ke story yang sama lewat server MCP dengan token ber-scope, jadi agen dan manusia melihat sumber kebenaran yang sama.',
+    ],
+  },
+  {
+    slug: 'akarkita',
+    consent: 'studio',
+    order: 20,
+    kind: 'lab',
+    client: 'AkarKita',
+    tagline: 'Pohon keluarga privat yang paham istilah kekerabatan Sunda dan Minangkabau.',
+    meta: 'LAB · PROYEK PRIBADI',
+    industry: 'other',
+    service: 'build',
+    publishedYear: '2026',
+    pills: ['NEXT.JS', 'CANVAS', 'PWA', 'POSTGRES'],
+    excerpt:
+      'Proyek pribadi farrez: silsilah keluarga besar di canvas sendiri, kalkulator kekerabatan menurut adat, dan simulator faraid dengan pecahan eksak. Dipakai sungguhan oleh satu keluarga.',
+    summary: {
+      problem:
+        'Silsilah keluarga besar tersimpan di ingatan orang tua dan grup WhatsApp, dengan istilah kekerabatan seperti Uwa, Mamak, dan Bako yang tidak dikenal aplikasi silsilah umum.',
+      solution:
+        'Pohon interaktif di canvas, istilah kekerabatan dihitung relatif terhadap siapa pun yang dipilih menurut lensa Sunda atau Minang, dan aturan adat disimpan sebagai data, bukan kode.',
+      result:
+        'Dipakai sungguhan oleh satu keluarga besar, bisa dibuka offline di ponsel, dan simulator warisannya menghitung bagian faraid dengan pecahan eksak.',
+    },
+    showcase: {
+      frame: 'browser',
+      screen: { file: 'akarkita-pohon.v1.webp', alt: 'AkarKita: pohon keluarga contoh di canvas, dari leluhur sampai cicit, dengan satu orang yang difokus' },
+      screenPhone: { file: 'akarkita-pohon-ponsel.v1.webp', alt: 'AkarKita di ponsel: potongan pohon dengan nama dan tahun lahir' },
+      demoNote: 'Render dari keluarga contoh. Nama dan tahun adalah data fiktif.',
+      consent: 'studio',
+    },
+    links: [{ kind: 'live', label: 'akarkita.vercel.app', href: 'https://akarkita.vercel.app', consent: 'studio' }],
+    timeline: [
+      { date: '24 Agu 2026', title: 'Engine kekerabatan, faraid, dan tata letak silsilah, semuanya fungsi murni yang teruji', sourceRef: 'AkarKita@fbda784' },
+      { date: '24 Agu 2026', title: 'Bisa dibuka offline, foto dikompres di perangkat', sourceRef: 'AkarKita@9adfc1d' },
+      { date: '14 Sep 2026', title: 'Simulator warisan menanyakan asabah jauh, server menghitung ulang', sourceRef: 'AkarKita@7223f97' },
+    ],
+    body: [
+      { h2: 'Budaya sebagai data' },
+      'Satu platform memetakan dua sistem kekerabatan sekaligus: Pancakaki Sunda yang bilateral dan suku Minangkabau yang diwariskan lewat garis ibu. Istilah, aturan pewarisan suku, dan peringatan pernikahan sesuku disimpan sebagai data, sehingga budaya lain bisa ditambahkan tanpa mengubah kode.',
+      { h2: 'Canvas sendiri, bukan pustaka diagram' },
+      'Pohonnya digambar di canvas dengan pan, zoom, dan pinch yang mulus, dan berubah bentuk saat diperkecil: dari orang per orang menjadi kelompok keluarga.',
+      { h2: 'Warisan dengan pecahan eksak' },
+      'Simulator faraid menghitung bagian ahli waris dengan pecahan, bukan desimal yang dibulatkan, dan membedakan harta pusaka tinggi Minang dari harta pencaharian. Sifatnya edukatif, bukan fatwa.',
     ],
   },
   {

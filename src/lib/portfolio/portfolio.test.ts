@@ -1,11 +1,13 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync, statSync } from 'node:fs';
+import path from 'node:path';
 import { describe, test } from 'node:test';
 import { CLIENTS } from '../landing/copy';
 import { consentAllows, isConsent, isConsentRef, type Grant } from './consent';
 import { LEGACY_CLIENT_NAMES, LEGACY_ENTRIES, numericTokens } from './legacy-baseline';
 import { formatMetric, metricProblems, toFeaturedMetric, type Metric } from './metrics';
 import { HIDDEN_PROJECT_SLUGS, PORTFOLIO, type PortfolioEntry } from './projects';
+import { assetsOf } from './sync';
 import { INDUSTRIES, RETIRED_INDUSTRIES, industryLabel } from './taxonomy';
 
 /** Static segments under /work that a project slug must never shadow. */
@@ -30,6 +32,12 @@ function copyOf(entry: PortfolioEntry): string {
     ...entry.body.map(blockText),
     ...(fd ? [fd.badgeLabel, fd.metaLine, fd.headline, fd.description, ...fd.stack] : []),
     ...(entry.studio ? [entry.studio.usage, ...entry.studio.bullets] : []),
+    ...Object.values(entry.summary ?? {}),
+    ...(entry.features ?? []).flatMap((f) => [f.title, f.body]),
+    ...(entry.timeline ?? []).flatMap((t) => [t.title, t.detail ?? '']),
+    ...Object.values(entry.darkChapter ?? {}),
+    entry.showcase?.tourTranscript ?? '',
+    entry.showcase?.demoNote ?? '',
   ].join(' ');
 }
 
@@ -59,8 +67,9 @@ describe('portfolio consent', () => {
   });
 
   test('a client entry on legacy consent adds no new images', () => {
-    for (const entry of PORTFOLIO.filter((e) => e.kind === 'client' && e.consent === 'legacy' && e.cover)) {
-      assert.ok(LEGACY_ENTRIES[entry.slug].files.includes(entry.cover!.file), `${entry.slug}: ${entry.cover!.file}`);
+    // Every file it names (cover, showcase, features, link snapshots), not only the cover.
+    for (const entry of PORTFOLIO.filter((e) => e.kind === 'client' && e.consent === 'legacy')) {
+      for (const { file } of assetsOf(entry)) assert.ok(LEGACY_ENTRIES[entry.slug].files.includes(file), `${entry.slug}: ${file}`);
     }
   });
 
@@ -192,5 +201,53 @@ describe('portfolio entries', () => {
 
   test('numericTokens reads Indonesian numbers', () => {
     assert.deepEqual(numericTokens('Rp33,9 juta, 397 invoice, 2.736 ms, 20,3 → 9,4 MB'), ['33,9', '397', '2.736', '20,3', '9,4']);
+  });
+});
+
+describe('portfolio story', () => {
+  test('the result line quotes only numbers its metrics source', () => {
+    for (const entry of PORTFOLIO) {
+      if (!entry.summary?.result) continue;
+      const sourced = new Set((entry.metrics ?? []).flatMap((m) => numericTokens(`${m.value} ${m.baseline?.value ?? ''}`)));
+      for (const n of numericTokens(entry.summary.result)) assert.ok(sourced.has(n), `${entry.slug}: ${n} in summary.result has no metric`);
+    }
+  });
+
+  test('a story page has all three parts of its summary', () => {
+    for (const entry of PORTFOLIO) {
+      if (!entry.summary) continue;
+      assert.ok(entry.summary.problem && entry.summary.solution && entry.summary.result, entry.slug);
+    }
+  });
+});
+
+describe('portfolio assets', () => {
+  const dir = path.join(process.cwd(), 'scripts/portfolio-assets');
+  const named = PORTFOLIO.flatMap((e) => assetsOf(e).map((a) => ({ slug: e.slug, ...a })));
+  // Budgets in KB: loop, tour, and poster from ADR 0006; a still loads with the page like a poster does.
+  const budget = (file: string) =>
+    /-loop\.v\d+\.mp4$/.test(file) ? 600 : file.endsWith('.mp4') ? 8 * 1024 : file.includes('.poster.') ? 150 : 300;
+
+  test('every file an entry names is in the repo, has alt text, and fits its budget', () => {
+    for (const a of named) {
+      const file = path.join(dir, a.file);
+      const bytes = statSync(file, { throwIfNoEntry: false })?.size;
+      assert.ok(bytes !== undefined, `${a.slug}: ${a.file} is missing`);
+      assert.ok(a.alt.trim().length >= 10, `${a.slug}: ${a.file} needs alt text`);
+      const kb = Math.round(bytes / 1024);
+      assert.ok(kb <= budget(a.file), `${a.slug}: ${a.file} is ${kb} KB, budget ${budget(a.file)} KB`);
+    }
+  });
+
+  test('new assets are versioned, so a changed file never hides behind a cached URL', () => {
+    for (const a of named) {
+      if (/^portfolio-[a-z-]+\.webp$/.test(a.file)) continue; // covers from before ADR 0006
+      assert.match(a.file, /\.v\d+\.(?:poster\.)?(?:webp|mp4|webm|vtt)$/, `${a.slug}: ${a.file}`);
+    }
+  });
+
+  test('nothing in the folder goes unused (it is public, and every byte ships with the repo)', () => {
+    const used = new Set(named.map((a) => a.file));
+    for (const file of readdirSync(dir)) assert.ok(used.has(file), `${file} is not named by any entry`);
   });
 });
