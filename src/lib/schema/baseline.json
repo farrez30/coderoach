@@ -1,0 +1,1756 @@
+{
+ "collection:assessment-leads.brand": {
+  "type": "text"
+ },
+ "collection:assessment-leads.consentAt": {
+  "type": "date"
+ },
+ "collection:assessment-leads.createdAt": {
+  "type": "date"
+ },
+ "collection:assessment-leads.email": {
+  "type": "email"
+ },
+ "collection:assessment-leads.employees": {
+  "type": "select",
+  "options": [
+   "1-5",
+   "100+",
+   "11-20",
+   "21-50",
+   "51-100",
+   "6-10"
+  ]
+ },
+ "collection:assessment-leads.excludeFromBenchmark": {
+  "type": "checkbox"
+ },
+ "collection:assessment-leads.followupStatus": {
+  "type": "select",
+  "required": true,
+  "options": [
+   "contacted",
+   "converted",
+   "new",
+   "not_fit",
+   "qualified"
+  ]
+ },
+ "collection:assessment-leads.industry": {
+  "type": "select",
+  "options": [
+   "distribusi",
+   "fashion",
+   "jasa",
+   "kriya",
+   "kuliner",
+   "lainnya",
+   "produksi",
+   "retail"
+  ]
+ },
+ "collection:assessment-leads.name": {
+  "type": "text"
+ },
+ "collection:assessment-leads.notes": {
+  "type": "textarea"
+ },
+ "collection:assessment-leads.phoneE164": {
+  "type": "text"
+ },
+ "collection:assessment-leads.repeatContact": {
+  "type": "checkbox"
+ },
+ "collection:assessment-leads.revenueBand": {
+  "type": "select",
+  "options": [
+   "100-200",
+   "200-400",
+   "400-800",
+   "50-100",
+   "gt800",
+   "lt50"
+  ]
+ },
+ "collection:assessment-leads.session": {
+  "type": "relationship",
+  "required": true,
+  "relationTo": "assessment-sessions"
+ },
+ "collection:assessment-leads.updatedAt": {
+  "type": "date"
+ },
+ "collection:assessment-leads.website": {
+  "type": "text"
+ },
+ "collection:assessment-sessions.answers": {
+  "type": "json"
+ },
+ "collection:assessment-sessions.completedAt": {
+  "type": "date"
+ },
+ "collection:assessment-sessions.createdAt": {
+  "type": "date"
+ },
+ "collection:assessment-sessions.gatedAt": {
+  "type": "date"
+ },
+ "collection:assessment-sessions.id": {
+  "type": "text",
+  "required": true
+ },
+ "collection:assessment-sessions.instrumentVersion": {
+  "type": "number",
+  "required": true
+ },
+ "collection:assessment-sessions.phase": {
+  "type": "number"
+ },
+ "collection:assessment-sessions.referrer": {
+  "type": "text"
+ },
+ "collection:assessment-sessions.scores": {
+  "type": "json"
+ },
+ "collection:assessment-sessions.shareSlug": {
+  "type": "text",
+  "required": true
+ },
+ "collection:assessment-sessions.startedAt": {
+  "type": "date",
+  "required": true
+ },
+ "collection:assessment-sessions.status": {
+  "type": "select",
+  "required": true,
+  "options": [
+   "completed",
+   "gated",
+   "started"
+  ]
+ },
+ "collection:assessment-sessions.total": {
+  "type": "number"
+ },
+ "collection:assessment-sessions.updatedAt": {
+  "type": "date"
+ },
+ "collection:assessment-sessions.userAgent": {
+  "type": "text"
+ },
+ "collection:assessment-sessions.utm": {
+  "type": "json"
+ },
+ "collection:authors.avatar": {
+  "type": "upload",
+  "relationTo": "media"
+ },
+ "collection:authors.bio": {
+  "type": "textarea"
+ },
+ "collection:authors.createdAt": {
+  "type": "date"
+ },
+ "collection:authors.name": {
+  "type": "text",
+  "required": true
+ },
+ "collection:authors.role": {
+  "type": "text"
+ },
+ "collection:authors.slug": {
+  "type": "text",
+  "required": true
+ },
+ "collection:authors.socialLinks": {
+  "type": "array"
+ },
+ "collection:authors.socialLinks[].href": {
+  "type": "text",
+  "required": true
+ },
+ "collection:authors.socialLinks[].id": {
+  "type": "text"
+ },
+ "collection:authors.socialLinks[].platform": {
+  "type": "text",
+  "required": true
+ },
+ "collection:authors.updatedAt": {
+  "type": "date"
+ },
+ "collection:clients.createdAt": {
+  "type": "date"
+ },
+ "collection:clients.logo": {
+  "type": "upload",
+  "relationTo": "media"
+ },
+ "collection:clients.logoDark": {
+  "type": "upload",
+  "relationTo": "media"
+ },
+ "collection:clients.name": {
+  "type": "text",
+  "required": true
+ },
+ "collection:clients.order": {
+  "type": "number",
+  "required": true
+ },
+ "collection:clients.updatedAt": {
+  "type": "date"
+ },
+ "collection:clients.website": {
+  "type": "text"
+ },
+ "collection:faqs.answer": {
+  "type": "textarea",
+  "required": true
+ },
+ "collection:faqs.createdAt": {
+  "type": "date"
+ },
+ "collection:faqs.order": {
+  "type": "number",
+  "required": true
+ },
+ "collection:faqs.question": {
+  "type": "text",
+  "required": true
+ },
+ "collection:faqs.updatedAt": {
+  "type": "date"
+ },
+ "collection:media.alt": {
+  "type": "text",
+  "required": true
+ },
+ "collection:media.createdAt": {
+  "type": "date"
+ },
+ "collection:media.filename": {
+  "type": "text"
+ },
+ "collection:media.filesize": {
+  "type": "number"
+ },
+ "collection:media.focalX": {
+  "type": "number"
+ },
+ "collection:media.focalY": {
+  "type": "number"
+ },
+ "collection:media.height": {
+  "type": "number"
+ },
+ "collection:media.mimeType": {
+  "type": "text"
+ },
+ "collection:media.sizes": {
+  "type": "group"
+ },
+ "collection:media.sizes.card": {
+  "type": "group"
+ },
+ "collection:media.sizes.card.filename": {
+  "type": "text"
+ },
+ "collection:media.sizes.card.filesize": {
+  "type": "number"
+ },
+ "collection:media.sizes.card.height": {
+  "type": "number"
+ },
+ "collection:media.sizes.card.mimeType": {
+  "type": "text"
+ },
+ "collection:media.sizes.card.url": {
+  "type": "text"
+ },
+ "collection:media.sizes.card.width": {
+  "type": "number"
+ },
+ "collection:media.sizes.hero": {
+  "type": "group"
+ },
+ "collection:media.sizes.hero.filename": {
+  "type": "text"
+ },
+ "collection:media.sizes.hero.filesize": {
+  "type": "number"
+ },
+ "collection:media.sizes.hero.height": {
+  "type": "number"
+ },
+ "collection:media.sizes.hero.mimeType": {
+  "type": "text"
+ },
+ "collection:media.sizes.hero.url": {
+  "type": "text"
+ },
+ "collection:media.sizes.hero.width": {
+  "type": "number"
+ },
+ "collection:media.sizes.og": {
+  "type": "group"
+ },
+ "collection:media.sizes.og.filename": {
+  "type": "text"
+ },
+ "collection:media.sizes.og.filesize": {
+  "type": "number"
+ },
+ "collection:media.sizes.og.height": {
+  "type": "number"
+ },
+ "collection:media.sizes.og.mimeType": {
+  "type": "text"
+ },
+ "collection:media.sizes.og.url": {
+  "type": "text"
+ },
+ "collection:media.sizes.og.width": {
+  "type": "number"
+ },
+ "collection:media.sizes.thumbnail": {
+  "type": "group"
+ },
+ "collection:media.sizes.thumbnail.filename": {
+  "type": "text"
+ },
+ "collection:media.sizes.thumbnail.filesize": {
+  "type": "number"
+ },
+ "collection:media.sizes.thumbnail.height": {
+  "type": "number"
+ },
+ "collection:media.sizes.thumbnail.mimeType": {
+  "type": "text"
+ },
+ "collection:media.sizes.thumbnail.url": {
+  "type": "text"
+ },
+ "collection:media.sizes.thumbnail.width": {
+  "type": "number"
+ },
+ "collection:media.thumbnailURL": {
+  "type": "text"
+ },
+ "collection:media.updatedAt": {
+  "type": "date"
+ },
+ "collection:media.url": {
+  "type": "text"
+ },
+ "collection:media.width": {
+  "type": "number"
+ },
+ "collection:pages._status": {
+  "type": "select",
+  "options": [
+   "draft",
+   "published"
+  ]
+ },
+ "collection:pages.createdAt": {
+  "type": "date"
+ },
+ "collection:pages.layout": {
+  "type": "blocks",
+  "required": true
+ },
+ "collection:pages.layout<contact>.blockName": {
+  "type": "text"
+ },
+ "collection:pages.layout<contact>.formLabels": {
+  "type": "group"
+ },
+ "collection:pages.layout<contact>.formLabels.emailFallback": {
+  "type": "text"
+ },
+ "collection:pages.layout<contact>.formLabels.submit": {
+  "type": "text"
+ },
+ "collection:pages.layout<contact>.heading": {
+  "type": "group"
+ },
+ "collection:pages.layout<contact>.heading.line1": {
+  "type": "text",
+  "required": true
+ },
+ "collection:pages.layout<contact>.heading.line2Accent": {
+  "type": "text",
+  "required": true
+ },
+ "collection:pages.layout<contact>.id": {
+  "type": "text"
+ },
+ "collection:pages.layout<contact>.lede": {
+  "type": "textarea",
+  "required": true
+ },
+ "collection:pages.layout<contact>.scopes": {
+  "type": "array"
+ },
+ "collection:pages.layout<contact>.scopes[].id": {
+  "type": "text"
+ },
+ "collection:pages.layout<contact>.scopes[].scope": {
+  "type": "text",
+  "required": true
+ },
+ "collection:pages.layout<contact>.sectionMarker": {
+  "type": "text"
+ },
+ "collection:pages.layout<contact>.successHeading": {
+  "type": "text"
+ },
+ "collection:pages.layout<ctaBanner>.blockName": {
+  "type": "text"
+ },
+ "collection:pages.layout<ctaBanner>.cta": {
+  "type": "group"
+ },
+ "collection:pages.layout<ctaBanner>.cta.href": {
+  "type": "text"
+ },
+ "collection:pages.layout<ctaBanner>.cta.label": {
+  "type": "text"
+ },
+ "collection:pages.layout<ctaBanner>.description": {
+  "type": "textarea"
+ },
+ "collection:pages.layout<ctaBanner>.eyebrow": {
+  "type": "text"
+ },
+ "collection:pages.layout<ctaBanner>.heading": {
+  "type": "text",
+  "required": true
+ },
+ "collection:pages.layout<ctaBanner>.id": {
+  "type": "text"
+ },
+ "collection:pages.layout<ctaBanner>.tone": {
+  "type": "select",
+  "options": [
+   "dark",
+   "light"
+  ]
+ },
+ "collection:pages.layout<faq>.blockName": {
+  "type": "text"
+ },
+ "collection:pages.layout<faq>.customItems": {
+  "type": "array"
+ },
+ "collection:pages.layout<faq>.customItems[].answer": {
+  "type": "textarea",
+  "required": true
+ },
+ "collection:pages.layout<faq>.customItems[].id": {
+  "type": "text"
+ },
+ "collection:pages.layout<faq>.customItems[].question": {
+  "type": "text",
+  "required": true
+ },
+ "collection:pages.layout<faq>.heading": {
+  "type": "text",
+  "required": true
+ },
+ "collection:pages.layout<faq>.id": {
+  "type": "text"
+ },
+ "collection:pages.layout<faq>.sectionMarker": {
+  "type": "text"
+ },
+ "collection:pages.layout<faq>.source": {
+  "type": "select",
+  "options": [
+   "collection",
+   "custom"
+  ]
+ },
+ "collection:pages.layout<hero>.blockName": {
+  "type": "text"
+ },
+ "collection:pages.layout<hero>.ctaPrimary": {
+  "type": "group"
+ },
+ "collection:pages.layout<hero>.ctaPrimary.href": {
+  "type": "text"
+ },
+ "collection:pages.layout<hero>.ctaPrimary.label": {
+  "type": "text"
+ },
+ "collection:pages.layout<hero>.ctaSecondary": {
+  "type": "group"
+ },
+ "collection:pages.layout<hero>.ctaSecondary.href": {
+  "type": "text"
+ },
+ "collection:pages.layout<hero>.ctaSecondary.label": {
+  "type": "text"
+ },
+ "collection:pages.layout<hero>.headline": {
+  "type": "group"
+ },
+ "collection:pages.layout<hero>.headline.accent": {
+  "type": "text"
+ },
+ "collection:pages.layout<hero>.headline.lead": {
+  "type": "text",
+  "required": true
+ },
+ "collection:pages.layout<hero>.id": {
+  "type": "text"
+ },
+ "collection:pages.layout<hero>.lede": {
+  "type": "textarea"
+ },
+ "collection:pages.layout<hero>.metaItems": {
+  "type": "array"
+ },
+ "collection:pages.layout<hero>.metaItems[].id": {
+  "type": "text"
+ },
+ "collection:pages.layout<hero>.metaItems[].label": {
+  "type": "text",
+  "required": true
+ },
+ "collection:pages.layout<hero>.metaItems[].value": {
+  "type": "text",
+  "required": true
+ },
+ "collection:pages.layout<hero>.pillText": {
+  "type": "text"
+ },
+ "collection:pages.layout<hero>.showOpsConsole": {
+  "type": "checkbox"
+ },
+ "collection:pages.layout<hero>.showTrustedBy": {
+  "type": "checkbox"
+ },
+ "collection:pages.layout<hero>.trustedBy": {
+  "type": "group"
+ },
+ "collection:pages.layout<hero>.trustedBy.label": {
+  "type": "text"
+ },
+ "collection:pages.layout<hero>.trustedBy.tagline": {
+  "type": "text"
+ },
+ "collection:pages.layout<notes>.blockName": {
+  "type": "text"
+ },
+ "collection:pages.layout<notes>.category": {
+  "type": "text"
+ },
+ "collection:pages.layout<notes>.heading": {
+  "type": "text",
+  "required": true
+ },
+ "collection:pages.layout<notes>.id": {
+  "type": "text"
+ },
+ "collection:pages.layout<notes>.lede": {
+  "type": "textarea"
+ },
+ "collection:pages.layout<notes>.limit": {
+  "type": "number"
+ },
+ "collection:pages.layout<notes>.sectionMarker": {
+  "type": "text"
+ },
+ "collection:pages.layout<notes>.showViewAllLink": {
+  "type": "checkbox"
+ },
+ "collection:pages.layout<process>.blockName": {
+  "type": "text"
+ },
+ "collection:pages.layout<process>.category": {
+  "type": "text"
+ },
+ "collection:pages.layout<process>.description": {
+  "type": "text"
+ },
+ "collection:pages.layout<process>.heading": {
+  "type": "text",
+  "required": true
+ },
+ "collection:pages.layout<process>.id": {
+  "type": "text"
+ },
+ "collection:pages.layout<process>.lede": {
+  "type": "textarea"
+ },
+ "collection:pages.layout<process>.phases": {
+  "type": "relationship",
+  "hasMany": true,
+  "relationTo": "process-phases"
+ },
+ "collection:pages.layout<process>.sectionMarker": {
+  "type": "text"
+ },
+ "collection:pages.layout<products>.blockName": {
+  "type": "text"
+ },
+ "collection:pages.layout<products>.category": {
+  "type": "text"
+ },
+ "collection:pages.layout<products>.description": {
+  "type": "text"
+ },
+ "collection:pages.layout<products>.heading": {
+  "type": "text",
+  "required": true
+ },
+ "collection:pages.layout<products>.id": {
+  "type": "text"
+ },
+ "collection:pages.layout<products>.lede": {
+  "type": "textarea"
+ },
+ "collection:pages.layout<products>.products": {
+  "type": "relationship",
+  "hasMany": true,
+  "relationTo": "projects"
+ },
+ "collection:pages.layout<products>.sectionMarker": {
+  "type": "text"
+ },
+ "collection:pages.layout<richText>.blockName": {
+  "type": "text"
+ },
+ "collection:pages.layout<richText>.content": {
+  "type": "richText",
+  "required": true
+ },
+ "collection:pages.layout<richText>.id": {
+  "type": "text"
+ },
+ "collection:pages.layout<richText>.maxWidth": {
+  "type": "select",
+  "options": [
+   "narrow",
+   "wide"
+  ]
+ },
+ "collection:pages.layout<serviceList>.blockName": {
+  "type": "text"
+ },
+ "collection:pages.layout<serviceList>.category": {
+  "type": "text"
+ },
+ "collection:pages.layout<serviceList>.description": {
+  "type": "text"
+ },
+ "collection:pages.layout<serviceList>.heading": {
+  "type": "text",
+  "required": true
+ },
+ "collection:pages.layout<serviceList>.id": {
+  "type": "text"
+ },
+ "collection:pages.layout<serviceList>.lede": {
+  "type": "textarea"
+ },
+ "collection:pages.layout<serviceList>.sectionMarker": {
+  "type": "text"
+ },
+ "collection:pages.layout<serviceList>.services": {
+  "type": "relationship",
+  "hasMany": true,
+  "relationTo": "services"
+ },
+ "collection:pages.layout<serviceList>.source": {
+  "type": "select",
+  "options": [
+   "all",
+   "manual"
+  ]
+ },
+ "collection:pages.layout<statsGrid>.blockName": {
+  "type": "text"
+ },
+ "collection:pages.layout<statsGrid>.eyebrow": {
+  "type": "text"
+ },
+ "collection:pages.layout<statsGrid>.heading": {
+  "type": "text"
+ },
+ "collection:pages.layout<statsGrid>.id": {
+  "type": "text"
+ },
+ "collection:pages.layout<statsGrid>.stats": {
+  "type": "array"
+ },
+ "collection:pages.layout<statsGrid>.stats[].accent": {
+  "type": "text"
+ },
+ "collection:pages.layout<statsGrid>.stats[].id": {
+  "type": "text"
+ },
+ "collection:pages.layout<statsGrid>.stats[].label": {
+  "type": "text",
+  "required": true
+ },
+ "collection:pages.layout<statsGrid>.stats[].num": {
+  "type": "text",
+  "required": true
+ },
+ "collection:pages.layout<studio>.blockName": {
+  "type": "text"
+ },
+ "collection:pages.layout<studio>.fullStudioLink": {
+  "type": "group"
+ },
+ "collection:pages.layout<studio>.fullStudioLink.href": {
+  "type": "text"
+ },
+ "collection:pages.layout<studio>.fullStudioLink.label": {
+  "type": "text"
+ },
+ "collection:pages.layout<studio>.heading": {
+  "type": "text",
+  "required": true
+ },
+ "collection:pages.layout<studio>.id": {
+  "type": "text"
+ },
+ "collection:pages.layout<studio>.lede": {
+  "type": "textarea",
+  "required": true
+ },
+ "collection:pages.layout<studio>.pullQuote": {
+  "type": "group"
+ },
+ "collection:pages.layout<studio>.pullQuote.attribution": {
+  "type": "text"
+ },
+ "collection:pages.layout<studio>.pullQuote.quote": {
+  "type": "textarea"
+ },
+ "collection:pages.layout<studio>.sectionMarker": {
+  "type": "text"
+ },
+ "collection:pages.layout<studio>.stats": {
+  "type": "array"
+ },
+ "collection:pages.layout<studio>.stats[].accent": {
+  "type": "text"
+ },
+ "collection:pages.layout<studio>.stats[].id": {
+  "type": "text"
+ },
+ "collection:pages.layout<studio>.stats[].label": {
+  "type": "text",
+  "required": true
+ },
+ "collection:pages.layout<studio>.stats[].num": {
+  "type": "text",
+  "required": true
+ },
+ "collection:pages.layout<studio>.tenets": {
+  "type": "relationship",
+  "hasMany": true,
+  "relationTo": "tenets"
+ },
+ "collection:pages.layout<work>.blockName": {
+  "type": "text"
+ },
+ "collection:pages.layout<work>.category": {
+  "type": "text"
+ },
+ "collection:pages.layout<work>.description": {
+  "type": "text"
+ },
+ "collection:pages.layout<work>.featuredProject": {
+  "type": "relationship",
+  "relationTo": "projects"
+ },
+ "collection:pages.layout<work>.heading": {
+  "type": "text",
+  "required": true
+ },
+ "collection:pages.layout<work>.id": {
+  "type": "text"
+ },
+ "collection:pages.layout<work>.lede": {
+  "type": "textarea"
+ },
+ "collection:pages.layout<work>.listProjects": {
+  "type": "relationship",
+  "hasMany": true,
+  "relationTo": "projects"
+ },
+ "collection:pages.layout<work>.sectionMarker": {
+  "type": "text"
+ },
+ "collection:pages.layout<work>.showViewAllLink": {
+  "type": "checkbox"
+ },
+ "collection:pages.seo": {
+  "type": "group"
+ },
+ "collection:pages.seo.metaDescription": {
+  "type": "textarea"
+ },
+ "collection:pages.seo.metaTitle": {
+  "type": "text"
+ },
+ "collection:pages.seo.ogImage": {
+  "type": "upload",
+  "relationTo": "media"
+ },
+ "collection:pages.slug": {
+  "type": "text",
+  "required": true
+ },
+ "collection:pages.title": {
+  "type": "text",
+  "required": true
+ },
+ "collection:pages.updatedAt": {
+  "type": "date"
+ },
+ "collection:payload-kv.data": {
+  "type": "json",
+  "required": true
+ },
+ "collection:payload-kv.key": {
+  "type": "text",
+  "required": true
+ },
+ "collection:payload-locked-documents.createdAt": {
+  "type": "date"
+ },
+ "collection:payload-locked-documents.document": {
+  "type": "relationship",
+  "relationTo": "assessment-leads,assessment-sessions,authors,clients,faqs,media,pages,posts,process-phases,projects,services,submissions,tenets,users"
+ },
+ "collection:payload-locked-documents.globalSlug": {
+  "type": "text"
+ },
+ "collection:payload-locked-documents.updatedAt": {
+  "type": "date"
+ },
+ "collection:payload-locked-documents.user": {
+  "type": "relationship",
+  "required": true,
+  "relationTo": "users"
+ },
+ "collection:payload-migrations.batch": {
+  "type": "number"
+ },
+ "collection:payload-migrations.createdAt": {
+  "type": "date"
+ },
+ "collection:payload-migrations.name": {
+  "type": "text"
+ },
+ "collection:payload-migrations.updatedAt": {
+  "type": "date"
+ },
+ "collection:payload-preferences.createdAt": {
+  "type": "date"
+ },
+ "collection:payload-preferences.key": {
+  "type": "text"
+ },
+ "collection:payload-preferences.updatedAt": {
+  "type": "date"
+ },
+ "collection:payload-preferences.user": {
+  "type": "relationship",
+  "required": true,
+  "relationTo": "users"
+ },
+ "collection:payload-preferences.value": {
+  "type": "json"
+ },
+ "collection:posts._status": {
+  "type": "select",
+  "options": [
+   "draft",
+   "published"
+  ]
+ },
+ "collection:posts.author": {
+  "type": "relationship",
+  "required": true,
+  "relationTo": "authors"
+ },
+ "collection:posts.category": {
+  "type": "select",
+  "required": true,
+  "options": [
+   "engineering",
+   "notes",
+   "operating",
+   "studio"
+  ]
+ },
+ "collection:posts.content": {
+  "type": "richText",
+  "required": true
+ },
+ "collection:posts.coverImage": {
+  "type": "upload",
+  "relationTo": "media"
+ },
+ "collection:posts.createdAt": {
+  "type": "date"
+ },
+ "collection:posts.excerpt": {
+  "type": "textarea",
+  "required": true
+ },
+ "collection:posts.featured": {
+  "type": "checkbox"
+ },
+ "collection:posts.ogImage": {
+  "type": "upload",
+  "relationTo": "media"
+ },
+ "collection:posts.publishedAt": {
+  "type": "date",
+  "required": true
+ },
+ "collection:posts.readingTime": {
+  "type": "number"
+ },
+ "collection:posts.slug": {
+  "type": "text",
+  "required": true
+ },
+ "collection:posts.tags": {
+  "type": "array"
+ },
+ "collection:posts.tags[].id": {
+  "type": "text"
+ },
+ "collection:posts.tags[].tag": {
+  "type": "text",
+  "required": true
+ },
+ "collection:posts.title": {
+  "type": "text",
+  "required": true
+ },
+ "collection:posts.updatedAt": {
+  "type": "date"
+ },
+ "collection:process-phases.createdAt": {
+  "type": "date"
+ },
+ "collection:process-phases.deliv": {
+  "type": "text",
+  "required": true
+ },
+ "collection:process-phases.icon": {
+  "type": "select",
+  "required": true,
+  "options": [
+   "design",
+   "discover",
+   "handoff",
+   "layers"
+  ]
+ },
+ "collection:process-phases.name": {
+  "type": "text",
+  "required": true
+ },
+ "collection:process-phases.order": {
+  "type": "number",
+  "required": true
+ },
+ "collection:process-phases.tag": {
+  "type": "text",
+  "required": true
+ },
+ "collection:process-phases.updatedAt": {
+  "type": "date"
+ },
+ "collection:process-phases.what": {
+  "type": "textarea",
+  "required": true
+ },
+ "collection:projects._status": {
+  "type": "select",
+  "options": [
+   "draft",
+   "published"
+  ]
+ },
+ "collection:projects.client": {
+  "type": "text",
+  "required": true
+ },
+ "collection:projects.coverImage": {
+  "type": "upload",
+  "relationTo": "media"
+ },
+ "collection:projects.createdAt": {
+  "type": "date"
+ },
+ "collection:projects.excerpt": {
+  "type": "textarea"
+ },
+ "collection:projects.featured": {
+  "type": "checkbox"
+ },
+ "collection:projects.featuredDetails": {
+  "type": "group"
+ },
+ "collection:projects.featuredDetails.badgeLabel": {
+  "type": "text"
+ },
+ "collection:projects.featuredDetails.codePanel": {
+  "type": "group"
+ },
+ "collection:projects.featuredDetails.codePanel.lines": {
+  "type": "array"
+ },
+ "collection:projects.featuredDetails.codePanel.lines[].id": {
+  "type": "text"
+ },
+ "collection:projects.featuredDetails.codePanel.lines[].line": {
+  "type": "text"
+ },
+ "collection:projects.featuredDetails.codePanel.path": {
+  "type": "text"
+ },
+ "collection:projects.featuredDetails.codePanel.tag": {
+  "type": "text"
+ },
+ "collection:projects.featuredDetails.description": {
+  "type": "textarea"
+ },
+ "collection:projects.featuredDetails.headline": {
+  "type": "textarea"
+ },
+ "collection:projects.featuredDetails.metaLine": {
+  "type": "text"
+ },
+ "collection:projects.featuredDetails.metrics": {
+  "type": "array"
+ },
+ "collection:projects.featuredDetails.metrics[].accent": {
+  "type": "text"
+ },
+ "collection:projects.featuredDetails.metrics[].id": {
+  "type": "text"
+ },
+ "collection:projects.featuredDetails.metrics[].label": {
+  "type": "text",
+  "required": true
+ },
+ "collection:projects.featuredDetails.metrics[].num": {
+  "type": "text",
+  "required": true
+ },
+ "collection:projects.featuredDetails.shippedLabel": {
+  "type": "text"
+ },
+ "collection:projects.featuredDetails.stack": {
+  "type": "array"
+ },
+ "collection:projects.featuredDetails.stack[].id": {
+  "type": "text"
+ },
+ "collection:projects.featuredDetails.stack[].tech": {
+  "type": "text",
+  "required": true
+ },
+ "collection:projects.gallery": {
+  "type": "array"
+ },
+ "collection:projects.gallery[].caption": {
+  "type": "text"
+ },
+ "collection:projects.gallery[].id": {
+  "type": "text"
+ },
+ "collection:projects.gallery[].image": {
+  "type": "upload",
+  "required": true,
+  "relationTo": "media"
+ },
+ "collection:projects.industry": {
+  "type": "select",
+  "options": [
+   "agency",
+   "fb",
+   "finance",
+   "logistics",
+   "manufacturing",
+   "other",
+   "vc"
+  ]
+ },
+ "collection:projects.kind": {
+  "type": "select",
+  "required": true,
+  "options": [
+   "client",
+   "studio"
+  ]
+ },
+ "collection:projects.meta": {
+  "type": "text"
+ },
+ "collection:projects.order": {
+  "type": "number",
+  "required": true
+ },
+ "collection:projects.pills": {
+  "type": "array"
+ },
+ "collection:projects.pills[].id": {
+  "type": "text"
+ },
+ "collection:projects.pills[].pill": {
+  "type": "text",
+  "required": true
+ },
+ "collection:projects.publishedYear": {
+  "type": "text"
+ },
+ "collection:projects.relatedProjects": {
+  "type": "relationship",
+  "hasMany": true,
+  "relationTo": "projects"
+ },
+ "collection:projects.richContent": {
+  "type": "richText"
+ },
+ "collection:projects.service": {
+  "type": "relationship",
+  "relationTo": "services"
+ },
+ "collection:projects.slug": {
+  "type": "text",
+  "required": true
+ },
+ "collection:projects.studio": {
+  "type": "group"
+ },
+ "collection:projects.studio.bullets": {
+  "type": "array"
+ },
+ "collection:projects.studio.bullets[].bullet": {
+  "type": "text",
+  "required": true
+ },
+ "collection:projects.studio.bullets[].id": {
+  "type": "text"
+ },
+ "collection:projects.studio.externalLink": {
+  "type": "group"
+ },
+ "collection:projects.studio.externalLink.href": {
+  "type": "text"
+ },
+ "collection:projects.studio.externalLink.label": {
+  "type": "text"
+ },
+ "collection:projects.studio.usage": {
+  "type": "text"
+ },
+ "collection:projects.studio.vizType": {
+  "type": "select",
+  "options": [
+   "laporta",
+   "none",
+   "viralytics"
+  ]
+ },
+ "collection:projects.tagline": {
+  "type": "text",
+  "required": true
+ },
+ "collection:projects.testimonial": {
+  "type": "group"
+ },
+ "collection:projects.testimonial.author": {
+  "type": "text"
+ },
+ "collection:projects.testimonial.quote": {
+  "type": "textarea"
+ },
+ "collection:projects.testimonial.role": {
+  "type": "text"
+ },
+ "collection:projects.updatedAt": {
+  "type": "date"
+ },
+ "collection:services.blurb": {
+  "type": "textarea",
+  "required": true
+ },
+ "collection:services.caseStudies": {
+  "type": "relationship",
+  "hasMany": true,
+  "relationTo": "projects"
+ },
+ "collection:services.createdAt": {
+  "type": "date"
+ },
+ "collection:services.heroLede": {
+  "type": "textarea"
+ },
+ "collection:services.icon": {
+  "type": "select",
+  "required": true,
+  "options": [
+   "augment",
+   "automate",
+   "build",
+   "intelligence"
+  ]
+ },
+ "collection:services.list": {
+  "type": "array",
+  "required": true
+ },
+ "collection:services.list[].id": {
+  "type": "text"
+ },
+ "collection:services.list[].item": {
+  "type": "text",
+  "required": true
+ },
+ "collection:services.order": {
+  "type": "number",
+  "required": true
+ },
+ "collection:services.pricingNote": {
+  "type": "text"
+ },
+ "collection:services.richContent": {
+  "type": "richText"
+ },
+ "collection:services.serviceFAQ": {
+  "type": "array"
+ },
+ "collection:services.serviceFAQ[].answer": {
+  "type": "textarea",
+  "required": true
+ },
+ "collection:services.serviceFAQ[].id": {
+  "type": "text"
+ },
+ "collection:services.serviceFAQ[].question": {
+  "type": "text",
+  "required": true
+ },
+ "collection:services.slug": {
+  "type": "text",
+  "required": true
+ },
+ "collection:services.stack": {
+  "type": "array",
+  "required": true
+ },
+ "collection:services.stack[].id": {
+  "type": "text"
+ },
+ "collection:services.stack[].tech": {
+  "type": "text",
+  "required": true
+ },
+ "collection:services.tag": {
+  "type": "text",
+  "required": true
+ },
+ "collection:services.tagline": {
+  "type": "text",
+  "required": true
+ },
+ "collection:services.title": {
+  "type": "text",
+  "required": true
+ },
+ "collection:services.updatedAt": {
+  "type": "date"
+ },
+ "collection:submissions.assessmentSession": {
+  "type": "relationship",
+  "relationTo": "assessment-sessions"
+ },
+ "collection:submissions.brief": {
+  "type": "textarea",
+  "required": true
+ },
+ "collection:submissions.createdAt": {
+  "type": "date"
+ },
+ "collection:submissions.email": {
+  "type": "email",
+  "required": true
+ },
+ "collection:submissions.notes": {
+  "type": "textarea"
+ },
+ "collection:submissions.referrer": {
+  "type": "text"
+ },
+ "collection:submissions.scope": {
+  "type": "select",
+  "options": [
+   "Augment",
+   "Automate",
+   "Belum yakin",
+   "Build",
+   "Intelligence",
+   "Other"
+  ]
+ },
+ "collection:submissions.status": {
+  "type": "select",
+  "options": [
+   "archived",
+   "contacted",
+   "new"
+  ]
+ },
+ "collection:submissions.submittedAt": {
+  "type": "date"
+ },
+ "collection:submissions.updatedAt": {
+  "type": "date"
+ },
+ "collection:submissions.userAgent": {
+  "type": "text"
+ },
+ "collection:tenets.createdAt": {
+  "type": "date"
+ },
+ "collection:tenets.description": {
+  "type": "textarea",
+  "required": true
+ },
+ "collection:tenets.icon": {
+  "type": "select",
+  "required": true,
+  "options": [
+   "shield",
+   "users",
+   "voice"
+  ]
+ },
+ "collection:tenets.order": {
+  "type": "number",
+  "required": true
+ },
+ "collection:tenets.title": {
+  "type": "text",
+  "required": true
+ },
+ "collection:tenets.updatedAt": {
+  "type": "date"
+ },
+ "collection:users.createdAt": {
+  "type": "date"
+ },
+ "collection:users.email": {
+  "type": "email",
+  "required": true
+ },
+ "collection:users.hash": {
+  "type": "text"
+ },
+ "collection:users.lockUntil": {
+  "type": "date"
+ },
+ "collection:users.loginAttempts": {
+  "type": "number"
+ },
+ "collection:users.name": {
+  "type": "text"
+ },
+ "collection:users.resetPasswordExpiration": {
+  "type": "date"
+ },
+ "collection:users.resetPasswordToken": {
+  "type": "text"
+ },
+ "collection:users.salt": {
+  "type": "text"
+ },
+ "collection:users.sessions": {
+  "type": "array"
+ },
+ "collection:users.sessions[].createdAt": {
+  "type": "date"
+ },
+ "collection:users.sessions[].expiresAt": {
+  "type": "date",
+  "required": true
+ },
+ "collection:users.sessions[].id": {
+  "type": "text",
+  "required": true
+ },
+ "collection:users.updatedAt": {
+  "type": "date"
+ },
+ "global:blog-settings.archiveHero": {
+  "type": "group"
+ },
+ "global:blog-settings.archiveHero.heading": {
+  "type": "text"
+ },
+ "global:blog-settings.archiveHero.lede": {
+  "type": "textarea"
+ },
+ "global:blog-settings.archiveHero.sectionMarker": {
+  "type": "text"
+ },
+ "global:blog-settings.createdAt": {
+  "type": "date"
+ },
+ "global:blog-settings.defaultOgImage": {
+  "type": "upload",
+  "relationTo": "media"
+ },
+ "global:blog-settings.postsPerPage": {
+  "type": "number"
+ },
+ "global:blog-settings.updatedAt": {
+  "type": "date"
+ },
+ "global:contact.createdAt": {
+  "type": "date"
+ },
+ "global:contact.formLabels": {
+  "type": "group"
+ },
+ "global:contact.formLabels.brief": {
+  "type": "text"
+ },
+ "global:contact.formLabels.email": {
+  "type": "text"
+ },
+ "global:contact.formLabels.emailFallback": {
+  "type": "text"
+ },
+ "global:contact.formLabels.scope": {
+  "type": "text"
+ },
+ "global:contact.formLabels.submit": {
+  "type": "text"
+ },
+ "global:contact.heading": {
+  "type": "group"
+ },
+ "global:contact.heading.line1": {
+  "type": "text",
+  "required": true
+ },
+ "global:contact.heading.line2Accent": {
+  "type": "text",
+  "required": true
+ },
+ "global:contact.lede": {
+  "type": "textarea",
+  "required": true
+ },
+ "global:contact.scopes": {
+  "type": "array"
+ },
+ "global:contact.scopes[].id": {
+  "type": "text"
+ },
+ "global:contact.scopes[].scope": {
+  "type": "text",
+  "required": true
+ },
+ "global:contact.sectionMarker": {
+  "type": "text"
+ },
+ "global:contact.successHeading": {
+  "type": "text"
+ },
+ "global:contact.updatedAt": {
+  "type": "date"
+ },
+ "global:hero.createdAt": {
+  "type": "date"
+ },
+ "global:hero.ctaPrimary": {
+  "type": "group"
+ },
+ "global:hero.ctaPrimary.href": {
+  "type": "text",
+  "required": true
+ },
+ "global:hero.ctaPrimary.label": {
+  "type": "text",
+  "required": true
+ },
+ "global:hero.ctaSecondary": {
+  "type": "group"
+ },
+ "global:hero.ctaSecondary.href": {
+  "type": "text"
+ },
+ "global:hero.ctaSecondary.label": {
+  "type": "text"
+ },
+ "global:hero.headline": {
+  "type": "group"
+ },
+ "global:hero.headline.accent": {
+  "type": "text",
+  "required": true
+ },
+ "global:hero.headline.lead": {
+  "type": "text",
+  "required": true
+ },
+ "global:hero.lede": {
+  "type": "textarea",
+  "required": true
+ },
+ "global:hero.metaItems": {
+  "type": "array"
+ },
+ "global:hero.metaItems[].id": {
+  "type": "text"
+ },
+ "global:hero.metaItems[].label": {
+  "type": "text",
+  "required": true
+ },
+ "global:hero.metaItems[].value": {
+  "type": "text",
+  "required": true
+ },
+ "global:hero.pillText": {
+  "type": "text",
+  "required": true
+ },
+ "global:hero.trustedBy": {
+  "type": "group"
+ },
+ "global:hero.trustedBy.label": {
+  "type": "text"
+ },
+ "global:hero.trustedBy.tagline": {
+  "type": "text"
+ },
+ "global:hero.updatedAt": {
+  "type": "date"
+ },
+ "global:site-settings.createdAt": {
+  "type": "date"
+ },
+ "global:site-settings.favicon": {
+  "type": "upload",
+  "relationTo": "media"
+ },
+ "global:site-settings.footer": {
+  "type": "group"
+ },
+ "global:site-settings.footer.badge": {
+  "type": "text"
+ },
+ "global:site-settings.footer.columns": {
+  "type": "array"
+ },
+ "global:site-settings.footer.columns[].heading": {
+  "type": "text",
+  "required": true
+ },
+ "global:site-settings.footer.columns[].id": {
+  "type": "text"
+ },
+ "global:site-settings.footer.columns[].links": {
+  "type": "array"
+ },
+ "global:site-settings.footer.columns[].links[].href": {
+  "type": "text",
+  "required": true
+ },
+ "global:site-settings.footer.columns[].links[].id": {
+  "type": "text"
+ },
+ "global:site-settings.footer.columns[].links[].label": {
+  "type": "text",
+  "required": true
+ },
+ "global:site-settings.footer.metaLine": {
+  "type": "group"
+ },
+ "global:site-settings.footer.metaLine.left": {
+  "type": "text"
+ },
+ "global:site-settings.footer.metaLine.right": {
+  "type": "text"
+ },
+ "global:site-settings.footer.tagline": {
+  "type": "textarea"
+ },
+ "global:site-settings.logo": {
+  "type": "upload",
+  "relationTo": "media"
+ },
+ "global:site-settings.logoDark": {
+  "type": "upload",
+  "relationTo": "media"
+ },
+ "global:site-settings.navCta": {
+  "type": "group"
+ },
+ "global:site-settings.navCta.href": {
+  "type": "text"
+ },
+ "global:site-settings.navCta.label": {
+  "type": "text"
+ },
+ "global:site-settings.navStatus": {
+  "type": "group"
+ },
+ "global:site-settings.navStatus.label": {
+  "type": "text"
+ },
+ "global:site-settings.ogImage": {
+  "type": "upload",
+  "relationTo": "media"
+ },
+ "global:site-settings.siteDescription": {
+  "type": "textarea"
+ },
+ "global:site-settings.siteName": {
+  "type": "text",
+  "required": true
+ },
+ "global:site-settings.social": {
+  "type": "array"
+ },
+ "global:site-settings.social[].href": {
+  "type": "text",
+  "required": true
+ },
+ "global:site-settings.social[].id": {
+  "type": "text"
+ },
+ "global:site-settings.social[].platform": {
+  "type": "text",
+  "required": true
+ },
+ "global:site-settings.updatedAt": {
+  "type": "date"
+ },
+ "global:studio.about": {
+  "type": "group"
+ },
+ "global:studio.about.mission": {
+  "type": "textarea"
+ },
+ "global:studio.about.pageHeading": {
+  "type": "text"
+ },
+ "global:studio.about.pageLede": {
+  "type": "textarea"
+ },
+ "global:studio.about.story": {
+  "type": "richText"
+ },
+ "global:studio.about.timeline": {
+  "type": "array"
+ },
+ "global:studio.about.timeline[].description": {
+  "type": "text"
+ },
+ "global:studio.about.timeline[].id": {
+  "type": "text"
+ },
+ "global:studio.about.timeline[].title": {
+  "type": "text",
+  "required": true
+ },
+ "global:studio.about.timeline[].year": {
+  "type": "text",
+  "required": true
+ },
+ "global:studio.about.workspace": {
+  "type": "group"
+ },
+ "global:studio.about.workspace.address": {
+  "type": "text"
+ },
+ "global:studio.about.workspace.hours": {
+  "type": "text"
+ },
+ "global:studio.about.workspace.image": {
+  "type": "upload",
+  "relationTo": "media"
+ },
+ "global:studio.about.workspace.tagline": {
+  "type": "text"
+ },
+ "global:studio.createdAt": {
+  "type": "date"
+ },
+ "global:studio.heading": {
+  "type": "text",
+  "required": true
+ },
+ "global:studio.lede": {
+  "type": "textarea",
+  "required": true
+ },
+ "global:studio.sectionMarker": {
+  "type": "text"
+ },
+ "global:studio.stats": {
+  "type": "array"
+ },
+ "global:studio.stats[].accent": {
+  "type": "text"
+ },
+ "global:studio.stats[].id": {
+  "type": "text"
+ },
+ "global:studio.stats[].label": {
+  "type": "text",
+  "required": true
+ },
+ "global:studio.stats[].num": {
+  "type": "text",
+  "required": true
+ },
+ "global:studio.updatedAt": {
+  "type": "date"
+ },
+ "global:top-bar.createdAt": {
+  "type": "date"
+ },
+ "global:top-bar.enabled": {
+  "type": "checkbox"
+ },
+ "global:top-bar.link": {
+  "type": "group"
+ },
+ "global:top-bar.link.href": {
+  "type": "text"
+ },
+ "global:top-bar.link.label": {
+  "type": "text"
+ },
+ "global:top-bar.message": {
+  "type": "text",
+  "required": true
+ },
+ "global:top-bar.tag": {
+  "type": "text"
+ },
+ "global:top-bar.updatedAt": {
+  "type": "date"
+ }
+}

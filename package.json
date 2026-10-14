@@ -8,14 +8,15 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "tsx --test src/lib/opsscore/*.test.ts",
+    "test": "tsx --test \"src/lib/**/*.test.ts\"",
     "payload": "payload",
     "generate:types": "payload generate:types",
     "generate:importmap": "payload generate:importmap",
     "migrate": "payload migrate",
     "migrate:create": "payload migrate:create",
     "seed": "tsx --env-file=.env.local src/lib/seed.ts",
-    "opsscore:og": "tsx scripts/opsscore-og.ts"
+    "opsscore:og": "tsx scripts/opsscore-og.ts",
+    "schema:baseline": "tsx scripts/schema-baseline.ts"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.0.0",
