@@ -20,15 +20,15 @@ export default async function PresentasiPage() {
   return (
     <main className="min-h-[100dvh] bg-ink text-paper flex flex-col" data-theme="dark">
       <header className="flex flex-wrap items-center justify-between gap-4 px-6 sm:px-10 py-5 border-b border-shadow-700">
-        <p className="m-0 font-mono text-[11px] uppercase tracking-wider text-mist-500 tabular">
+        <h1 className="m-0 font-mono text-[11px] font-normal uppercase tracking-wider text-mist-500 tabular">
           Coderoach · Presentasi · {pad(projects.length)} proyek
-        </p>
+        </h1>
         <div className="flex flex-wrap items-center gap-3">
           <OfflineKit enabled={process.env.NEXT_PUBLIC_PRESENTASI_OFFLINE === 'on'} pages={pages} />
           <Presenter back="/work" />
           <a
             href="/work"
-            className="h-8 px-3 rounded-md inline-flex items-center font-mono text-[11px] uppercase tracking-wider text-mist-500 hover:text-paper focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric"
+            className="h-10 px-3.5 rounded-md inline-flex items-center font-mono text-[11px] uppercase tracking-wider text-mist-500 hover:text-paper focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric"
           >
             Keluar · Esc
           </a>
@@ -68,7 +68,7 @@ export default async function PresentasiPage() {
                     [ {pad(i + 1)} / {pad(projects.length)} ] · {KIND_LABELS[p.kind]} · {industryLabel(p.industry)}
                     {p.publishedYear ? ` · ${p.publishedYear}` : ''}
                   </p>
-                  <p className="m-0 mt-3 text-[clamp(28px,3.4vw,40px)] font-bold tracking-[-0.03em] leading-[1.05]">{p.client}</p>
+                  <h2 className="m-0 mt-3 text-[clamp(28px,3.4vw,40px)] font-bold tracking-[-0.03em] leading-[1.05]">{p.client}</h2>
                   <p className="m-0 mt-2 text-[17px] leading-[1.45] text-mist-400 text-pretty">{p.tagline}</p>
                 </div>
               </a>
@@ -77,7 +77,7 @@ export default async function PresentasiPage() {
         })}
       </ol>
 
-      <p className="m-0 px-6 sm:px-10 pb-6 font-mono text-[11px] uppercase tracking-wider text-mist-500 tabular">
+      <p className="hidden [@media(hover:hover)]:block m-0 px-6 sm:px-10 pb-6 font-mono text-[11px] uppercase tracking-wider text-mist-500 tabular">
         ← → pilih · Enter buka · F layar penuh · Esc keluar
       </p>
     </main>

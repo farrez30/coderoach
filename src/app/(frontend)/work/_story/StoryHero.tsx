@@ -41,7 +41,7 @@ export function StoryHero({ project, links, mode }: { project: Project; links: L
           {asMedia(sc?.tour) && (
             <a
               href="#tur"
-              className="h-9 inline-flex items-center text-[17px] font-medium text-electric hover:underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric"
+              className="h-11 inline-flex items-center text-[19px] font-bold text-electric hover:underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric"
             >
               Tonton turnya ›
             </a>

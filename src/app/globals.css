@@ -281,6 +281,8 @@
   .story-timeline__fill { scale: 1 var(--p, 1); transform-origin: top; }
 
   .story-transcript summary::marker { color: var(--color-mist-500); }
+  /* The prose "##" ornament reads as a dev blog after a product page. */
+  .story .prose-coderoach h2::before { content: none; }
 
   /* Features: rows by default (mobile, overlay, no JS, reduced motion)... */
   .story-feature { display: grid; gap: 28px; align-items: center; }
@@ -300,7 +302,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      opacity: 0.28;
+      opacity: 0.45;
       transition: opacity 400ms var(--ease-out-quint);
     }
     .story[data-motion='on'] .story-feature__shot {

@@ -76,7 +76,7 @@ export function ProjectCard({
         {project.preview && <CardPreview preview={project.preview} label={project.client} />}
         {project.publishedYear && (
           <div className="absolute top-4 right-4 z-[1]">
-            <span className="font-mono text-[11px] uppercase tracking-wider text-mist-600 bg-paper-50 px-2 py-1 rounded-md tabular">
+            <span className="font-mono text-[11px] uppercase tracking-wider text-ink/65 bg-paper-50 px-2 py-1 rounded-md tabular">
               {project.publishedYear}
             </span>
           </div>
@@ -94,18 +94,18 @@ export function ProjectCard({
             </a>
           )}
         </h3>
-        <p className={`${variant === 'feature' ? 'text-[16px]' : 'text-[14px]'} leading-[1.5] text-mist-600 m-0 flex-1`}>
+        <p className={`${variant === 'feature' ? 'text-[16px]' : 'text-[14px]'} leading-[1.5] text-ink/65 m-0 flex-1`}>
           {project.excerpt || project.tagline}
         </p>
         <div className="flex items-center justify-between pt-3 border-t border-paper-200/60 mt-auto flex-wrap gap-2">
           {project.industry && (
-            <span className="font-mono text-[11px] uppercase tracking-wider text-mist-600 tabular">
+            <span className="font-mono text-[11px] uppercase tracking-wider text-ink/65 tabular">
               {industryLabel(project.industry)}
             </span>
           )}
           <span
             aria-hidden
-            className="font-mono text-[11px] tracking-wider text-mist-600 group-hover:text-electric group-hover:translate-x-1 transition-[color,transform] motion-reduce:group-hover:translate-x-0"
+            className="font-mono text-[11px] tracking-wider text-ink/65 group-hover:text-electric group-hover:translate-x-1 transition-[color,transform] motion-reduce:group-hover:translate-x-0"
           >
             Baca →
           </span>

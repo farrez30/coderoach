@@ -273,6 +273,7 @@ The project page in the manner of a product page, used once a project has its su
 - **Features** are rows of text beside a framed screen; on a wide screen with motion allowed they become one pinned scene where the screens share a sticky slot and cross-fade.
 - **The one dark chapter** is the tour: ink section, centred headline, a 16:10 video that never autoplays, the demo note under it, and the transcript in a disclosure.
 - **Timeline** on a 2px rail that fills with Signal Blue as the page is read; **Sumber** lists each number with its method, date, and `repo@commit`.
+- **Type ramp on these pages** follows ADR 0005, not the site ramp above: body 16–17px (19px in the dark chapter), feature titles 24–32px, section heads clamp(34px, 5vw, 60px), captions and link notes 13–15px, mono readouts 11–12px.
 - **Secondary text is ink at 65%** (6.3:1 on paper-100), not mist-600, which measures 4.13:1 and is too light for reading text.
 - **Motion** reads `--p` (0 to 1) with its resting value as the fallback, so no JS, reduced motion, and the overlay all show the finished page. Scroll is never hijacked; only the value read from it is smoothed.
 

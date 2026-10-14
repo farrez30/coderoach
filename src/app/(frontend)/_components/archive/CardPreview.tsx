@@ -67,7 +67,7 @@ export function CardPreview({ preview, label }: { preview: CardPreviewMedia; lab
             setOn(true);
           }
         }}
-        className="absolute bottom-4 right-4 z-[3] h-8 px-3 rounded-full bg-paper-50 border border-paper-200 inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wider text-ink hover:border-shadow-800 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric"
+        className="absolute bottom-4 right-4 z-[3] h-10 px-3.5 rounded-full bg-paper-50 border border-paper-200 inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wider text-ink hover:border-shadow-800 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric"
       >
         <svg aria-hidden width="10" height="10" viewBox="0 0 10 10" fill="currentColor">
           {playing ? <path d="M2 1.5h2.2v7H2zM5.8 1.5H8v7H5.8z" /> : <path d="M2.5 1.2v7.6L8.6 5z" />}

@@ -60,7 +60,7 @@ export function Presenter({ back, prev, next }: { back?: string; prev?: string |
     <button
       type="button"
       onClick={() => (document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen().catch(() => {}))}
-      className="h-8 px-3 rounded-md border border-shadow-700 font-mono text-[11px] uppercase tracking-wider text-paper hover:bg-paper/[0.06] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric"
+      className="h-10 px-3.5 rounded-md border border-shadow-700 font-mono text-[11px] uppercase tracking-wider text-paper hover:bg-paper/[0.06] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric"
     >
       Layar penuh · F
     </button>

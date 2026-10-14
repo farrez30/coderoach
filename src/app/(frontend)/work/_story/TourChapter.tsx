@@ -27,13 +27,15 @@ export function TourChapter({ project }: { project: Project }) {
             <div data-scene="enter">
               <div className="story-tour relative mx-auto overflow-hidden bg-shadow-900 border border-shadow-700 aspect-[16/10]">
                 {/* The poster as a lazy image under the video: a poster attribute is fetched with the
-                    page, competing with the hero image for a section far below it. An unloaded
-                    video paints nothing, so the image shows through until playback starts. */}
+                    page, competing with the hero image for a section far below it. The video gets
+                    a transparent 1px poster instead: without any poster Chromium paints an opaque
+                    grey surface over the image until playback starts. */}
                 {poster && <MediaImg media={poster} alt="" sizes="(min-width: 1180px) 1116px, 92vw" className="absolute inset-0 h-full w-full object-contain" />}
                 <video
                   controls
                   playsInline
                   preload="none"
+                  poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                   aria-label={tour.alt || `Tur ${project.client}`}
                   className="relative block h-full w-full object-contain"
                 >
@@ -50,7 +52,7 @@ export function TourChapter({ project }: { project: Project }) {
         )}
         {sc?.tourTranscript && (
           <details className="story-transcript max-w-[780px] mx-auto mt-8 border-t border-shadow-700 pt-5">
-            <summary className="cursor-pointer text-[15px] font-medium text-paper focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-electric">
+            <summary className="cursor-pointer py-3 text-[15px] font-medium text-paper focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-electric">
               Transkrip tur
             </summary>
             <p className="m-0 mt-4 text-[16px] leading-[1.6] text-mist-400 text-pretty">{sc.tourTranscript}</p>

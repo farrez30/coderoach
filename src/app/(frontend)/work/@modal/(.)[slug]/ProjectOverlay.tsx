@@ -65,9 +65,9 @@ export function ProjectOverlay({ slug, title, children }: { slug: string; title:
           <div className="flex items-center gap-2 shrink-0">
             <a
               href={`/work/${slug}`}
-              className="h-9 px-3 rounded-md font-mono text-[11px] uppercase tracking-wider text-mist-600 hover:text-ink hover:bg-paper-100 inline-flex items-center transition-colors"
+              className="h-9 px-3 rounded-md font-mono text-[11px] uppercase tracking-wider text-ink/65 hover:text-ink hover:bg-paper-100 inline-flex items-center transition-colors"
             >
-              Halaman penuh ↗
+              Halaman penuh →
             </a>
             <button
               type="button"
