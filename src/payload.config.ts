@@ -126,8 +126,10 @@ export default buildConfig({
       cancel: ({ req }) => Boolean(req.user),
     },
   },
+  // Nothing here uses GraphQL, and its schema never built anyway: the "faq" block and the "faqs"
+  // collection both claim the type name Faq, so every request was a 500. Off is one less endpoint.
   graphQL: {
-    disablePlaygroundInProduction: true,
+    disable: true,
   },
   email: process.env.RESEND_API_KEY
     ? resendAdapter({

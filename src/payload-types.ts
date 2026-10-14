@@ -1053,7 +1053,7 @@ export interface Client {
    */
   website?: string | null;
   /**
-   * Shown on the site. Set by the landing sync from permissions recorded in Coderoach OS.
+   * Shown on the site and in the public API. Set by the landing sync from CLIENTS in src/lib/landing/copy.ts.
    */
   listed?: boolean | null;
   industry?:
