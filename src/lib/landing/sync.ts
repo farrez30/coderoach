@@ -1,5 +1,6 @@
 import type { Payload } from 'payload';
 import { toLexical } from '../lexical';
+import { planClientsSync } from './clients';
 import {
   BLOCK_COPY,
   CLIENTS,
@@ -32,12 +33,7 @@ export async function syncLanding(payload: Payload, { apply, log = console.log }
   await replaceAll(payload, 'process-phases', PROCESS_PHASES, { apply, log });
   await replaceAll(payload, 'tenets', TENETS, { apply, log });
   await replaceAll(payload, 'faqs', FAQS, { apply, log });
-  await replaceAll(
-    payload,
-    'clients',
-    CLIENTS.map((name, i) => ({ order: i + 1, name })),
-    { apply, log },
-  );
+  await syncClients(payload, { apply, log });
   await syncHomePage(payload, { apply, log });
 }
 
@@ -103,10 +99,10 @@ async function syncServices(payload: Payload, { apply, log }: Required<SyncOptio
   }
 }
 
-/** Content collections whose every row is copy: clear them and write the new set. */
+/** Content collections whose every row is copy, with nothing set in the admin: clear them and write the new set. */
 async function replaceAll(
   payload: Payload,
-  collection: 'process-phases' | 'tenets' | 'faqs' | 'clients',
+  collection: 'process-phases' | 'tenets' | 'faqs',
   rows: Record<string, unknown>[],
   { apply, log }: Required<SyncOptions>,
 ) {
@@ -118,6 +114,26 @@ async function replaceAll(
   }
   for (const data of rows) {
     await payload.create({ collection, data: data as never, overrideAccess: true });
+  }
+}
+
+/** Clients carry logos set in the admin, so they are matched by name, never cleared (see clients.ts). */
+async function syncClients(payload: Payload, { apply, log }: Required<SyncOptions>) {
+  const { docs } = await payload.find({ collection: 'clients', limit: 200, depth: 0, overrideAccess: true });
+  const plan = planClientsSync(
+    docs.map((d) => ({ id: d.id, name: d.name, order: d.order })),
+    CLIENTS,
+  );
+  for (const row of plan.create) {
+    log(`create     client  ${row.name}`);
+    if (apply) await payload.create({ collection: 'clients', data: row, overrideAccess: true });
+  }
+  for (const row of plan.reorder) {
+    log(`reorder    client  ${row.name} → ${row.order}`);
+    if (apply) await payload.update({ collection: 'clients', id: row.id, data: { order: row.order }, overrideAccess: true });
+  }
+  for (const row of plan.extra) {
+    log(`keep       client  ${row.name} (not in copy.ts; remove it in the admin if it should go)`);
   }
 }
 
