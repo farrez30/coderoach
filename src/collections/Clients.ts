@@ -48,7 +48,7 @@ export const Clients: CollectionConfig = {
       index: true,
       admin: {
         position: 'sidebar',
-        description: 'Shown on the site. Set by the landing sync from permissions recorded in Coderoach OS.',
+        description: 'Shown on the site and in the public API. Set by the landing sync from CLIENTS in src/lib/landing/copy.ts.',
       },
     },
     {

@@ -78,7 +78,7 @@ describe('portfolio consent', () => {
   });
 
   test('the hero marquee only names clients already shown before the rule', () => {
-    for (const name of CLIENTS) assert.ok((LEGACY_CLIENT_NAMES as readonly string[]).includes(name), name);
+    for (const { name } of CLIENTS) assert.ok((LEGACY_CLIENT_NAMES as readonly string[]).includes(name), name);
   });
 
   test('consentAllows needs a granted, in-scope permission, and the metric key for numbers', () => {

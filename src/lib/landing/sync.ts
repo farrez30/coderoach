@@ -121,23 +121,30 @@ async function replaceAll(
 async function syncClients(payload: Payload, { apply, log }: Required<SyncOptions>) {
   const { docs } = await payload.find({ collection: 'clients', limit: 200, depth: 0, overrideAccess: true });
   const plan = planClientsSync(
-    docs.map((d) => ({ id: d.id, name: d.name, order: d.order, hasAdminData: Boolean(d.logo || d.logoDark || d.website) })),
+    docs.map((d) => ({
+      id: d.id,
+      name: d.name,
+      order: d.order,
+      listed: d.listed === true,
+      industry: d.industry ?? null,
+      hasAdminData: Boolean(d.logo || d.logoDark || d.website),
+    })),
     CLIENTS,
   );
   for (const row of plan.create) {
     log(`create     client  ${row.name}`);
     if (apply) await payload.create({ collection: 'clients', data: row, overrideAccess: true });
   }
-  for (const row of plan.reorder) {
-    log(`reorder    client  ${row.name} → ${row.order}`);
-    if (apply) await payload.update({ collection: 'clients', id: row.id, data: { order: row.order }, overrideAccess: true });
+  for (const row of plan.update) {
+    log(`update     client  ${row.name} (${Object.entries(row.data).map(([k, v]) => `${k}=${v}`).join(', ')})`);
+    if (apply) await payload.update({ collection: 'clients', id: row.id, data: row.data, overrideAccess: true });
   }
   for (const row of plan.remove) {
     log(`delete     client  ${row.name} (not in copy.ts)`);
     if (apply) await payload.delete({ collection: 'clients', id: row.id, overrideAccess: true });
   }
   for (const row of plan.extra) {
-    log(`keep       client  ${row.name} (not in copy.ts, but has a logo or website; remove it in the admin if it should go)`);
+    log(`keep       client  ${row.name} (not in copy.ts, so unlisted; it has a logo or website, remove it in the admin if it should go)`);
   }
 }
 

@@ -9,6 +9,7 @@
  * timing promise is one month to something the client's team can try.
  */
 import type { LexicalBlock } from '../lexical';
+import type { WantedClient } from './clients';
 
 /** Rich-text sections that do not exist as blocks yet. `after` is the blockType they follow. */
 export type LandingSection = {
@@ -363,5 +364,14 @@ export const FAQS = [
   },
 ];
 
-/** Marquee under the hero. Names the owner confirmed may be published; all already named on /work. */
-export const CLIENTS = ['Geprek Wow', 'RPN Agro', 'Chicken Wow', 'Uruzin', 'The Global Review'];
+/**
+ * Marquee under the hero. Names the owner confirmed may be published; all already named on /work.
+ * The landing sync lists exactly these in Clients, which is what the public API returns.
+ */
+export const CLIENTS: readonly WantedClient[] = [
+  { name: 'Geprek Wow', industry: 'fb' },
+  { name: 'RPN Agro', industry: 'manufacturing' },
+  { name: 'Chicken Wow', industry: 'fb' },
+  { name: 'Uruzin', industry: 'legal' },
+  { name: 'The Global Review', industry: 'media' },
+];
