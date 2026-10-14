@@ -15,8 +15,8 @@ export function InteractionsClient() {
     const finePointer = matchMedia('(pointer: fine)').matches;
     const cleanups: Array<() => void> = [];
 
-    /* IntersectionObserver — section reveal */
-    const targets = document.querySelectorAll('.reveal, .reveal-stagger');
+    /* IntersectionObserver — section reveal. Elements that mount later (an overlay opened by a soft
+       navigation, a filtered card) are picked up by the MutationObserver, or they would stay hidden. */
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -28,31 +28,42 @@ export function InteractionsClient() {
       },
       { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
     );
-    targets.forEach((el) => io.observe(el));
-    cleanups.push(() => io.disconnect());
+    const REVEAL = '.reveal:not(.in), .reveal-stagger:not(.in)';
+    const watch = (root: ParentNode) => {
+      if (root instanceof Element && root.matches(REVEAL)) io.observe(root);
+      root.querySelectorAll(REVEAL).forEach((el) => io.observe(el));
+    };
+    watch(document);
+    const mo = new MutationObserver((records) => {
+      for (const r of records) r.addedNodes.forEach((n) => n instanceof Element && watch(n));
+    });
+    mo.observe(document.body, { childList: true, subtree: true });
+    cleanups.push(() => {
+      io.disconnect();
+      mo.disconnect();
+    });
 
     if (reduceMotion) return () => cleanups.forEach((c) => c());
 
-    /* Spotlight cursor (case-feature dark cards) */
-    document.querySelectorAll<HTMLElement>('[data-spotlight]').forEach((el) => {
-      const handler = (e: PointerEvent) => {
-        const r = el.getBoundingClientRect();
-        el.style.setProperty('--mx', `${e.clientX - r.left}px`);
-        el.style.setProperty('--my', `${e.clientY - r.top}px`);
-      };
-      el.addEventListener('pointermove', handler);
-      cleanups.push(() => el.removeEventListener('pointermove', handler));
-    });
-
-    /* Directional work-row hover origin */
-    document.querySelectorAll<HTMLElement>('[data-work-row]').forEach((row) => {
-      const handler = (e: PointerEvent) => {
-        const r = row.getBoundingClientRect();
-        const fromLeft = e.clientX - r.left < r.width / 2;
-        row.style.setProperty('--origin', fromLeft ? 'left' : 'right');
-      };
-      row.addEventListener('pointerenter', handler);
-      cleanups.push(() => row.removeEventListener('pointerenter', handler));
+    /* Spotlight cursor and directional work-row hover, delegated so cards mounted later work too */
+    const onPointerMove = (e: PointerEvent) => {
+      const el = (e.target as Element | null)?.closest?.<HTMLElement>('[data-spotlight]');
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', `${e.clientX - r.left}px`);
+      el.style.setProperty('--my', `${e.clientY - r.top}px`);
+    };
+    const onPointerOver = (e: PointerEvent) => {
+      const row = (e.target as Element | null)?.closest?.<HTMLElement>('[data-work-row]');
+      if (!row || (e.relatedTarget instanceof Node && row.contains(e.relatedTarget))) return;
+      const r = row.getBoundingClientRect();
+      row.style.setProperty('--origin', e.clientX - r.left < r.width / 2 ? 'left' : 'right');
+    };
+    document.addEventListener('pointermove', onPointerMove, { passive: true });
+    document.addEventListener('pointerover', onPointerOver, { passive: true });
+    cleanups.push(() => {
+      document.removeEventListener('pointermove', onPointerMove);
+      document.removeEventListener('pointerover', onPointerOver);
     });
 
     /* Magnetic CTA (hero only, fine pointer) */
