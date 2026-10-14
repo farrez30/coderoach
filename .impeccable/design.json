@@ -1,0 +1,492 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-14T06:08:39.441Z",
+  "title": "Design System: Coderoach Studio",
+  "extensions": {
+    "colorMeta": {
+      "electric": {
+        "role": "primary",
+        "displayName": "Signal Blue",
+        "canonical": "#2C70FE",
+        "oklch": "oklch(58.8% 0.223 262.5)",
+        "tonalRamp": [
+          "#000729",
+          "#001B5F",
+          "#01329B",
+          "#0B4FDB",
+          "#3275FF",
+          "#73A3FF",
+          "#AFCBFF",
+          "#E6EFFE"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Console Ink",
+        "canonical": "#08090A",
+        "oklch": "oklch(13.9% 0.003 246.3)",
+        "tonalRamp": [
+          "#08090A",
+          "#13171A",
+          "#222823",
+          "#3A4140",
+          "#7A767C",
+          "#E8ECEA",
+          "#F4F7F5",
+          "#FAFBFA"
+        ]
+      },
+      "paper-50": {
+        "role": "neutral",
+        "displayName": "Lit Paper",
+        "canonical": "#FAFBFA",
+        "oklch": "oklch(98.7% 0.002 145.6)",
+        "tonalRamp": [
+          "#08090A",
+          "#13171A",
+          "#222823",
+          "#3A4140",
+          "#7A767C",
+          "#E8ECEA",
+          "#F4F7F5",
+          "#FAFBFA"
+        ]
+      },
+      "paper-100": {
+        "role": "neutral",
+        "displayName": "Daylight Paper",
+        "canonical": "#F4F7F5",
+        "oklch": "oklch(97.3% 0.004 157.2)",
+        "tonalRamp": [
+          "#08090A",
+          "#13171A",
+          "#222823",
+          "#3A4140",
+          "#7A767C",
+          "#E8ECEA",
+          "#F4F7F5",
+          "#FAFBFA"
+        ]
+      },
+      "paper-200": {
+        "role": "neutral",
+        "displayName": "Hairline Paper",
+        "canonical": "#E8ECEA",
+        "oklch": "oklch(93.9% 0.005 165.0)",
+        "tonalRamp": [
+          "#08090A",
+          "#13171A",
+          "#222823",
+          "#3A4140",
+          "#7A767C",
+          "#E8ECEA",
+          "#F4F7F5",
+          "#FAFBFA"
+        ]
+      },
+      "mist-400": {
+        "role": "neutral",
+        "displayName": "Faint Mist",
+        "canonical": "#C4C0C5",
+        "oklch": "oklch(81.2% 0.008 319.4)",
+        "tonalRamp": [
+          "#08090A",
+          "#3A4140",
+          "#7A767C",
+          "#A7A2A9",
+          "#C4C0C5",
+          "#E8ECEA",
+          "#F4F7F5",
+          "#FAFBFA"
+        ]
+      },
+      "mist-500": {
+        "role": "neutral",
+        "displayName": "Instrument Mist",
+        "canonical": "#A7A2A9",
+        "oklch": "oklch(71.9% 0.011 316.5)",
+        "tonalRamp": [
+          "#08090A",
+          "#3A4140",
+          "#7A767C",
+          "#A7A2A9",
+          "#C4C0C5",
+          "#E8ECEA",
+          "#F4F7F5",
+          "#FAFBFA"
+        ]
+      },
+      "mist-600": {
+        "role": "neutral",
+        "displayName": "Readout Mist",
+        "canonical": "#7A767C",
+        "oklch": "oklch(57.1% 0.010 314.7)",
+        "tonalRamp": [
+          "#08090A",
+          "#3A4140",
+          "#7A767C",
+          "#A7A2A9",
+          "#C4C0C5",
+          "#E8ECEA",
+          "#F4F7F5",
+          "#FAFBFA"
+        ]
+      },
+      "shadow-700": {
+        "role": "neutral",
+        "displayName": "Panel Edge",
+        "canonical": "#3A4140",
+        "oklch": "oklch(36.8% 0.009 186.4)",
+        "tonalRamp": [
+          "#08090A",
+          "#13171A",
+          "#222823",
+          "#3A4140",
+          "#7A767C",
+          "#E8ECEA",
+          "#F4F7F5",
+          "#FAFBFA"
+        ]
+      },
+      "shadow-800": {
+        "role": "neutral",
+        "displayName": "Panel Slate",
+        "canonical": "#222823",
+        "oklch": "oklch(26.9% 0.013 150.2)",
+        "tonalRamp": [
+          "#08090A",
+          "#13171A",
+          "#222823",
+          "#3A4140",
+          "#7A767C",
+          "#E8ECEA",
+          "#F4F7F5",
+          "#FAFBFA"
+        ]
+      },
+      "shadow-900": {
+        "role": "neutral",
+        "displayName": "Console Slate",
+        "canonical": "#13171A",
+        "oklch": "oklch(20.2% 0.009 240.4)",
+        "tonalRamp": [
+          "#08090A",
+          "#13171A",
+          "#222823",
+          "#3A4140",
+          "#7A767C",
+          "#E8ECEA",
+          "#F4F7F5",
+          "#FAFBFA"
+        ]
+      },
+      "success": {
+        "role": "status",
+        "displayName": "Uplink Green",
+        "canonical": "#2BB673",
+        "oklch": "oklch(68.8% 0.152 156.7)",
+        "tonalRamp": [
+          "#000F05",
+          "#002D17",
+          "#014D2C",
+          "#047344",
+          "#08985C",
+          "#3AC07C",
+          "#68E8A1",
+          "#C4FFD9"
+        ]
+      },
+      "warning": {
+        "role": "status",
+        "displayName": "Caution Amber",
+        "canonical": "#F2A93B",
+        "oklch": "oklch(78.7% 0.147 73.0)",
+        "tonalRamp": [
+          "#130900",
+          "#341F00",
+          "#583803",
+          "#835603",
+          "#AD7203",
+          "#DB941B",
+          "#FFBC60",
+          "#FFEBD2"
+        ]
+      },
+      "error": {
+        "role": "status",
+        "displayName": "Fault Red",
+        "canonical": "#E5484D",
+        "oklch": "oklch(62.6% 0.193 23.0)",
+        "tonalRamp": [
+          "#1E0002",
+          "#4A0109",
+          "#7C0015",
+          "#B50A25",
+          "#DC3F46",
+          "#FF7170",
+          "#FFB4B0",
+          "#FEE9E7"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero H1 only, max 16ch, one Signal Blue accent span."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section H2 under the mono section marker."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Card titles; scales to 28px (process), 32-36px (feature), 44-48px (featured work)."
+      },
+      "body-lede": {
+        "displayName": "Lede",
+        "purpose": "Section and hero ledes in mist-600 at a 520-620px measure."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Component copy; long-form prose is 18px/1.65 at 720px."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Sans field and column labels, uppercase, 0.18em."
+      },
+      "label-mono": {
+        "displayName": "Measurement",
+        "purpose": "Positions, counts, times, versions, statuses; tabular, uppercase."
+      }
+    },
+    "shadows": [
+      {
+        "name": "lit-edge",
+        "value": "inset 0 1px 0 rgba(255,255,255,0.6)",
+        "purpose": "Top catch-light on light cards."
+      },
+      {
+        "name": "instrument-seat",
+        "value": "inset 0 1px 0 rgba(255,255,255,0.04), 0 24px 48px -24px rgba(8,9,10,0.4)",
+        "purpose": "Seats the dark ops console into the page (featured-work panel uses 0.5 alpha)."
+      },
+      {
+        "name": "narrative-card",
+        "value": "0 0 1px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.05), 0 8px 24px rgba(0,0,0,0.04)",
+        "purpose": "Cards in the narrative landing sections."
+      },
+      {
+        "name": "floating-drawer",
+        "value": "0 12px 32px -12px rgba(8,9,10,0.18)",
+        "purpose": "Mobile nav drawer."
+      },
+      {
+        "name": "floating-toast",
+        "value": "0 18px 40px -16px rgba(8,9,10,0.25)",
+        "purpose": "Toasts."
+      },
+      {
+        "name": "floating-announcement",
+        "value": "0 18px 36px -12px rgba(8,9,10,0.4)",
+        "purpose": "Mobile announcement card."
+      },
+      {
+        "name": "pressed-thumb",
+        "value": "0 2px 6px -2px rgba(8,9,10,0.3)",
+        "purpose": "Active option of the segmented filter."
+      },
+      {
+        "name": "field-halo",
+        "value": "0 0 0 3px rgba(44,112,254,0.14)",
+        "purpose": "Focus on light opsscore inputs."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out-quint",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Default for entrances, reveals, pulses, row slide-ins."
+      },
+      {
+        "name": "ease-emphasized",
+        "value": "cubic-bezier(0.3, 0, 0, 1)",
+        "purpose": "Declared token for emphasized transitions."
+      },
+      {
+        "name": "ease-default",
+        "value": "cubic-bezier(0.2, 0, 0, 1)",
+        "purpose": "Live-indicator blink."
+      },
+      {
+        "name": "reveal",
+        "value": "720ms ease-out-quint, translateY(14px) to none; children 640ms staggered 80ms",
+        "purpose": "IntersectionObserver section reveal; removed under reduced motion."
+      },
+      {
+        "name": "hero-in",
+        "value": "760ms ease-out-quint, translateY(10px), delays 60-600ms",
+        "purpose": "Hero entrance stagger."
+      },
+      {
+        "name": "pulse-dot",
+        "value": "2.6s ease-out-quint infinite, 0 to 5px ring at 45% success",
+        "purpose": "Live status dot."
+      },
+      {
+        "name": "ops-row-in",
+        "value": "320ms ease-out-quint, translateY(-8px)",
+        "purpose": "New console row; the feed ticks every 3.2s."
+      },
+      {
+        "name": "octagon-drift",
+        "value": "60s linear infinite, rotate 0 to 45deg",
+        "purpose": "Hero octagon watermark."
+      },
+      {
+        "name": "view-transition",
+        "value": "out 200ms, in 240ms after 80ms, ease-out-quint",
+        "purpose": "Cross-fade between routes."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one action in a view: Signal Blue fill, 52px tall, 6px corners. The focus ring here approximates the browser default the site ships.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Mulai diskusi <svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h14M13 5l7 7-7 7\"/></svg></a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; height: 52px; padding: 0 22px; border-radius: 6px; background: #2C70FE; color: #F4F7F5; font-family: Satoshi, Inter, system-ui, sans-serif; font-size: 15px; font-weight: 600; text-decoration: none; transition: background-color 150ms cubic-bezier(0.4,0,0.2,1), transform 150ms; } .ds-btn-primary:hover { background: #2562E0; } .ds-btn-primary:active { transform: scale(0.98); } .ds-btn-primary:focus-visible { outline: 2px solid #2C70FE; outline-offset: 2px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Quiet alternative beside the primary: transparent, 1px mist-400 border, ink text.",
+      "html": "<a class=\"ds-btn-secondary\" href=\"#\">Lihat proyek</a>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; height: 52px; padding: 0 22px; border-radius: 6px; background: transparent; color: #08090A; border: 1px solid #C4C0C5; font-family: Satoshi, Inter, system-ui, sans-serif; font-size: 15px; font-weight: 600; text-decoration: none; transition: background-color 150ms cubic-bezier(0.4,0,0.2,1); } .ds-btn-secondary:hover { background: rgba(8,9,10,0.04); } .ds-btn-secondary:focus-visible { outline: 2px solid #2C70FE; outline-offset: 2px; }"
+    },
+    {
+      "name": "Badge",
+      "kind": "chip",
+      "refersTo": "badge-electric",
+      "description": "Mono status pill. Neutral for client work, electric for studio products.",
+      "html": "<span class=\"ds-badge\">Client</span> <span class=\"ds-badge ds-badge--electric\">Studio</span>",
+      "css": ".ds-badge { display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 9999px; background: rgba(196,192,197,0.3); color: #08090A; font-family: 'JetBrains Mono', 'SF Mono', Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; white-space: nowrap; } .ds-badge--electric { background: rgba(44,112,254,0.10); color: #2C70FE; border: 1px solid rgba(44,112,254,0.3); }"
+    },
+    {
+      "name": "Segmented Filter",
+      "kind": "chip",
+      "refersTo": "filter-segment-active",
+      "description": "Primary archive filter: paper track, ink thumb on the active option, tabular counts.",
+      "html": "<div class=\"ds-seg\"><button class=\"ds-seg-opt is-active\" aria-pressed=\"true\">Semua<span class=\"ds-seg-count\">12</span></button><button class=\"ds-seg-opt\" aria-pressed=\"false\">Client<span class=\"ds-seg-count\">8</span></button><button class=\"ds-seg-opt\" aria-pressed=\"false\">Studio<span class=\"ds-seg-count\">4</span></button></div>",
+      "css": ".ds-seg { display: inline-flex; align-items: center; gap: 2px; padding: 4px; background: #F4F7F5; border: 1px solid #E8ECEA; border-radius: 9999px; } .ds-seg-opt { display: flex; align-items: center; height: 32px; padding: 0 16px; border: 0; border-radius: 9999px; background: transparent; color: #7A767C; font-family: 'JetBrains Mono', 'SF Mono', Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; font-variant-numeric: tabular-nums; cursor: pointer; transition: all 150ms cubic-bezier(0.4,0,0.2,1); } .ds-seg-opt:hover { color: #08090A; } .ds-seg-opt:active { transform: scale(0.97); } .ds-seg-opt:focus-visible { outline: 2px solid #2C70FE; outline-offset: 2px; } .ds-seg-opt.is-active { background: #08090A; color: #F4F7F5; box-shadow: 0 2px 6px -2px rgba(8,9,10,0.3); } .ds-seg-count { margin-left: 6px; color: #A7A2A9; } .ds-seg-opt.is-active .ds-seg-count { color: #C4C0C5; }"
+    },
+    {
+      "name": "Project Card",
+      "kind": "card",
+      "refersTo": "card-project",
+      "description": "Specimen tray: paper-50 body, blueprint placeholder media well, mono footer readout. Lifts 2px and darkens its border on hover.",
+      "html": "<a class=\"ds-card\" href=\"#\"><div class=\"ds-card-media\"><span class=\"ds-corner ds-corner--l\"></span><span class=\"ds-corner ds-corner--r\"></span><div class=\"ds-card-cover\"><span class=\"ds-card-meta\"><span class=\"ds-sq\"></span>F&amp;B · 12 outlet</span><span class=\"ds-card-name\">Laporta</span></div></div><div class=\"ds-card-body\"><h3 class=\"ds-card-title\">Laporta</h3><p class=\"ds-card-text\">Laporan harian dua belas outlet dalam satu layar.</p><div class=\"ds-card-foot\"><span>F&amp;B</span><span class=\"ds-card-read\">Read →</span></div></div></a>",
+      "css": ".ds-card { display: flex; flex-direction: column; max-width: 360px; background: #FAFBFA; border: 1px solid #E8ECEA; border-radius: 16px; overflow: hidden; color: #08090A; text-decoration: none; font-family: Satoshi, Inter, system-ui, sans-serif; box-shadow: inset 0 1px 0 rgba(255,255,255,0.6); transition: all 150ms cubic-bezier(0.4,0,0.2,1); } .ds-card:hover { border-color: #222823; transform: translateY(-2px); } .ds-card:focus-visible { outline: 2px solid #2C70FE; outline-offset: 2px; } .ds-card-media { position: relative; aspect-ratio: 16/10; background-color: #F4F7F5; background-image: linear-gradient(rgba(8,9,10,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(8,9,10,0.05) 1px, transparent 1px); background-size: 28px 28px; background-position: -1px -1px; border-bottom: 1px solid #E8ECEA; } .ds-corner { position: absolute; bottom: 12px; width: 12px; height: 12px; border-bottom: 1px solid rgba(8,9,10,0.15); } .ds-corner--l { left: 12px; border-left: 1px solid rgba(8,9,10,0.15); } .ds-corner--r { right: 12px; border-right: 1px solid rgba(8,9,10,0.15); } .ds-card-cover { position: absolute; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; gap: 10px; padding: 24px; } .ds-card-meta { display: inline-flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: #7A767C; } .ds-sq { width: 6px; height: 6px; background: #2C70FE; } .ds-card-name { font-size: 40px; font-weight: 700; line-height: 0.95; letter-spacing: -0.03em; } .ds-card-body { display: flex; flex-direction: column; gap: 12px; padding: 24px; } .ds-card-title { margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -0.015em; line-height: 1.25; transition: color 150ms; } .ds-card:hover .ds-card-title { color: #2C70FE; } .ds-card-text { margin: 0; font-size: 14px; line-height: 1.5; color: #7A767C; } .ds-card-foot { display: flex; justify-content: space-between; padding-top: 12px; border-top: 1px solid rgba(232,236,234,0.6); font-family: 'JetBrains Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: #7A767C; } .ds-card-read { text-transform: none; transition: color 150ms, transform 150ms; } .ds-card:hover .ds-card-read { color: #2C70FE; transform: translateX(4px); }"
+    },
+    {
+      "name": "Ops Console",
+      "kind": "custom",
+      "refersTo": "ops-console",
+      "description": "Signature instrument: a dark, bounded live feed embedded in the light hero. Pulsing uplink dot, tabular clock, three rows fading by age.",
+      "html": "<div class=\"ds-console\"><div class=\"ds-console-head\"><span class=\"ds-console-id\"><span class=\"ds-dot\"></span>coderoach.studio · uplink</span><span class=\"ds-console-clock\">14:02:37</span></div><div class=\"ds-row\"><span class=\"ds-cat ds-cat--build\">build</span><span class=\"ds-subj\">laporta@v4.2.1</span><span class=\"ds-stat\">shipped in 23s</span></div><div class=\"ds-row ds-row--2\"><span class=\"ds-cat ds-cat--alert\">alert</span><span class=\"ds-subj\">sync queue latency</span><span class=\"ds-stat\">auto-resolved</span></div><div class=\"ds-row ds-row--3\"><span class=\"ds-cat ds-cat--trace\">trace</span><span class=\"ds-subj\">multi-cabang sync</span><span class=\"ds-stat\">12 outlet · live</span></div><div class=\"ds-console-foot\">streaming · 8 services · 3 regions</div></div>",
+      "css": ".ds-console { max-width: 480px; background: #13171A; color: #F4F7F5; border: 1px solid #3A4140; border-radius: 16px; overflow: hidden; font-family: 'JetBrains Mono', 'SF Mono', Menlo, monospace; font-size: 12px; font-variant-numeric: tabular-nums; box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 24px 48px -24px rgba(8,9,10,0.4); } .ds-console:hover .ds-dot { animation-play-state: paused; } .ds-console-head { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; border-bottom: 1px solid #3A4140; } .ds-console-id { display: flex; align-items: center; gap: 10px; color: #C4C0C5; letter-spacing: 0.06em; } .ds-dot { width: 8px; height: 8px; border-radius: 9999px; background: #2BB673; animation: ds-pulse 2.6s cubic-bezier(0.22,1,0.36,1) infinite; } @keyframes ds-pulse { 0%,70%,100% { box-shadow: 0 0 0 0 rgba(43,182,115,0); } 35% { box-shadow: 0 0 0 5px rgba(43,182,115,0.45); } } @media (prefers-reduced-motion: reduce) { .ds-dot { animation: none; } } .ds-console-clock { color: #7A767C; letter-spacing: 0.04em; } .ds-row { display: flex; align-items: center; gap: 16px; padding: 14px 20px; border-bottom: 1px solid rgba(58,65,64,0.6); } .ds-row--2 { opacity: 0.8; } .ds-row--3 { opacity: 0.5; border-bottom: 0; } .ds-cat { width: 48px; flex-shrink: 0; font-weight: 500; letter-spacing: 0.04em; } .ds-cat--build { color: #2C70FE; } .ds-cat--alert { color: #F2A93B; } .ds-cat--trace { color: #5DD79A; } .ds-subj { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } .ds-stat { color: #A7A2A9; } .ds-console-foot { padding: 10px 20px; border-top: 1px solid #3A4140; font-size: 10px; color: #7A767C; letter-spacing: 0.06em; }"
+    },
+    {
+      "name": "Section Head",
+      "kind": "custom",
+      "description": "Mono position marker, bold headline, mist-600 lede. The marker is a measurement, not a tagline.",
+      "html": "<div class=\"ds-head\"><span class=\"ds-head-marker\">[ 02 / 07 ] <span class=\"ds-head-sep\">·</span> Work</span><h2 class=\"ds-head-title\">Work we&#39;ve shipped.</h2><p class=\"ds-head-lede\">Sebagian proyek yang telah berjalan, dari company website sampai data pipeline.</p></div>",
+      "css": ".ds-head { font-family: Satoshi, Inter, system-ui, sans-serif; color: #08090A; } .ds-head-marker { display: inline-flex; gap: 8px; font-family: 'JetBrains Mono', 'SF Mono', Menlo, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: #7A767C; font-variant-numeric: tabular-nums; } .ds-head-sep { color: #C4C0C5; } .ds-head-title { margin: 18px 0 0; font-size: clamp(40px, 5vw, 64px); font-weight: 700; line-height: 1; letter-spacing: -0.02em; max-width: 880px; } .ds-head-lede { margin: 24px 0 0; font-size: 18px; line-height: 1.5; color: #7A767C; max-width: 620px; }"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "description": "Sticky 72px translucent paper bar with a hairline base, 14px links that turn Signal Blue, compact blue CTA.",
+      "html": "<div class=\"ds-nav\"><a class=\"ds-nav-brand\" href=\"#\"><span class=\"ds-nav-mark\"></span><span class=\"ds-nav-word\"><b>coderoach</b><span>studio</span></span></a><nav class=\"ds-nav-links\"><a href=\"#\">Services</a><a href=\"#\">Work</a><a href=\"#\">Process</a><a href=\"#\">Notes</a></nav><a class=\"ds-nav-cta\" href=\"#\">Hubungi kami</a></div>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; gap: 32px; height: 72px; padding: 0 32px; background: rgba(244,247,245,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid #E8ECEA; font-family: Satoshi, Inter, system-ui, sans-serif; color: #08090A; } .ds-nav-brand { display: flex; align-items: center; gap: 10px; color: #08090A; text-decoration: none; } .ds-nav-mark { width: 32px; height: 32px; background: #08090A; clip-path: polygon(29% 8%, 71% 8%, 92% 29%, 92% 71%, 71% 92%, 29% 92%, 8% 71%, 8% 29%); } .ds-nav-word { display: flex; flex-direction: column; gap: 2px; font-size: 14px; line-height: 1; letter-spacing: -0.02em; text-transform: lowercase; } .ds-nav-word b { font-weight: 600; } .ds-nav-links { display: flex; gap: 28px; } .ds-nav-links a { color: #08090A; font-size: 14px; font-weight: 500; text-decoration: none; transition: color 150ms; } .ds-nav-links a:hover { color: #2C70FE; } .ds-nav-links a:focus-visible, .ds-nav-cta:focus-visible { outline: 2px solid #2C70FE; outline-offset: 2px; } .ds-nav-cta { display: inline-flex; align-items: center; height: 36px; padding: 0 14px; border-radius: 6px; background: #2C70FE; color: #F4F7F5; font-size: 13px; font-weight: 600; text-decoration: none; transition: background-color 150ms; } .ds-nav-cta:hover { background: #2562E0; }"
+    },
+    {
+      "name": "Underline Field (dark)",
+      "kind": "input",
+      "description": "Contact field on the dark surface: no box, a shadow-700 underline that turns Signal Blue on focus, blue caret.",
+      "html": "<div class=\"ds-field-wrap\"><label class=\"ds-field-label\" for=\"ds-email\">Email</label><input id=\"ds-email\" class=\"ds-field\" placeholder=\"nama@perusahaan.co.id\"></div>",
+      "css": ".ds-field-wrap { padding: 24px; background: #08090A; font-family: Satoshi, Inter, system-ui, sans-serif; } .ds-field-label { display: block; margin-bottom: 8px; font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #A7A2A9; } .ds-field { display: block; width: 100%; padding: 8px 0; background: transparent; border: 0; border-bottom: 1px solid #3A4140; outline: none; color: #F4F7F5; caret-color: #2C70FE; font-family: inherit; font-size: 22px; font-weight: 500; line-height: 1.3; letter-spacing: -0.01em; transition: border-color 150ms; } .ds-field::placeholder { color: #7A767C; } .ds-field:hover { border-bottom-color: #7A767C; } .ds-field:focus, .ds-field:focus-visible { border-bottom-color: #2C70FE; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Ruang Kendali (The Control Room)",
+    "overview": "A light control room. The walls are daylight paper (#F4F7F5), the type is near-black ink, and nothing on the page raises its voice; the instruments do the talking. Mono status lines, bracketed counters such as `[ 02 / 07 ] · WORK`, a live green dot that pulses every 2.6s, a clock that ticks, hairline rules that measure off one region from the next, and a 28px blueprint grid behind anything that has no picture yet. Signal Blue appears where something can be acted on or where a reading matters, and almost nowhere else.\n\nDark surfaces exist, but as instruments embedded in the light room: the ops console beside the hero headline, the code block in prose, the deploy console that opens on submit, the dark featured-work panel, the ink footer. Each is bounded, rounded, and labelled like a device. The hero itself stays on paper; the console sits in its right column at the same weight as the headline, not behind it. Density is calm: 120px between sections, a single 1180px column with 32px gutters, and copy that sits in 520–720px measures.\n\nThis file documents the site-wide system as shipped. The project pages at `/work/[slug]` are about to receive their own Apple-product-page treatment (docs/decisions/0003); a project-page section will be added here from that shipped code later.",
+    "keyCharacteristics": [
+      "Paper-and-ink daylight with one signal colour; dark panels are instruments, never backdrops.",
+      "Measurement voice: mono, tabular, uppercase, bracketed; labels report position, count, time, or status.",
+      "Hairlines (1px paper-200 on light, shadow-700 on dark) do the structural work; shadows are soft and rare.",
+      "Octagon geometry as the brand motif: watermark, divider dots, pill glyph, spinner.",
+      "Motion is instrument-like (ticks, pulses, rows sliding in, bars filling) and every animation has a reduced-motion off switch."
+    ],
+    "rules": [
+      {
+        "name": "The One Signal Rule",
+        "body": "Signal Blue is the only hue that carries meaning, at roughly 5–10% of any viewport. Status colours appear only as status (a dot, a category, a badge), never as decoration, and never as a second accent beside the blue.",
+        "section": "colors"
+      },
+      {
+        "name": "The Light-Room Ramp Rule",
+        "body": "On light surfaces secondary text uses mist-600; on dark surfaces mist-500 (or mist-400). Swapping them breaks legibility: mist-500 on paper-100 measures 2.32:1, mist-600 on shadow-900 measures 4.04:1. Mist-600 itself measures 4.13:1 on paper-100 and 4.30:1 on paper-50, below the 4.5:1 body floor PRODUCT.md sets, so it is a known gap, not a cleared value; body copy that must be read sits in ink.",
+        "section": "colors"
+      },
+      {
+        "name": "The Measurement Rule",
+        "body": "Mono is reserved for things that could be read off an instrument: a position (`[ 04 / 07 ]`, `[ Q.03 ]`), a count, a time, a version, a status, a category. Sentences are never set in mono, and a mono label never carries a marketing tagline.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tabular Rule",
+        "body": "Any mono or number-heavy element gets `font-variant-numeric: tabular-nums` (the `.tabular` utility), so ticking clocks and counters never shift.",
+        "section": "typography"
+      },
+      {
+        "name": "The Hairline-First Rule",
+        "body": "Separate with a 1px line before reaching for a shadow. A shadow is allowed to seat an instrument or float a layer, never to make a static card look important.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep the room light: page background paper-100, raised surfaces paper-50, structure in 1px paper-200 hairlines.",
+      "Do frame dark panels (shadow-900 or ink) as bounded instruments with 16px corners, a 1px shadow-700 border, and a mono header that says what the device is.",
+      "Do set every position, count, time, version, and status in JetBrains Mono, uppercase, tabular, 10–12px.",
+      "Do use Signal Blue for the one action or reading that matters in a view, and hover it to #2562E0.",
+      "Do use mist-600 for secondary text on light and mist-500 for secondary text on dark, and keep text that must be read in ink.",
+      "Do give every animation a `prefers-reduced-motion: reduce` path that removes it and leaves content visible.",
+      "Do fill a missing image with the blueprint placeholder (28px grid, crosshair corners, name set large), never a stock photo."
+    ],
+    "donts": [
+      "Don't use a full-bleed dark hero or dark panel for drama; the hero stays on paper and the console sits in it.",
+      "Don't introduce a second accent hue, gradient washes, or warm cream backgrounds.",
+      "Don't answer a section with a uniform grid of icon cards.",
+      "Don't put mist-500 or lighter text on a light surface, or mist-600 text on a dark one.",
+      "Don't use mono for sentences, or a bracketed label for anything that is not a real position or measurement.",
+      "Don't add hard drop shadows or shadows to static cards beyond the 1px lit edge."
+    ]
+  }
+}
