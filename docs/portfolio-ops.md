@@ -67,7 +67,9 @@ Coderoach OS.
    `blocked` = item tanpa izin yang ditahan), lalu ulangi dengan `--apply`.
 5. Sync tidak pernah menghapus Media. Berkas yang tidak dipakai lagi dihapus manual di admin
    (Media), karena `/api/media/file/...` tetap publik selama berkasnya ada. Saat ini:
-   `portfolio-laporta.webp` (sampul lama Laporta, memuat data outlet sungguhan dan URL produksi).
+   `portfolio-laporta.webp` (sampul lama Laporta, memuat data outlet sungguhan dan URL produksi),
+   dan tujuh berkas `nds-etl-*` (aset Rencana RO dengan nama lama; namanya menyebut singkatan
+   portal prinsipal, isinya sama dengan `rencana-ro-*`).
 
 Template halaman proyek berganti ke halaman cerita begitu `summary.problem` terisi. Rekaman demo
 dibuat dari database demo berdata fiktif dan wajib membawa `demoNote` yang mengatakannya.
