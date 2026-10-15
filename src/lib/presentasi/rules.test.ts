@@ -40,6 +40,14 @@ describe('assetUrls', () => {
     ]);
   });
 
+  test('reads the chunk paths Next 16 writes without the /_next/ prefix', () => {
+    const html = 'e:I[17542,[\\"8437\\",\\"static/chunks/8437-c29f.js\\",\\"3299\\",\\"static/chunks/app/(presentasi)/page-1a.js\\"]] see docs/static/chunks/x.js';
+    assert.deepEqual(assetUrls(html, origin).sort(), [
+      'https://coderoach.id/_next/static/chunks/8437-c29f.js',
+      'https://coderoach.id/_next/static/chunks/app/(presentasi)/page-1a.js',
+    ]);
+  });
+
   test('ignores other origins and other paths', () => {
     const html = '<script src="https://evil.example/_next/static/x.js"></script><a href="/api/users/me">x</a><img src="/_next/image?url=x">';
     assert.deepEqual(assetUrls(html, origin), []);

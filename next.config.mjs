@@ -59,9 +59,7 @@ const cspHeader = [{ key: 'Content-Security-Policy', value: csp }];
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  experimental: {
-    reactCompiler: false,
-  },
+  reactCompiler: false,
   async headers() {
     return [
       { source: '/:path*', headers: securityHeaders },

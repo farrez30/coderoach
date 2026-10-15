@@ -29,12 +29,16 @@ const keepAsset = (url: URL, origin: string) => url.origin === origin && (cacheF
  * Asset URLs a presentation page needs, read from its HTML: script and style tags, img src and
  * srcset, video sources and posters, and the chunk paths inside the RSC payload. Paths may hold
  * parentheses (route groups), so a URL ends at whitespace, a quote, a comma, a backslash, or < >.
+ * Next 16 lists a client component's chunks in the payload without the /_next/ prefix
+ * ("static/chunks/8437-….js"); those are loaded on demand, so a page missing one fails offline.
  */
 export function assetUrls(html: string, origin: string): string[] {
   const found = new Set<string>();
-  for (const m of html.matchAll(/(?:https?:\/\/[^/\s"']+)?\/(?:_next\/static|api\/media\/file)\/[^\s"'<>\\,]+/g)) {
+  const pattern = /(?:https?:\/\/[^/\s"']+)?\/(?:_next\/static|api\/media\/file)\/[^\s"'<>\\,]+|(?<![\w/.])static\/(?:chunks|css|media)\/[^\s"'<>\\,]+/g;
+  for (const m of html.matchAll(pattern)) {
     try {
-      const url = new URL(m[0].replace(/&amp;/g, '&'), origin);
+      const path = m[0].startsWith('static/') ? `/_next/${m[0]}` : m[0];
+      const url = new URL(path.replace(/&amp;/g, '&'), origin);
       if (keepAsset(url, origin)) found.add(url.href);
     } catch {
       // Not a URL after all.
