@@ -31,6 +31,9 @@
     "serwist": "9.5.13",
     "sharp": "^0.35.5"
   },
+  "overrides": {
+    "sharp": "$sharp"
+  },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.0",
     "@types/node": "^22.10.0",
