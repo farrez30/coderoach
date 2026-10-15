@@ -15,6 +15,7 @@ export function StoryHero({ project, links, mode }: { project: Project; links: L
   const screen = asMedia(sc?.screen);
   // No recording yet: the cover the old page used, shown as it is (it is often already a composite).
   const cover = screen ? null : asMedia(project.coverImage);
+  const onlyPhone = sc?.frame === 'phone';
   const phone = asMedia(sc?.screenPhone);
   const loop = asMedia(sc?.loop);
   const summary = [
@@ -69,10 +70,11 @@ export function StoryHero({ project, links, mode }: { project: Project; links: L
       )}
       {screen && (
         <div className="max-w-[1180px] mx-auto px-5 sm:px-8 mt-12 sm:mt-20">
-          <div className={`relative mx-auto max-w-[1040px] ${phone ? 'pr-[11%] pb-[6%]' : ''}`}>
+          {/* A phone-only product stands alone, at a phone's size, instead of stretched to a laptop's. */}
+          <div className={`relative mx-auto ${onlyPhone ? 'max-w-[300px]' : 'max-w-[1040px]'} ${phone ? 'pr-[11%] pb-[6%]' : ''}`}>
             <div className="story-rise">
               <DeviceFrame kind={sc?.frame ?? 'laptop'}>
-                <MediaImg media={screen} priority sizes="(min-width: 1180px) 900px, 86vw" />
+                <MediaImg media={screen} priority sizes={onlyPhone ? '300px' : '(min-width: 1180px) 900px, 86vw'} />
               </DeviceFrame>
             </div>
             {phone && (

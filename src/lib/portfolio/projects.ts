@@ -602,6 +602,225 @@ export const PORTFOLIO: PortfolioEntry[] = [
     ],
   },
   {
+    slug: 'jeda',
+    consent: 'studio',
+    order: 21,
+    kind: 'lab',
+    client: 'Jeda',
+    tagline: 'Catatan pikiran di antara sesi konseling, yang tetap jalan tanpa sinyal.',
+    meta: 'LAB · KESEHATAN MENTAL',
+    industry: 'health',
+    service: 'build',
+    publishedYear: '2026',
+    pills: ['NEXT.JS', 'PWA', 'INDEXEDDB', 'POSTGRES'],
+    excerpt:
+      'Aplikasi thought record CBT yang dibangun bersama seorang psikolog: klien mencatat saat perasaan berubah, bahkan tanpa internet, lalu membagikan tautan baca-saja kepada psikolognya.',
+    cover: {
+      file: 'jeda-tabel-psikolog.v1.webp',
+      alt: 'Tampilan psikolog di laptop: tabel catatan klien dengan bagian Baru sejak terakhir dibuka',
+      focalX: 50,
+      focalY: 20,
+    },
+    summary: {
+      problem:
+        'Pekerjaan rumah CBT biasanya diisi di kertas atau chat, tercecer, dan sering baru ditulis ulang menjelang sesi, sehingga sulit dibaca berurutan oleh psikolog.',
+      solution:
+        'Aplikasi yang mencatat lebih dulu di ponsel, tetap jalan tanpa sinyal, lalu menyinkronkan diam-diam. Psikolog membaca lewat tautan baca-saja yang bisa dikunci PIN dan dicabut.',
+      result:
+        'Klien bisa mencatat dalam hitungan detik di mana saja, dan psikolog langsung tahu catatan mana yang baru sejak terakhir dibuka.',
+    },
+    showcase: {
+      frame: 'browser',
+      screen: { file: 'jeda-tabel-psikolog.v1.webp', alt: 'Tampilan psikolog di laptop: tabel catatan klien dengan bagian Baru sejak terakhir dibuka' },
+      screenPhone: { file: 'jeda-daftar.v1.webp', alt: 'Layar utama Jeda di ponsel: daftar catatan dua minggu, dua bertanda belum lengkap' },
+      loop: { file: 'jeda-catat-cepat-loop.v1.mp4', alt: 'Menekan Catat, mengetik situasi dan pikiran, lalu menyimpan' },
+      loopPoster: { file: 'jeda-catat-cepat-loop.v1.poster.webp', alt: 'Lembar catatan baru di ponsel' },
+      tour: { file: 'jeda-tur.v1.mp4', alt: 'Tur Jeda: daftar catatan, mencatat cepat, melengkapi catatan, lalu dibaca dari ruang psikolog' },
+      tourPoster: { file: 'jeda-tur.v1.poster.webp', alt: 'Daftar catatan Jeda di ponsel' },
+      tourTranscript:
+        'Tur tanpa suara, sekitar 50 detik. Daftar catatan klien selama dua minggu. Catatan baru disimpan cukup dengan situasi dan pikiran. Catatan yang belum lengkap dilengkapi dengan seberapa yakin, emosi beserta intensitasnya, dan respon. Lalu catatan yang sama dibaca dari ruang psikolog: beranda, ringkasan dengan grafik, dan tabel catatan.',
+      demoNote: 'Direkam dari data contoh karangan pada build lokal. Tidak ada catatan klien atau psikolog sungguhan.',
+      consent: 'studio',
+    },
+    features: [
+      {
+        title: 'Catat cepat, lengkapi nanti',
+        body: 'Cukup situasi dan pikiran untuk menyimpan. Sisanya bisa diisi belakangan, dan catatannya ditandai belum lengkap.',
+        screen: { file: 'jeda-catat-cepat.v1.webp', alt: 'Lembar catatan baru dengan situasi dan pikiran terisi' },
+      },
+      {
+        title: 'Tetap jalan tanpa internet',
+        body: 'Catatan ditulis ke perangkat dulu lalu disinkronkan begitu online. Draf bertahan walau aplikasi ditutup paksa.',
+        screen: { file: 'jeda-daftar.v1.webp', alt: 'Daftar catatan klien di ponsel' },
+      },
+      {
+        title: 'Emosi yang bisa dinamai',
+        body: 'Perasaan dipilih dari daftar yang masing-masing punya arti satu baris, dengan intensitas dan skala keyakinan yang berlabel di kedua ujungnya.',
+        screen: { file: 'jeda-catatan-lengkap.v1.webp', alt: 'Catatan lengkap: keyakinan, emosi cemas dengan intensitasnya, dan respon' },
+      },
+      {
+        title: 'Ruang baca untuk psikolog',
+        body: 'Tautan bertoken dengan PIN opsional yang bisa kedaluwarsa dan dicabut. Ringkasan per hari, tren keyakinan, tanda catatan baru, dan unduh PDF.',
+        screen: { file: 'jeda-ringkasan.v1.webp', alt: 'Tab Ringkasan di laptop: catatan per hari, tren keyakinan, dan tabel emosi' },
+      },
+    ],
+    timeline: [
+      { date: '1 Okt 2026', title: 'Proyek dimulai', sourceRef: 'Jeda@ba94670' },
+      { date: '3 Okt 2026', title: 'Aplikasi klien offline, catat cepat, dan tautan psikolog', sourceRef: 'Jeda@7669014' },
+      { date: '3 Okt 2026', title: 'Rahasia lokal dikeluarkan dari unggahan deploy', sourceRef: 'Jeda@5f47376' },
+      { date: '3 Okt 2026', title: 'Ringkasan dan tabel catatan jadi tab di setiap halaman', sourceRef: 'Jeda@c8f988a' },
+    ],
+    darkChapter: {
+      eyebrow: 'TUR · 50 DETIK',
+      title: 'Dari kereta tanpa sinyal ke meja psikolog.',
+      body: 'Rekaman berikut berjalan dengan catatan contoh karangan. Yang Anda lihat adalah aplikasinya sendiri, bukan maket.',
+    },
+    body: [
+      { h2: 'Mencatat, bukan menafsirkan' },
+      'Psikolog yang memakainya meminta lebih sedikit analisis dan lebih banyak kehadiran. Jadi layar klien sengaja hanya mencatat: tidak ada grafik mood, streak, lencana, atau ringkasan otomatis. Angka dan grafik hanya ada di sisi psikolog.',
+      { h2: 'Data kesehatan tetap di tempatnya' },
+      'Tanpa SDK analitik dan tanpa tracker, font di-host sendiri, dan aplikasinya tidak memanggil server lain. Tampilan psikolog dirender di server dan tetap terbaca tanpa JavaScript.',
+    ],
+  },
+  {
+    slug: 'd-day',
+    consent: 'studio',
+    order: 22,
+    kind: 'lab',
+    client: 'd-day',
+    tagline: 'Sistem eksekusi otomatis untuk aturan yang ditulis orang lain.',
+    meta: 'LAB · EKSEKUSI OTOMATIS',
+    industry: 'technology',
+    service: 'automate',
+    publishedYear: '2026',
+    pills: ['TYPESCRIPT', 'NEXT.JS', 'POSTGRES', 'SYSTEMD'],
+    excerpt:
+      'Mesin yang menjalankan aturan trading milik mitra dengan disiplin: tiap keputusan tercatat, setiap posisi punya penjaga, dan semuanya bisa dihentikan dengan satu ketukan.',
+    cover: {
+      file: 'd-day-keadaan.v1.webp',
+      alt: 'Dashboard d-day halaman Keadaan: status engine, tombol hentikan semua order, dan tabel engine simulasi',
+      focalX: 50,
+      focalY: 10,
+    },
+    summary: {
+      problem:
+        'Pemilik aturan tahu kapan masuk dan keluar, tapi tidak membaca kode dan tidak bisa menjaga server sepanjang hari. Menjalankan aturan orang lain dengan uang sungguhan tidak boleh meninggalkan posisi tanpa penjaga.',
+      solution:
+        'Engine yang bangun di setiap bar, menghitung sinyal secara deterministik, memasang stop sebagai order nyata, dan mencocokkan keadaannya dengan exchange sebelum memercayai catatan sendiri.',
+      result:
+        'Keadaan engine terbaca dalam satu kalimat, berhenti cukup satu ketukan, dan jalan lanjut hanya terbuka setelah bukti sinkron menunjukkan semuanya cocok.',
+    },
+    showcase: {
+      frame: 'browser',
+      screen: { file: 'd-day-keadaan.v1.webp', alt: 'Dashboard d-day halaman Keadaan: status engine, tombol hentikan semua order, dan tabel engine simulasi' },
+      tour: { file: 'd-day-tur.v1.mp4', alt: 'Tur d-day: keadaan sehat, halaman exchange, menghentikan semua order, lalu melanjutkan' },
+      tourPoster: { file: 'd-day-tur.v1.poster.webp', alt: 'Dashboard d-day halaman Keadaan' },
+      tourTranscript:
+        'Tur tanpa suara, sekitar 40 detik. Halaman Keadaan dengan engine sehat, log tick, dan notifikasi. Halaman Exchange dengan hasil sinkron baca-saja. Lalu semua order dihentikan dengan satu tombol, dan dilanjutkan kembali dengan mengetik LANJUTKAN.',
+      demoNote:
+        'Data simulasi: nama engine, simbol, harga, dan order semuanya karangan, di database lokal tanpa akun exchange. Panel saldo, hasil, dan harga stop disembunyikan.',
+      consent: 'studio',
+    },
+    features: [
+      {
+        title: 'Status engine dalam satu kalimat',
+        body: 'Heartbeat, tick terakhir, halt, dan posisi tanpa proteksi dinilai bersama, dan yang terburuk yang menang. Galat teknis diterjemahkan ke bahasa orang, dengan teks aslinya tetap bisa dibuka.',
+        screen: { file: 'd-day-log.v1.webp', alt: 'Log tick terakhir dengan satu galat jaringan yang diterjemahkan, dan notifikasi email' },
+      },
+      {
+        title: 'Berhenti satu ketukan, lanjut lewat bukti',
+        body: 'Menghentikan semua order cukup satu tombol, karena saat darurat detik berarti. Lanjutkan hanya terbuka kalau sinkron exchange yang masih segar membuktikan order dan catatan engine cocok.',
+        screen: { file: 'd-day-kill-switch.v1.webp', alt: 'Keadaan sesudah kill switch: strip merah dan formulir Lanjutkan yang terkunci' },
+      },
+      {
+        title: 'Rekonsiliasi baca-saja',
+        body: 'Worker terpisah memegang kunci, dashboard tidak. Pemeriksaan menemukan stop yang dibatalkan dari luar dan order yang bukan buatan engine, tanpa mengirim satu order pun.',
+        screen: { file: 'd-day-rekonsiliasi.v1.webp', alt: 'Halaman Exchange: satu dari dua engine tidak cocok dan satu order bukan buatan engine' },
+      },
+    ],
+    timeline: [
+      { date: '10 Sep 2026', title: 'Engine mencocokkan diri dengan exchange sebelum memercayai keadaan tersimpan', sourceRef: 'd-day@0713dd3' },
+      { date: '11 Sep 2026', title: 'Kill switch satu ketukan; kehati-hatian dipindah ke Lanjutkan', sourceRef: 'd-day@fe0cba2' },
+      { date: '3 Okt 2026', title: 'Worker sinkron baca-saja di belakang tombol Sinkronkan', sourceRef: 'd-day@6cff7b8' },
+      { date: '7 Okt 2026', title: 'Uji testnet ditutup: stop nyata, order ditolak, dan proses mati di tengah order', sourceRef: 'd-day@221ea8b' },
+    ],
+    darkChapter: {
+      eyebrow: 'TUR · 40 DETIK',
+      title: 'Berhenti dalam satu ketukan, lanjut hanya dengan bukti.',
+      body: 'Rekaman berikut berjalan dengan data simulasi di mesin lokal, tanpa akun exchange sungguhan.',
+    },
+    body: [
+      { h2: 'Mesin, bukan peramal' },
+      'Keputusan trading tetap di tangan pemilik aturan. Sistem tidak menebak dan tidak mengoptimasi; ia menjalankan aturan yang tertulis, dan berhenti ketika ada yang tidak jelas.',
+      { h2: 'Satu loop untuk semua mode' },
+      'Backtest, mode bayangan, dan mode live memakai loop yang sama, jadi tidak ada cabang logika yang hanya teruji di satu mode. Jalur yang memegang uang ditulis tanpa dependency pihak ketiga, dan setiap keputusan desain dicatat sebagai ADR.',
+    ],
+  },
+  {
+    slug: 'yiheecam',
+    consent: 'studio',
+    order: 23,
+    kind: 'lab',
+    client: 'YiheeCam',
+    tagline: 'Pengendali action cam lama yang ditinggalkan vendornya, dibangun ulang dari protokolnya.',
+    meta: 'LAB · ANDROID & PROTOKOL',
+    industry: 'technology',
+    service: 'build',
+    publishedYear: '2026',
+    pills: ['KOTLIN', 'COMPOSE', 'TCP', 'RTSP'],
+    excerpt:
+      'Aplikasi Android untuk mengendalikan action cam keluaran 2016 saat touring motor, setelah aplikasi resminya ditarik dan tidak bisa lagi dipasang di Android 15.',
+    cover: {
+      file: 'yiheecam-protokol.v1.webp',
+      alt: 'Diagram urutan pesan JSON antara klien uji dan kamera tiruan: mulai sesi, nyalakan live view, mulai dan hentikan rekam',
+      focalX: 50,
+      focalY: 50,
+    },
+    summary: {
+      problem:
+        'Aplikasi resmi kameranya sudah ditarik dari Play Store dan ditolak Android 15 saat dipasang, sehingga kamera yang masih bagus jadi tidak bisa dikendalikan dari HP.',
+      solution:
+        'Protokolnya dibangun ulang dari analisis aplikasi resmi di lingkungan terisolasi dan kamera tiruan yang meniru firmware aslinya, lalu dijadikan aplikasi Kotlin dengan layar yang terbaca dari dudukan stang.',
+      result:
+        'Status rekam, baterai, dan sisa kartu terbaca dalam satu lirikan, aman ditekan dengan sarung tangan, dan aplikasinya hanya berbicara dengan kamera, tanpa tracker.',
+    },
+    showcase: {
+      frame: 'phone',
+      screen: { file: 'yiheecam-yakin.v1.webp', alt: 'Layar Live bertema terang saat merekam: tombol berhenti yang sudah ditekan sekali bertuliskan YAKIN?' },
+      demoNote: 'Tangkapan dari uji di HP dengan kamera tiruan di laptop. Live view berisi pola uji, bukan rekaman perjalanan.',
+      consent: 'studio',
+    },
+    features: [
+      {
+        title: 'Terbaca dalam satu lirikan',
+        body: 'Status kamera tampil sebagai papan split-flap: mode rekam, baterai, dan sisa kartu. Semua nilai berasal dari laporan kamera sendiri; yang tidak dilaporkan kamera tidak dikarang.',
+        screen: { file: 'yiheecam-setting.v1.webp', alt: 'Layar Setting bagian Video dengan nilai yang dilaporkan kamera' },
+      },
+      {
+        title: 'Aman dengan sarung tangan',
+        body: 'Tombol utama besar, dan berhenti rekam butuh dua ketukan supaya tidak terhenti tak sengaja. Tema terang tetap terbaca di bawah matahari langsung.',
+        screen: { file: 'yiheecam-yakin.v1.webp', alt: 'Tombol berhenti bertuliskan YAKIN? menunggu ketukan kedua' },
+      },
+      {
+        title: 'Jujur saat sambungan putus',
+        body: 'Saat WiFi kamera hilang, papan berganti TERPUTUS dan nilai terakhir diberi label, alih-alih berpura-pura masih terkini. Live view yang membeku dicoba ulang sendiri.',
+        screen: { file: 'yiheecam-terputus.v1.webp', alt: 'Layar Live saat sambungan putus: papan bertuliskan TERPUTUS dengan nilai terakhir' },
+      },
+    ],
+    timeline: [
+      { date: '7 Okt 2026', title: 'Riset: kenapa aplikasi resmi tidak bisa dipasang di Android 15', sourceRef: 'yiheeCam@9f3fcbc' },
+      { date: '7 Okt 2026', title: 'Analisis aplikasi resmi di lingkungan tanpa internet, peta protokol', sourceRef: 'yiheeCam@d17d62e' },
+      { date: '8 Okt 2026', title: 'Layar papan split-flap dan versi pertama aplikasi', sourceRef: 'yiheeCam@8bb0296' },
+      { date: '8 Okt 2026', title: 'Pemutar live view dipilih lewat uji di kamera asli', sourceRef: 'yiheeCam@15e0aa7' },
+    ],
+    body: [
+      { h2: 'Membaca protokol yang tidak didokumentasikan' },
+      'Aplikasi resmi dianalisis di lingkungan terisolasi tanpa internet, lalu protokolnya diuji langsung ke kamera. Hasilnya dipakai untuk membangun kamera tiruan yang meniru firmware aslinya, termasuk pesan yang menyatu dan terpotong, supaya klien bisa diuji tanpa kamera fisik.',
+      { h2: 'Hanya bicara dengan kamera' },
+      'Analisis aplikasi resmi menemukan sejumlah tracker dan pengambilan nomor IMEI. Penggantinya tidak memanggil server mana pun selain kamera itu sendiri.',
+    ],
+  },
+  {
     slug: 'pt-raja-roti-cemerlang',
     consent: 'legacy',
     hidden: true,
