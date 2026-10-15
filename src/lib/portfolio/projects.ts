@@ -645,6 +645,113 @@ export const PORTFOLIO: PortfolioEntry[] = [
     ],
   },
   {
+    slug: 'rencana-ro',
+    consent: 'studio',
+    order: 11,
+    kind: 'studio',
+    client: 'Rencana RO',
+    tagline: 'Asisten mingguan untuk distributor independen: bonus cair, beli berapa, taruh di mana, kapan repeat order.',
+    meta: 'SAAS · STUDIO PRODUCT',
+    industry: 'other',
+    service: 'automate',
+    publishedYear: '2026',
+    pills: ['PLAYWRIGHT', 'NEXT.JS', 'SUPABASE', 'GITHUB ACTIONS'],
+    excerpt:
+      'SaaS milik studio yang setiap jam menarik data jaringan distributor dari back office, lalu menjawab empat pertanyaan mingguan mereka lewat dashboard, email, kalender, dan push di ponsel.',
+    cover: {
+      file: 'nds-etl-dashboard.v1.webp',
+      alt: 'Beranda Rencana RO dengan empat kartu jawaban: bonus cair, saran pembelian, posisi untuk member baru, dan tenggat repeat order',
+      focalX: 50,
+      focalY: 15,
+    },
+    studio: {
+      vizType: 'none',
+      usage: 'DISTRIBUTOR SAAS',
+      externalLink: null,
+      bullets: [
+        'Tarikan data back office tiap jam',
+        'Rencana repeat order per kaki',
+        'Pengingat lewat email, push, kalender',
+        'Riwayat run yang bisa diaudit',
+      ],
+    },
+    metrics: [
+      {
+        key: 'cek-sesi-region',
+        value: '27',
+        unit: 'ms',
+        label: 'Cek sesi per request',
+        baseline: { value: '137', unit: 'ms' },
+        status: 'measured',
+        measuredAt: '2026-08-28',
+        method: 'Fase cek sesi di middleware, sebelum dan sesudah fungsi dan database dipindah ke Singapura; median delapan sampel sesudahnya.',
+        sourceRef: 'rencana-ro@cca37ff',
+        consent: 'studio',
+      },
+    ],
+    summary: {
+      problem:
+        'Back office distributor hanya menerbitkan data mentah: bagan jaringan, tabel kaki, buku bonus, dan masa aktif. Siapa yang perlu repeat order sebelum tutup mingguan harus dihitung sendiri, dan salah hitung berarti poin hangus.',
+      solution:
+        'Penarik data terjadwal menyimpan jaringan tiap distributor secara terpisah, lalu mesin aturan menyimulasikan pembelian di atas pohon jaringannya dan mengirim rencananya ke tempat distributor membaca.',
+      result:
+        'Satu layar menjawab bonus yang sudah cair, pembelian yang disarankan, posisi untuk member baru, dan tenggat repeat order, dengan tanggal data di setiap angka.',
+    },
+    showcase: {
+      frame: 'browser',
+      screen: { file: 'nds-etl-dashboard.v1.webp', alt: 'Beranda Rencana RO dengan empat kartu jawaban: bonus cair, saran pembelian, posisi untuk member baru, dan tenggat repeat order' },
+      screenPhone: { file: 'nds-etl-dashboard-ponsel.v1.webp', alt: 'Beranda yang sama di ponsel: kartu jawaban ditumpuk satu kolom dengan navigasi bawah' },
+      tour: { file: 'nds-etl-tur.v1.mp4', alt: 'Tur Rencana RO: beranda, bonus cair, rencana repeat order, kalender, riwayat tarikan, dan pengaturan pengingat' },
+      tourPoster: { file: 'nds-etl-tur.v1.poster.webp', alt: 'Beranda Rencana RO' },
+      tourTranscript:
+        'Tur tanpa suara, sekitar satu menit. Beranda yang terisi, lalu bonus yang sudah cair. Rencana repeat order per kaki dengan jumlah unit, biaya, dan alasannya. Kalender repeat order bulanan. Riwayat dan log tarikan data per jam. Pengaturan pengingat dan jadwal tarikan, lalu lonceng notifikasi.',
+      demoNote:
+        'Direkam dari build lokal di atas jaringan fiktif: nama, nomor anggota, poin, dan rupiah dibangkitkan mesin. Tidak ada data atau akun distributor sungguhan.',
+      consent: 'studio',
+    },
+    features: [
+      {
+        title: 'Empat jawaban di satu layar',
+        body: 'Bonus yang sudah cair, pembelian yang disarankan beserta perkiraan bonusnya, posisi untuk member baru, dan tenggat repeat order. Setiap angka menyebut tanggal datanya, dan yang bergantung asumsi diberi label perkiraan.',
+        screen: { file: 'nds-etl-dashboard-ponsel.v1.webp', alt: 'Beranda di ponsel: kartu jawaban ditumpuk satu kolom' },
+      },
+      {
+        title: 'Rencana repeat order dengan alasan',
+        body: 'Mesin aturan berlapis menyimulasikan pembelian di atas pohon jaringan distributor sendiri: siapa di kaki mana, berapa unit, berapa biayanya, dan kenapa. Rencana disimpan terstruktur per run, jadi tampilan baru berlaku mundur ke run lama.',
+        screen: { file: 'nds-etl-rencana-ro.v1.webp', alt: 'Bilah poin kaki kiri dan kanan sebelum dan sesudah, dan daftar repeat order yang disarankan' },
+      },
+      {
+        title: 'Pengingat yang diatur sendiri',
+        body: 'Distributor memilih hari pengingat, target yang dikejar, kanal, dan jam tarikan otomatis. Kalender repeat order bulanan bisa diekspor ke aplikasi kalender.',
+        screen: { file: 'nds-etl-kalender.v1.webp', alt: 'Kalender repeat order bulanan dengan nama fiktif per tanggal, berwarna menurut status' },
+      },
+      {
+        title: 'Tarikan per jam yang bisa diaudit',
+        body: 'Penjadwal berdetak tiap jam untuk distributor yang jadwalnya jatuh. Satu login hanya boleh punya satu sesi, jadi run yang berjalan sekaligus menjadi kunci, dan setiap run mencatat log, durasi per fase, dan laporan.',
+        screen: { file: 'nds-etl-riwayat-run.v1.webp', alt: 'Riwayat proses: tarikan terjadwal berstatus berhasil dengan tautan log dan ekspor laporan' },
+      },
+    ],
+    timeline: [
+      { date: '11 Jul 2026', title: 'Penarik data back office dan mesin rencana repeat order', sourceRef: 'rencana-ro@9db7ab5' },
+      { date: '12 Jul 2026', title: 'Notifikasi email, kalender, dan tautan WhatsApp', sourceRef: 'rencana-ro@ed56cbf' },
+      { date: '22 Jul 2026', title: 'Langganan, pembayaran, dan jadwal tarikan per pengguna', sourceRef: 'rencana-ro@57ec739' },
+      { date: '13 Agu 2026', title: 'Push pagi ke ponsel tanpa membuka back office', sourceRef: 'rencana-ro@6b0ae8e' },
+      { date: '28 Agu 2026', title: 'Fungsi dan database dipindah ke Singapura, lalu diukur', sourceRef: 'rencana-ro@cca37ff' },
+      { date: '3 Okt 2026', title: 'Satu beranda menggantikan empat mode dan enam laci', sourceRef: 'rencana-ro@ee1d450' },
+    ],
+    darkChapter: {
+      eyebrow: 'TUR · 60 DETIK',
+      title: 'Dari data mentah back office ke rencana minggu ini.',
+      body: 'Rekaman berikut berjalan di atas jaringan fiktif yang dibangkitkan mesin. Yang Anda lihat adalah aplikasinya sendiri, bukan maket.',
+    },
+    body: [
+      { h2: 'Saran, bukan sekadar data' },
+      'Distributor sudah punya datanya; yang tidak mereka punya adalah waktu untuk menghitung aturan bonus yang berlapis setiap minggu. Rencana RO mengerjakan hitungan itu dan menjawab dengan bahasa sehari-hari, di ponsel tempat mereka membacanya.',
+      { h2: 'Setiap distributor terpisah di database' },
+      'Data tiap pengguna dipisahkan row level security, kredensial back office disimpan terenkripsi, dan kuota serta kunci run dijaga fungsi di database. Satu perintah pemeriksaan menjalankan typecheck, tes mesin dan parser, tes pemisahan tenant, dan kontras tema sebelum rilis.',
+    ],
+  },
+  {
     slug: 'akarkita',
     consent: 'studio',
     order: 20,
