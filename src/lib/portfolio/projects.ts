@@ -558,13 +558,19 @@ export const PORTFOLIO: PortfolioEntry[] = [
     kind: 'lab',
     client: 'AkarKita',
     tagline: 'Pohon keluarga privat yang paham istilah kekerabatan Sunda dan Minangkabau.',
-    meta: 'LAB · PROYEK PRIBADI',
-    industry: 'other',
+    meta: 'LAB · SILSILAH & ADAT',
+    industry: 'community',
     service: 'build',
     publishedYear: '2026',
     pills: ['NEXT.JS', 'CANVAS', 'PWA', 'POSTGRES'],
+    cover: {
+      file: 'akarkita-pohon.v1.webp',
+      alt: 'AkarKita: pohon keluarga contoh di canvas, dari leluhur sampai cicit, dengan satu orang yang difokus',
+      focalX: 30,
+      focalY: 70,
+    },
     excerpt:
-      'Proyek pribadi farrez: silsilah keluarga besar di canvas sendiri, kalkulator kekerabatan menurut adat, dan simulator faraid dengan pecahan eksak. Dipakai sungguhan oleh satu keluarga.',
+      'Silsilah keluarga besar di canvas sendiri, kalkulator kekerabatan menurut adat Sunda dan Minang, dan simulator faraid dengan pecahan eksak. Proyek lab yang dipakai sungguhan oleh satu keluarga.',
     summary: {
       problem:
         'Silsilah keluarga besar tersimpan di ingatan orang tua dan grup WhatsApp, dengan istilah kekerabatan seperti Uwa, Mamak, dan Bako yang tidak dikenal aplikasi silsilah umum.',

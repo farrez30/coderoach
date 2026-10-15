@@ -62,18 +62,14 @@ export default async function WorkArchivePage({ searchParams }: { searchParams: 
     pillar: typeof p.service === 'object' && p.service ? { slug: p.service.slug, label: p.service.title } : null,
   }));
 
-  // Lab projects are personal; they get their own shelf and don't count toward the studio's work.
-  const work = projects.filter((p) => p.kind !== 'lab');
-  const lab = projects.filter((p) => p.kind === 'lab');
-  const industries = new Set(work.map((p) => p.industry || 'other'));
+  const industries = new Set(projects.map((p) => p.industry || 'other'));
 
   return (
     <SectionShell>
       <CatalogClient
-        projects={work}
-        lab={lab}
+        projects={projects}
         initial={{ pilar: one(params.pilar), bidang: one(params.bidang) }}
-        headline={`${work.length} proyek, ${industries.size} bidang usaha.`}
+        headline={`${projects.length} proyek, ${industries.size} bidang usaha.`}
         industryLabels={Object.fromEntries([...industries].map((i) => [i, industryLabel(i)]))}
       />
     </SectionShell>
