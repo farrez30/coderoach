@@ -104,7 +104,7 @@ export type PortfolioEntry = {
 };
 
 /** Entries that stay in the database as drafts: off the site, kept for later. */
-export const HIDDEN_PROJECT_SLUGS = ['ads-multiplatform-dashboard', 'viralytics'];
+export const HIDDEN_PROJECT_SLUGS = ['ads-multiplatform-dashboard'];
 
 const kw = (s: string) => `<span style="color:#C4C0C5">${s}</span>`;
 
@@ -552,6 +552,99 @@ export const PORTFOLIO: PortfolioEntry[] = [
     ],
   },
   {
+    slug: 'viralytics',
+    consent: 'studio',
+    order: 10,
+    kind: 'studio',
+    client: 'Viralytics',
+    tagline: 'Operasional campaign KOL dari pemilihan influencer sampai laporan hasil, dalam satu alur bergerbang.',
+    meta: 'KOL OPS · STUDIO PRODUCT',
+    industry: 'media',
+    service: 'build',
+    publishedYear: '2026',
+    pills: ['REACT', 'EXPRESS', 'POSTGRES', 'SSE'],
+    excerpt:
+      'Platform agensi untuk menjalankan campaign influencer: shortlist KOL, persetujuan brand per fase, draft dan verifikasi unggahan, pembayaran termin, sampai laporan hasil yang tidak perlu disusun ulang.',
+    cover: {
+      file: 'viralytics-campaign-board.v1.webp',
+      alt: 'Daftar campaign Viralytics: ringkasan campaign aktif, budget, slot, dan views di atas tabel campaign',
+      focalX: 50,
+      focalY: 15,
+    },
+    studio: {
+      vizType: 'none',
+      usage: 'KOL CAMPAIGN OPS',
+      externalLink: null,
+      bullets: [
+        'Direktori dan shortlist KOL',
+        'Persetujuan brand per fase',
+        'Verifikasi link unggahan',
+        'Laporan hasil per campaign',
+      ],
+    },
+    summary: {
+      problem:
+        'Campaign KOL biasanya berjalan lewat spreadsheet, chat, dan tangkapan layar. Brand tidak tahu KOL mana yang menunggu keputusannya, draft dan link ditagih satu per satu, dan laporan akhir disusun ulang dari nol setiap campaign.',
+      solution:
+        'Satu alur bergerbang untuk agensi dan brand: setiap campaign berjalan per fase dengan persetujuan brand, link unggahan diverifikasi sebelum metriknya ditarik otomatis, dan status berubah di layar semua orang saat itu juga.',
+      result:
+        'Antrean yang menahan jadwal terlihat di satu tempat, dan laporan hasil sudah tersedia begitu campaign selesai.',
+    },
+    showcase: {
+      frame: 'browser',
+      screen: { file: 'viralytics-campaign-board.v1.webp', alt: 'Daftar campaign Viralytics: ringkasan campaign aktif, budget, slot, dan views di atas tabel campaign' },
+      tour: { file: 'viralytics-tur.v1.mp4', alt: 'Tur Viralytics: daftar campaign, fase campaign, direktori KOL, review konten, dan laporan hasil' },
+      tourPoster: { file: 'viralytics-tur.v1.poster.webp', alt: 'Daftar campaign Viralytics' },
+      tourTranscript:
+        'Tur tanpa suara, sekitar 40 detik. Daftar campaign dengan status, slot, budget, dan progres views. Detail satu campaign beserta fasenya. Direktori KOL dengan filter dan shortlist. Antrean review konten. Lalu laporan hasil sebuah campaign yang sudah selesai.',
+      demoNote:
+        'Direkam dari build lokal dengan data fiktif: brand, orang, handle, dan angka tidak mewakili klien atau KOL sungguhan.',
+      consent: 'studio',
+    },
+    features: [
+      {
+        title: 'Papan campaign',
+        body: 'Semua campaign dalam satu daftar dengan status, slot KOL terisi, serapan budget, dan progres views terhadap target. Antrean yang menahan jadwal diingatkan di bagian atas.',
+        screen: { file: 'viralytics-campaign-board.v1.webp', alt: 'Daftar campaign dengan status, slot, budget, progres views, dan jadwal' },
+      },
+      {
+        title: 'Direktori dan shortlist KOL',
+        body: 'KOL per tier dengan filter platform, kategori, provinsi, dan sumber data. Beberapa KOL dipilih sekaligus lalu diajukan ke campaign dalam satu aksi.',
+        screen: { file: 'viralytics-kol-discovery.v1.webp', alt: 'Direktori KOL dengan filter, tabel followers dan ER, dan bilah aksi ajukan ke campaign' },
+      },
+      {
+        title: 'Fase dan gerbang persetujuan',
+        body: 'Setiap campaign berjalan per fase, dari pembuatan sampai posting, dengan persetujuan brand di tiap fase. Progres setiap KOL terlihat dalam satu matriks.',
+        screen: { file: 'viralytics-alur-konten.v1.webp', alt: 'Empat kartu fase campaign dengan status persetujuan, dan matriks progres tiap KOL' },
+      },
+      {
+        title: 'Laporan yang tidak disusun ulang',
+        body: 'Total views, engagement, rata-rata ER, biaya per view dan per engagement, pencapaian target, dan kontribusi tiap KOL dibaca dari data yang sama dengan operasinya.',
+        screen: { file: 'viralytics-laporan.v1.webp', alt: 'Laporan campaign selesai: views, engagement, biaya per view, dan kontribusi per KOL' },
+      },
+    ],
+    timeline: [
+      { date: '27 Apr 2026', title: 'Prototipe pertama manajemen campaign KOL', sourceRef: 'viralytics@fd739ca' },
+      { date: '1 Mei 2026', title: 'Review link konten: KOL kirim, tim setujui, metrik ditarik', sourceRef: 'viralytics@de99a87' },
+      { date: '14 Mei 2026', title: 'Perubahan status muncul seketika lewat server-sent events', sourceRef: 'viralytics@11bec22' },
+      { date: '11 Jul 2026', title: 'Autentikasi di-host sendiri: Argon2id, sesi di database, CSRF', sourceRef: 'viralytics@8ebf527' },
+      { date: '24 Jul 2026', title: 'Mode demo dicabut, setiap kontrol tersambung ke data nyata', sourceRef: 'viralytics@4192092' },
+      { date: '25 Agu 2026', title: 'Fase campaign dengan persetujuan brand per fase', sourceRef: 'viralytics@21df1da' },
+    ],
+    darkChapter: {
+      eyebrow: 'TUR · 40 DETIK',
+      title: 'Satu campaign, dari shortlist sampai laporan.',
+      body: 'Rekaman berikut berjalan dengan brand, KOL, dan angka fiktif. Yang Anda lihat adalah aplikasinya sendiri, bukan maket.',
+    },
+    body: [
+      { h2: 'Produk venture, bukan proyek pesanan' },
+      'Viralytics dibangun studio bersama mitra venture yang menjalankan agensi KOL. Kebutuhan datang dari operasi agensi itu sendiri: siapa menunggu siapa, draft mana yang belum masuk, dan termin mana yang belum dibayar.',
+      { h2: 'Alur yang bergerbang, bukan daftar tugas' },
+      'Setiap langkah punya pemilik dan gerbang persetujuan. Link unggahan diverifikasi dulu, baru metriknya ditarik otomatis, jadi angka di laporan tidak pernah disalin tangan.',
+      'Autentikasi di-host sendiri dengan Argon2id, sesi di database, perlindungan CSRF, dan verifikasi dua langkah lewat email.',
+    ],
+  },
+  {
     slug: 'akarkita',
     consent: 'studio',
     order: 20,
@@ -818,6 +911,89 @@ export const PORTFOLIO: PortfolioEntry[] = [
       'Aplikasi resmi dianalisis di lingkungan terisolasi tanpa internet, lalu protokolnya diuji langsung ke kamera. Hasilnya dipakai untuk membangun kamera tiruan yang meniru firmware aslinya, termasuk pesan yang menyatu dan terpotong, supaya klien bisa diuji tanpa kamera fisik.',
       { h2: 'Hanya bicara dengan kamera' },
       'Analisis aplikasi resmi menemukan sejumlah tracker dan pengambilan nomor IMEI. Penggantinya tidak memanggil server mana pun selain kamera itu sendiri.',
+    ],
+  },
+  {
+    slug: 'fifofun',
+    consent: 'studio',
+    order: 24,
+    kind: 'lab',
+    client: 'FiFoFun',
+    tagline: 'Perencana keuangan rumah tangga yang memeriksa dirinya sendiri terhadap bank.',
+    meta: 'LAB · KEUANGAN RUMAH TANGGA',
+    industry: 'finance',
+    service: 'build',
+    publishedYear: '2026',
+    pills: ['NEXT.JS', 'SUPABASE', 'DRIZZLE', 'PWA'],
+    excerpt:
+      'Membaca e-Statement bank, mencocokkan setiap baris dengan saldo cetakan bank sampai ke sen, lalu menjadikannya patokan untuk anggaran, dana, dan ringkasan tiga bulan.',
+    cover: {
+      file: 'fifofun-ringkasan.v1.webp',
+      alt: 'Halaman Ringkasan FiFoFun: kartu pemasukan, pengeluaran, tagihan, dan uang bisa dipakai di atas grafik air terjun',
+      focalX: 50,
+      focalY: 20,
+    },
+    summary: {
+      problem:
+        'Anggaran di spreadsheet tidak pernah diperiksa terhadap sumber di luar dirinya sendiri, jadi salah kategori dan saldo dompet yang minus bisa bertahan berminggu-minggu tanpa ada yang sadar.',
+      solution:
+        'Mutasi bank dijadikan rujukan yang bisa diperiksa: setiap impor ditelusuri baris demi baris terhadap saldo cetakan bank, dan baru setelah cocok perencanaan dibangun di atasnya.',
+      result:
+        'Uang yang dipastikan bank terpisah jelas dari yang hanya perkiraan, dan impor yang tidak cocok ditolak utuh, bukan disimpan setengah.',
+    },
+    showcase: {
+      frame: 'browser',
+      screen: { file: 'fifofun-ringkasan.v1.webp', alt: 'Halaman Ringkasan FiFoFun: kartu pemasukan, pengeluaran, tagihan, dan uang bisa dipakai di atas grafik air terjun' },
+      screenPhone: { file: 'fifofun-ringkasan-hp-loop.v1.poster.webp', alt: 'Ringkasan 3 Bulan di layar ponsel' },
+      loop: { file: 'fifofun-ringkasan-hp-loop.v1.mp4', alt: 'Ringkasan 3 Bulan di ponsel, digulir dari pemasukan ke pengeluaran dan sisa per bulan' },
+      loopPoster: { file: 'fifofun-ringkasan-hp-loop.v1.poster.webp', alt: 'Ringkasan 3 Bulan di layar ponsel' },
+      tour: { file: 'fifofun-tur.v1.mp4', alt: 'Tur FiFoFun: ringkasan, impor e-Statement, saldo bank yang cocok, tinjau transaksi, anggaran, dan ringkasan tiga bulan' },
+      tourPoster: { file: 'fifofun-tur.v1.poster.webp', alt: 'Halaman Ringkasan FiFoFun' },
+      tourTranscript:
+        'Tur tanpa suara, sekitar 45 detik. Ringkasan bulan Agustus. Impor e-Statement September yang lolos rekonsiliasi. Ringkasan September dengan saldo hitungan aplikasi yang sama dengan saldo cetakan bank. Satu keputusan di Tinjau yang mengategorikan enam transaksi sekaligus. Anggaran per kategori. Lalu Ringkasan 3 Bulan.',
+      demoNote:
+        'Semua layar memakai rumah tangga fiktif dan e-Statement karangan yang diimpor lewat parser asli aplikasi, bukan data keuangan sungguhan.',
+      consent: 'studio',
+    },
+    features: [
+      {
+        title: 'Impor yang membuktikan dirinya',
+        body: 'Rekonsiliasi berlapis menelusuri rantai saldo baris demi baris, jadi kesalahan menunjuk transaksinya, bukan sekadar totalnya selisih. Kalau tidak cocok, tidak satu baris pun disimpan.',
+        screen: { file: 'fifofun-impor.v1.webp', alt: 'Hasil impor e-Statement: transaksi masuk dan saldonya cocok sampai ke sen terakhir' },
+      },
+      {
+        title: 'Satu angka yang dicek ke luar',
+        body: 'Saldo hitungan aplikasi ditaruh di samping saldo cetakan bank. Saldo dompet digital yang meleset dicatat sebagai penyesuaian, bukan dihapus diam-diam.',
+        screen: { file: 'fifofun-rekonsiliasi.v1.webp', alt: 'Bagian Uangnya ada di mana: saldo hitungan aplikasi sama dengan saldo cetakan bank' },
+      },
+      {
+        title: 'Anggaran dengan bukti di sampingnya',
+        body: 'Batas per kategori ditetapkan di samping median bulan-bulan sebelumnya dan angka bulan lalu. Pos yang datang jarang dihargai per bulan supaya tidak mengagetkan saat jatuh tempo.',
+        screen: { file: 'fifofun-anggaran.v1.webp', alt: 'Halaman Anggaran: bilah alokasi per kategori dan tabel biasanya, bulan lalu, anggaran, dan realisasi' },
+      },
+      {
+        title: 'Ringkasan untuk dibaca orang lain',
+        body: 'Tiga bulan terakhir berdampingan dengan rata-ratanya, hanya angka gabungan, dirancang untuk dibaca dari ponsel dan bisa dibagikan sebagai PDF.',
+        screen: { file: 'fifofun-ringkasan-3-bulan.v1.webp', alt: 'Ringkasan 3 Bulan: tabel pemasukan per bulan dengan rata-rata dan tombol Bagikan sebagai PDF' },
+      },
+    ],
+    timeline: [
+      { date: '19 Agu 2026', title: 'Parser e-Statement dengan rekonsiliasi berlapis', sourceRef: 'fifofun@4265a70' },
+      { date: '20 Agu 2026', title: 'Playwright mengukur grafik, axe jalan di setiap push', sourceRef: 'fifofun@1121214' },
+      { date: '22 Agu 2026', title: 'Anggaran per kategori bisa ditetapkan sendiri', sourceRef: 'fifofun@ccc6428' },
+      { date: '2 Okt 2026', title: 'Ringkasan 3 Bulan, satu layar untuk ditunjukkan ke orang lain', sourceRef: 'fifofun@a418836' },
+    ],
+    darkChapter: {
+      eyebrow: 'TUR · 45 DETIK',
+      title: 'Dari mutasi bank ke anggaran yang bisa dipercaya.',
+      body: 'Rekaman berikut berjalan dengan rumah tangga dan e-Statement karangan. Yang Anda lihat adalah aplikasinya sendiri, bukan maket.',
+    },
+    body: [
+      { h2: 'Bank sebagai patokan' },
+      'Catatan dompet digital dan uang tunai diketik sendiri, jadi selalu bisa meleset. Mutasi bank tidak. FiFoFun memisahkan keduanya di setiap layar, supaya jelas angka mana yang sudah dipastikan dan mana yang masih perkiraan.',
+      { h2: 'Uang tidak pernah jadi pecahan desimal' },
+      'Setiap nominal disimpan sebagai bilangan bulat dalam sen, tidak pernah sebagai float. Data tiap rumah tangga dipisahkan oleh row level security di database, dan akun baru hanya bisa dibuat lewat undangan anggota rumah tangga.',
+      'Setiap push melewati typecheck, tes unit, Playwright dengan pemeriksaan aksesibilitas di lebar desktop dan ponsel, audit dependency, CodeQL, dan pemindai rahasia.',
     ],
   },
   {
