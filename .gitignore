@@ -46,3 +46,6 @@ skills-lock.json
 /public/presentasi-sw.js
 /public/presentasi-sw.js.map
 /public/swe-worker-*.js
+
+# scripts/text-cleanup.ts backups
+text-cleanup-backup-*.json
