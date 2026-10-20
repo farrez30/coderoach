@@ -2,6 +2,7 @@ import type { Project } from '@/payload-types';
 import { linkState, safeHref } from '@/lib/portfolio/links';
 import { latestLinkChecks } from '@/lib/portfolio/queries';
 import { Badge } from '../../_components/ui/Badge';
+import { Meta } from '../../_components/ui/Meta';
 import { ProseRenderer } from '../../_components/detail/ProseRenderer';
 import { FeatureScene } from './FeatureScene';
 import { formatDay } from './format';
@@ -125,8 +126,7 @@ function BeforeAfter({ rows }: { rows: NonNullable<Project['beforeAfter']> }) {
                     <figure key={label} className="m-0 rounded-xl overflow-hidden border border-paper-200 bg-paper-100">
                       <MediaImg media={media} sizes="(min-width: 768px) 560px, 92vw" className="block w-full h-auto" />
                       <figcaption className="px-4 py-3 font-mono text-[11px] uppercase tracking-wider text-ink/65 tabular">
-                        {label}
-                        {date ? ` · ${formatDay(date)}` : ''}
+                        <Meta parts={[label, date && formatDay(date)]} />
                       </figcaption>
                     </figure>
                   ) : null,

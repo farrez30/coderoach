@@ -67,9 +67,9 @@ export async function generateMetadata({
     depth: 1,
   });
   const p = docs[0] as any;
-  if (!p) return { title: 'Not found · Coderoach Studio' };
+  if (!p) return { title: 'Not found | Coderoach Studio' };
   return {
-    title: `${p.title} · Field Notes · Coderoach Studio`,
+    title: `${p.title} | Field Notes | Coderoach Studio`,
     description: p.excerpt,
     openGraph: {
       title: p.title,
@@ -290,7 +290,7 @@ export default async function PostDetailPage({
               href="/#contact"
               className="h-12 px-5 rounded-md bg-electric text-paper text-sm font-semibold inline-flex items-center hover:bg-[#2562E0] transition-colors"
             >
-              Start a 48-hour discovery →
+              Start a 48-hour discovery <span aria-hidden>→</span>
             </a>
           </div>
         </section>

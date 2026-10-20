@@ -25,7 +25,7 @@ export function ProjectOverlay({ slug, title, children }: { slug: string; title:
     if (dialog && !dialog.open) dialog.showModal();
     // A parallel slot can't set metadata, so the overlay names the tab itself.
     const previousTitle = document.title;
-    document.title = `${title} · Coderoach Studio`;
+    document.title = `${title} | Coderoach Studio`;
     return () => {
       document.title = previousTitle;
       document.querySelector<HTMLElement>(`[data-card-link="${CSS.escape(slug)}"]`)?.focus({ preventScroll: true });
@@ -67,7 +67,7 @@ export function ProjectOverlay({ slug, title, children }: { slug: string; title:
               href={`/work/${slug}`}
               className="h-9 px-3 rounded-md font-mono text-[11px] uppercase tracking-wider text-ink/65 hover:text-ink hover:bg-paper-100 inline-flex items-center transition-colors"
             >
-              Halaman penuh →
+              Halaman penuh <span aria-hidden>→</span>
             </a>
             <button
               type="button"

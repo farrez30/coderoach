@@ -1,4 +1,5 @@
 import { FooterCopyLink } from './FooterCopyLink';
+import { Meta } from './ui/Meta';
 
 type FooterData = {
   siteName?: string | null;
@@ -70,8 +71,8 @@ export function Footer({ data }: { data: FooterData | null }) {
         </div>
         {data?.footer?.metaLine && (data.footer.metaLine.left || data.footer.metaLine.right) && (
           <div className="mt-14 pt-6 border-t border-shadow-700 flex justify-between flex-wrap gap-4 font-mono text-[11px] text-mist-500 tracking-wide tabular">
-            <span>{data.footer.metaLine.left}</span>
-            <span>{data.footer.metaLine.right}</span>
+            <Meta parts={data.footer.metaLine.left} />
+            <Meta parts={data.footer.metaLine.right} />
           </div>
         )}
       </div>

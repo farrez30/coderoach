@@ -6,6 +6,7 @@
  * or unlabelled because the site publishes no prices.
  */
 import { Icon, type IconName } from '@/lib/icons';
+import { Meta } from '../ui/Meta';
 
 /** Position in a staggered group, read by the narrative-* animations in globals.css. */
 const nth = (i: number) => ({ '--n-i': i }) as React.CSSProperties;
@@ -121,9 +122,7 @@ export function MissingFigure({ count }: { count: number }) {
       className="flex w-full flex-col gap-[18px] rounded-2xl border border-white/10 bg-shadow-900/90 p-6 backdrop-blur-[12px] lg:w-[392px] lg:shrink-0"
     >
       <div className="flex items-center justify-between gap-3">
-        <span className="font-mono text-[11px] uppercase tracking-[0.09em] text-mist-500">
-          Laba bersih · semua cabang
-        </span>
+        <Meta parts="Laba bersih · semua cabang" className="font-mono text-[11px] uppercase tracking-[0.09em] text-mist-500" />
         <Icon name="syncOff" size={16} className="shrink-0 text-mist-500" />
       </div>
       <div className="flex items-end gap-2.5">

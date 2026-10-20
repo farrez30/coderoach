@@ -19,9 +19,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const p = (await getProject(slug)) as any;
-  if (!p) return { title: 'Tidak ditemukan · Coderoach Studio' };
+  if (!p) return { title: 'Tidak ditemukan | Coderoach Studio' };
   return {
-    title: `${p.client} · Coderoach Studio`,
+    title: `${p.client} | Coderoach Studio`,
     description: p.excerpt || p.tagline,
     alternates: { canonical: `/work/${slug}` },
     openGraph: {
@@ -140,7 +140,7 @@ export default async function ProjectDetailPage({
             href="/#contact"
             className="h-12 px-5 rounded-md bg-electric text-paper text-sm font-semibold inline-flex items-center hover:bg-[#2562E0] transition-colors"
           >
-            Ceritakan kebutuhan Anda →
+            Ceritakan kebutuhan Anda <span aria-hidden>→</span>
           </a>
         </div>
       </section>

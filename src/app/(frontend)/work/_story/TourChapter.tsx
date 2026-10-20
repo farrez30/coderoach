@@ -1,4 +1,5 @@
 import type { Project } from '@/payload-types';
+import { Meta } from '../../_components/ui/Meta';
 import { asMedia, MediaImg } from './MediaImg';
 
 /**
@@ -16,7 +17,7 @@ export function TourChapter({ project }: { project: Project }) {
     <section id="tur" aria-labelledby="tur-judul" data-theme="dark" className="bg-ink text-paper py-[clamp(80px,10vw,140px)] overflow-hidden scroll-mt-16">
       <div className="max-w-[1180px] mx-auto px-5 sm:px-8">
         <div className="max-w-[780px] mx-auto text-center">
-          {dc?.eyebrow && <p className="m-0 font-mono text-[11px] sm:text-xs uppercase tracking-wider text-mist-500 tabular">{dc.eyebrow}</p>}
+          {dc?.eyebrow && <p className="m-0 font-mono text-[11px] sm:text-xs uppercase tracking-wider text-mist-500 tabular"><Meta parts={dc.eyebrow} className="justify-center" /></p>}
           <h2 id="tur-judul" className="m-0 mt-4 text-[clamp(34px,5.4vw,68px)] font-bold tracking-[-0.035em] leading-[1.02] text-balance">
             {dc?.title || `Tur ${project.client}`}
           </h2>

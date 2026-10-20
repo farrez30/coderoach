@@ -1,4 +1,5 @@
 import { Badge } from '../../_components/ui/Badge';
+import { Meta } from '../../_components/ui/Meta';
 import { Breadcrumbs } from '../../_components/detail/Breadcrumbs';
 import { ProseRenderer } from '../../_components/detail/ProseRenderer';
 import { PayloadImage } from '../../_components/ui/PayloadImage';
@@ -39,7 +40,7 @@ export function ClientCaseDetail({ project, as: Root = 'main' }: { project: Proj
           </div>
           {(fd?.metaLine || project.meta) && (
             <span className="block font-mono text-[11px] uppercase tracking-wider text-mist-500 mb-4 tabular">
-              {fd?.metaLine || project.meta}
+              <Meta parts={fd?.metaLine || project.meta} />
             </span>
           )}
           <h1 className="text-[clamp(40px,5.5vw,72px)] font-bold tracking-[-0.025em] leading-[1.05] my-6 max-w-[20ch] text-balance">

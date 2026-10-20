@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { Meta } from '../ui/Meta';
 
 type TimelineItem = {
   year: string;
@@ -193,9 +194,10 @@ function ArtifactHeader({ tag, dark = false }: { tag: string; dark?: boolean }) 
       }`}
     >
       <span
+        aria-hidden
         className={`w-1.5 h-1.5 rounded-full ${dark ? 'bg-electric' : 'bg-electric'} animate-pulse`}
       />
-      <span>{tag}</span>
+      <Meta parts={tag} />
     </div>
   );
 }
@@ -243,7 +245,7 @@ function Artifact2023() {
           ))}
         </div>
         <div className="mt-2.5 text-[10px] font-mono uppercase tracking-[0.18em] text-mist-500 tabular">
-          ✓ project-scoped validated
+          <span aria-hidden>✓ </span>project-scoped validated
         </div>
       </div>
     </ArtifactCard>
@@ -352,7 +354,7 @@ function Artifact2026() {
           ))}
         </div>
         <div className="mt-2 text-[10px] font-mono uppercase tracking-[0.18em] text-mist-500 tabular">
-          4 doors · 1 disciplin
+          <Meta parts="4 doors · 1 discipline" />
         </div>
       </div>
     </ArtifactCard>

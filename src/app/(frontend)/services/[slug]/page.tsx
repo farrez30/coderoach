@@ -37,9 +37,9 @@ export async function generateMetadata({
   const payload = await getPayload({ config });
   const { docs } = await payload.find({ collection: 'services', where: { slug: { equals: slug } }, limit: 1 });
   const s = docs[0] as any;
-  if (!s) return { title: 'Not found · Coderoach Studio' };
+  if (!s) return { title: 'Not found | Coderoach Studio' };
   return {
-    title: `${s.title} · Coderoach Studio`,
+    title: `${s.title} | Coderoach Studio`,
     description: s.heroLede || s.tagline,
   };
 }
@@ -248,7 +248,7 @@ export default async function ServiceDetailPage({
             href={`/#contact?scope=${service.title}`}
             className="h-12 px-5 rounded-md bg-electric text-paper text-sm font-semibold inline-flex items-center hover:bg-[#2562E0] transition-colors"
           >
-            Start a 48-hour discovery →
+            Start a 48-hour discovery <span aria-hidden>→</span>
           </a>
         </div>
       </section>

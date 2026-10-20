@@ -1,4 +1,5 @@
 import { PayloadImage } from '../ui/PayloadImage';
+import { Meta } from '../ui/Meta';
 
 type CoverSource = {
   client: string;
@@ -70,8 +71,8 @@ export function CoverPlaceholder({ client, meta }: { client: string; meta?: stri
             className="inline-flex items-center gap-2 font-mono uppercase tracking-wider text-mist-600 tabular"
             style={{ fontSize: 'clamp(10px, 1.6cqw, 12px)' }}
           >
-            <span className="w-1.5 h-1.5 bg-electric shrink-0" />
-            {meta}
+            <span aria-hidden className="w-1.5 h-1.5 bg-electric shrink-0" />
+            <Meta parts={meta} />
           </span>
         )}
         <span

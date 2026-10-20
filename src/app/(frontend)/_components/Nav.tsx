@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { CtaLabel } from './ui/CtaLabel';
 
 type NavData = {
   siteName?: string | null;
@@ -74,7 +75,7 @@ export function Nav({ data }: { data: NavData | null }) {
               href={data.navCta.href}
               className="hidden sm:inline-flex h-9 px-3.5 rounded-md bg-electric text-paper text-[13px] font-semibold items-center justify-center hover:bg-[#2562E0] transition-colors"
             >
-              {data.navCta.label}
+              <CtaLabel label={data.navCta.label} />
             </a>
           )}
           <button
@@ -143,7 +144,7 @@ export function Nav({ data }: { data: NavData | null }) {
               onClick={close}
               className="my-4 h-12 px-4 rounded-md bg-electric text-paper text-[15px] font-semibold inline-flex items-center justify-center hover:bg-[#2562E0] transition-colors"
             >
-              {data.navCta.label}
+              <CtaLabel label={data.navCta.label} />
             </a>
           )}
         </nav>

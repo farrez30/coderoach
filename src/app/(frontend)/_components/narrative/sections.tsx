@@ -10,6 +10,7 @@
 import { Icon, type IconName } from '@/lib/icons';
 import { productPath } from '@/lib/opsscore/config';
 import { StudioWaveBg } from '../ui/StudioWaveBg';
+import { Meta } from '../ui/Meta';
 import { CostChart, Glow, MissingFigure, SCENES } from './illustrations';
 import { parseNarrative, splitItem, type NarrativeGroup } from './parse';
 
@@ -73,10 +74,7 @@ export function SymptomsSection({ content }: { content: unknown }) {
                   </div>
                 )}
                 <div className="flex flex-col gap-2.5 px-6 pt-[22px] pb-[26px]">
-                  <span className={`${LABEL} text-mist-600`}>
-                    {String(i + 1).padStart(2, '0')}
-                    {scene && ` · ${scene.label}`}
-                  </span>
+                  <Meta parts={[String(i + 1).padStart(2, '0'), scene?.label]} className={`${LABEL} text-mist-600`} />
                   <h3 className="text-[22px] font-bold leading-[1.2] tracking-[-0.02em] text-ink m-0">{text}</h3>
                   {detail && <p className="text-[15px] leading-[1.5] text-mist-600 m-0">{detail}</p>}
                 </div>
@@ -217,7 +215,7 @@ export function LedgerSection({ content }: { content: unknown }) {
           <div className={`reveal flex flex-col gap-10 bg-white lg:flex-row lg:gap-12 ${CARD} ${CARD_SHADOW}`}>
             <div className="flex flex-col justify-between gap-8 lg:w-[320px] lg:shrink-0">
               <div className="flex flex-col gap-3.5">
-                <span className={`${LABEL} text-mist-600`}>Biaya kumulatif · ilustrasi</span>
+                <span className={`${LABEL} text-mist-600`}>Biaya kumulatif (ilustrasi)</span>
                 <h3 className="text-[26px] font-bold leading-[1.2] tracking-[-0.023em] text-ink text-balance m-0">
                   {chart.title}
                 </h3>

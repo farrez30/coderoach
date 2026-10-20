@@ -43,6 +43,7 @@ import { SCENE_PANEL_GRID } from './scene-engine';
 import { ScoringConsole } from './ScoringConsole';
 import { SectionScene } from './SectionScene';
 
+import { Meta } from '../../_components/ui/Meta';
 const STORAGE_KEY = `opsscore.quiz.v${INSTRUMENT_VERSION}`;
 const LAST_RESULT_KEY = 'opsscore.lastResult';
 const ADVANCE_DELAY_MS = 250;
@@ -519,7 +520,7 @@ export function Quiz() {
     content = (
       <div className="flex flex-col">
         <span className="font-mono text-xs font-medium tracking-wider text-mist-600 uppercase tabular">
-          {QUIZ_COPY.introMarker}
+          <Meta parts={QUIZ_COPY.introMarker} />
         </span>
         <h1
           ref={headingRef}
@@ -661,7 +662,7 @@ export function Quiz() {
           ) : (
             <>
               {QUIZ_COPY.remaining(remainingMinutes)}
-              {step.kind === 'question' && <span className="max-sm:hidden"> · {QUIZ_COPY.keyboardHint}</span>}
+              {step.kind === 'question' && <span className="max-sm:hidden">, {QUIZ_COPY.keyboardHint}</span>}
             </>
           )}
         </span>

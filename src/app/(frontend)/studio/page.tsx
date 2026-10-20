@@ -6,6 +6,7 @@ import { Breadcrumbs } from '../_components/detail/Breadcrumbs';
 import { ProseRenderer } from '../_components/detail/ProseRenderer';
 import { Icon, type IconName } from '@/lib/icons';
 import { Badge } from '../_components/ui/Badge';
+import { Meta } from '../_components/ui/Meta';
 import { AnimatedCount } from '../_components/ui/AnimatedCount';
 import { PayloadImage } from '../_components/ui/PayloadImage';
 import { StudioTimeline } from '../_components/studio/StudioTimeline';
@@ -13,7 +14,7 @@ import { StudioTimeline } from '../_components/studio/StudioTimeline';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Studio · Coderoach',
+  title: 'Studio | Coderoach',
   description: 'Studio engineering dari Jakarta: build, automate, dan ship intelligence untuk bisnis Indonesia.',
 };
 
@@ -225,9 +226,7 @@ export default async function StudioPage() {
                     <div className="flex flex-col gap-0.5 leading-tight">
                       <span className="text-[16px] font-bold text-ink">{a.name}</span>
                       {a.role && (
-                        <span className="font-mono text-[11px] uppercase tracking-wider text-mist-600 tabular">
-                          {a.role}
-                        </span>
+                        <Meta parts={a.role} className="font-mono text-[11px] uppercase tracking-wider text-mist-600 tabular" />
                       )}
                     </div>
                   </div>
@@ -242,7 +241,7 @@ export default async function StudioPage() {
                           rel="noopener noreferrer"
                           className="font-mono text-[11px] uppercase tracking-wider text-mist-600 hover:text-electric tabular"
                         >
-                          {sl.platform} →
+                          {sl.platform} <span aria-hidden>→</span>
                         </a>
                       ))}
                     </div>
@@ -295,7 +294,7 @@ export default async function StudioPage() {
                     <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-mist-600 mb-2 block">
                       Hours
                     </span>
-                    <p className="text-[16px] m-0 text-ink">{studio.about.workspace.hours}</p>
+                    <p className="text-[16px] m-0 text-ink"><Meta parts={studio.about.workspace.hours} /></p>
                   </div>
                 )}
                 {studio.about.workspace.tagline && (
@@ -342,11 +341,11 @@ export default async function StudioPage() {
             <div className="relative max-w-[680px]">
               {/* Live status indicator */}
               <div className="inline-flex items-center gap-2 mb-5 font-mono text-[10px] uppercase tracking-[0.2em] tabular text-mist-500">
-                <span className="relative flex w-2 h-2">
+                <span aria-hidden className="relative flex w-2 h-2">
                   <span className="absolute inset-0 rounded-full bg-[#5DD79A] animate-ping opacity-75" />
                   <span className="relative w-2 h-2 rounded-full bg-[#5DD79A]" />
                 </span>
-                <span>OPEN · SLOT TERBATAS · Q2 2026</span>
+                <Meta parts="OPEN · SLOT TERBATAS · Q2 2026" />
               </div>
               <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-mist-500 block mb-3">
                 Tertarik berkolaborasi?
@@ -360,7 +359,7 @@ export default async function StudioPage() {
               href="/#contact"
               className="relative h-12 px-5 rounded-md bg-electric text-paper text-sm font-semibold inline-flex items-center hover:bg-[#2562E0] active:scale-[0.98] transition-[background,transform] flex-shrink-0 shadow-[0_8px_24px_-8px_rgba(44,112,254,0.55)]"
             >
-              Mulai brief proyek →
+              Mulai brief proyek <span aria-hidden>→</span>
             </a>
           </div>
         </div>

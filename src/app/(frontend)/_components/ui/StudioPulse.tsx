@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { Meta } from './Meta';
 
 const formatTime = (d: Date) => {
   const h = String(d.getHours()).padStart(2, '0');
@@ -90,15 +91,18 @@ export function StudioPulse() {
       <div className="flex items-center justify-between font-mono text-[10px] text-mist-500 tracking-[0.04em]">
         <span>
           {activeDay >= 0 ? (
-            <>
-              <span className="text-paper">day {String(activeDay + 1).padStart(2, '0')}</span> ·{' '}
-              {LABELS[activeDay]} · {FOCUS[activeDay]}
-            </>
+            <Meta
+              parts={[
+                <span key="day" className="text-paper">day {String(activeDay + 1).padStart(2, '0')}</span>,
+                LABELS[activeDay],
+                FOCUS[activeDay],
+              ]}
+            />
           ) : (
-            <>two-week sprints · demos every friday</>
+            <>two-week sprints, demos every friday</>
           )}
         </span>
-        <span className="text-mist-600">kemang · jkt</span>
+        <Meta parts="kemang · jkt" className="text-mist-600" />
       </div>
     </div>
   );

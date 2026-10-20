@@ -37,7 +37,7 @@ export const StudioBlock: Block = {
       name: 'fullStudioLink',
       type: 'group',
       fields: [
-        { name: 'label', type: 'text', defaultValue: 'See the full studio →' },
+        { name: 'label', type: 'text', defaultValue: 'See the full studio' },
         { name: 'href', type: 'text', defaultValue: '/studio' },
       ],
     },

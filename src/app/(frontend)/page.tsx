@@ -57,7 +57,7 @@ export default async function HomePage() {
               href="/admin/collections/pages/create"
               className="h-12 px-5 rounded-md bg-electric text-paper text-sm font-semibold inline-flex items-center hover:bg-[#2562E0] transition-colors"
             >
-              Open admin →
+              Open admin <span aria-hidden>→</span>
             </a>
           </div>
         </main>

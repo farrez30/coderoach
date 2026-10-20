@@ -1,3 +1,5 @@
+import { CtaLabel } from '../ui/CtaLabel';
+
 export function CTABannerBlockRenderer({ block }: { block: any }) {
   const dark = block?.tone !== 'light';
   return (
@@ -28,7 +30,7 @@ export function CTABannerBlockRenderer({ block }: { block: any }) {
             href={block.cta.href}
             className="h-12 px-5 rounded-md bg-electric text-paper text-sm font-semibold inline-flex items-center hover:bg-[#2562E0] transition-colors"
           >
-            {block.cta.label || 'Get in touch →'}
+            <CtaLabel label={block.cta.label || 'Get in touch'} />
           </a>
         )}
       </div>

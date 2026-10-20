@@ -17,7 +17,7 @@ export function Pagination({
     <nav aria-label="Pagination" className="mt-16 flex items-center justify-center gap-2 font-mono text-xs uppercase tracking-wider tabular">
       {prev && (
         <a href={prev} className="px-3 py-2 text-mist-600 hover:text-electric transition-colors">
-          ← Prev
+          <span aria-hidden>←</span> Prev
         </a>
       )}
       {pages.map((p) => {
@@ -40,7 +40,7 @@ export function Pagination({
       })}
       {next && (
         <a href={next} className="px-3 py-2 text-mist-600 hover:text-electric transition-colors">
-          Next →
+          Next <span aria-hidden>→</span>
         </a>
       )}
     </nav>

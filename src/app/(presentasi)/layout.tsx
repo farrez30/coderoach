@@ -10,7 +10,7 @@ const metadataBase = new URL(process.env.NEXT_PUBLIC_SERVER_URL || 'http://local
  */
 export const metadata: Metadata = {
   metadataBase,
-  title: 'Presentasi · Coderoach Studio',
+  title: 'Presentasi | Coderoach Studio',
   robots: { index: false, follow: false },
   manifest: '/presentasi.webmanifest',
   icons: { icon: '/assets/coderoach_logo.svg' },

@@ -37,7 +37,7 @@ export const ContactBlock: Block = {
       type: 'group',
       admin: { description: 'Form field labels, keep short.' },
       fields: [
-        { name: 'submit', type: 'text', defaultValue: 'Send the brief →' },
+        { name: 'submit', type: 'text', defaultValue: 'Send the brief' },
         { name: 'emailFallback', type: 'text', defaultValue: 'hello@example.com', admin: { description: 'Shown as "or email …"' } },
       ],
     },

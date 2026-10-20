@@ -47,7 +47,7 @@ export const SiteSettings: GlobalConfig = {
     linkField({
       name: 'navCta',
       description: 'Primary call-to-action in the top nav.',
-      defaultLabel: 'Start a discovery →',
+      defaultLabel: 'Start a discovery',
       defaultHref: '#contact',
     }),
     {

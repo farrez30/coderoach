@@ -1,5 +1,6 @@
 import { Icon, type IconName } from '@/lib/icons';
 import { AnimatedCount } from './ui/AnimatedCount';
+import { Meta } from './ui/Meta';
 import { StudioPulse } from './ui/StudioPulse';
 import { StudioWaveBg } from './ui/StudioWaveBg';
 
@@ -39,7 +40,7 @@ export function Studio({ data, tenets }: { data: StudioData | null; tenets: Tene
             href="/studio"
             className="text-[11px] font-semibold uppercase tracking-[0.18em] text-electric hover:underline mt-6 inline-block"
           >
-            Lihat selengkapnya →
+            Lihat selengkapnya <span aria-hidden>→</span>
           </a>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-20 mt-14 items-start">
@@ -73,9 +74,10 @@ export function Studio({ data, tenets }: { data: StudioData | null; tenets: Tene
                 <div className="w-7 h-7 rounded-full bg-gradient-to-br from-electric to-[#5DD79A] grid place-items-center text-paper text-[10px] font-bold">
                   CR
                 </div>
-                <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-mist-500">
-                  Coderoach Studio · Operating note
-                </span>
+                <Meta
+                  parts="Coderoach Studio · Operating note"
+                  className="text-[11px] font-semibold uppercase tracking-[0.18em] text-mist-500"
+                />
               </figcaption>
             </figure>
           </div>

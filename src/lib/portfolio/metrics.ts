@@ -64,7 +64,7 @@ export function formatMetric(m: Pick<Metric, 'value' | 'unit' | 'baseline' | 'st
 
 /** Shape of featuredDetails.metrics on the home page card, derived so it can't drift from the source. */
 export function toFeaturedMetric(m: Metric): { num: string; accent: string; label: string } {
-  const from = m.baseline ? ` · DARI ${[m.baseline.value, m.baseline.unit].filter(Boolean).join(' ')}` : '';
+  const from = m.baseline ? ` (DARI ${[m.baseline.value, m.baseline.unit].filter(Boolean).join(' ')})` : '';
   return {
     num: m.status === 'target' ? `Target ${m.value}` : m.value,
     accent: m.unit ? ` ${m.unit}` : '',

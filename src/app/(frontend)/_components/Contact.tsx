@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { TurnstileField, type TurnstileHandle } from './TurnstileField';
 import { DeployConsole } from './DeployConsole';
+import { CtaLabel } from './ui/CtaLabel';
+import { Meta } from './ui/Meta';
 import { StatusAlert } from './ui/StatusAlert';
 import { useToast } from './ui/Toast';
 
@@ -27,7 +29,7 @@ const formatStamp = (d: Date) => {
   const day = String(d.getDate()).padStart(2, '0');
   const hh = String(d.getHours()).padStart(2, '0');
   const mm = String(d.getMinutes()).padStart(2, '0');
-  return `${y}-${m}-${day} · ${hh}:${mm} WIB`;
+  return [`${y}-${m}-${day}`, `${hh}:${mm} WIB`];
 };
 
 export function Contact({ data }: { data: ContactData | null }) {
@@ -309,7 +311,7 @@ export function Contact({ data }: { data: ContactData | null }) {
               {data?.scopes && data.scopes.length > 0 && (
                 <div className="flex flex-col gap-2.5">
                   <span className="text-[15px] leading-[1.6] text-mist-400 font-medium">
-                    Kemungkinan ini <span className="text-mist-600">…</span>
+                    Kemungkinan ini
                   </span>
                   <div className="flex flex-wrap gap-2">
                     {data.scopes.map((s) => (
@@ -362,9 +364,7 @@ export function Contact({ data }: { data: ContactData | null }) {
                     !emailValid || brief.trim().length < 10 ? 'opacity-60' : ''
                   } ${submitting ? 'opacity-40' : ''}`}
                 >
-                  {submitting
-                    ? 'Deploying…'
-                    : data?.formLabels?.submit ?? 'Kirim brief →'}
+                  {submitting ? 'Deploying…' : <CtaLabel label={data?.formLabels?.submit ?? 'Kirim brief'} />}
                 </button>
                 {submitError && (
                   <span className="text-[12px] text-[#E5484D] font-medium">
@@ -445,7 +445,7 @@ function BriefPreview({
             </span>
           </div>
           <span className="text-shadow-700/60 text-[10px] tracking-wider tabular">
-            {now ? formatStamp(now) : '—'}
+            {now ? <Meta parts={formatStamp(now)} /> : '—'}
           </span>
         </div>
 
@@ -460,7 +460,7 @@ function BriefPreview({
           />
           <LetterRow
             label="Re"
-            value={scope || 'pilih scope…'}
+            value={scope || 'belum dipilih'}
             muted={!scope}
             active={focused === 'scope'}
             accent={!!scope}
@@ -492,7 +492,7 @@ function BriefPreview({
         <div className="flex items-end justify-between gap-4 flex-wrap pt-5 border-t border-shadow-200">
           <div>
             <p className="text-shadow-700 text-[12px] m-0 mb-1 tracking-[0.04em]">
-              Dikirim dari <span className="text-shadow-900 font-medium">{email || '…'}</span>
+              Dikirim dari <span className="text-shadow-900 font-medium">{email || '—'}</span>
             </p>
             <p className="text-mist-500 text-[10px] uppercase tracking-[0.18em] m-0">
               {hasAny ? 'balas dalam 48 jam' : 'menunggu input'}

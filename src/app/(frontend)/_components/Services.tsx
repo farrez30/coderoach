@@ -98,7 +98,7 @@ export function Services({ items, head }: { items: Service[]; head?: SectionHead
                         ))}
                       </div>
                       <span className="font-mono text-[10px] uppercase tracking-wider text-electric opacity-0 group-hover:opacity-100 transition-opacity">
-                        Explore →
+                        Explore <span aria-hidden>→</span>
                       </span>
                     </div>
                   </div>

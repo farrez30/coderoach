@@ -24,7 +24,7 @@ export const TOP_BAR = {
   enabled: true,
   tag: '[ TERBUKA UNTUK Q4 2026 ]',
   message: 'Kami menerima beberapa proyek baru tiap kuartal. Mulai dari konsultasi gratis 30 menit.',
-  link: { label: 'Konsultasi gratis →', href: '#contact' },
+  link: { label: 'Konsultasi gratis', href: '#contact' },
 };
 
 /**
@@ -32,7 +32,7 @@ export const TOP_BAR = {
  * by generateMetadata to build the <title>, so it holds the search phrase, not the on-page headline.
  */
 export const METADATA = {
-  // Both halves are required fields; the title joins them: "Coderoach Studio · Jasa Pembuatan ERP & Sistem Custom".
+  // Both halves are required fields; the title joins them: "Coderoach Studio | Jasa Pembuatan ERP & Sistem Custom".
   heroHeadline: { lead: 'Jasa Pembuatan ERP &', accent: 'Sistem Custom' },
   siteDescription:
     'Software house Jakarta yang membangun ERP custom, aplikasi internal, otomasi, dan dashboard sesuai proses bisnis Anda. Source code milik Anda.',
@@ -82,7 +82,7 @@ export const BLOCK_COPY: Record<string, Record<string, unknown>> = {
   },
   contact: {
     heading: { line1: 'Ceritakan proses yang paling merepotkan.', line2Accent: 'Kami bantu petakan.' },
-    lede: 'Tidak perlu tahu solusinya. Ceritakan bagian yang paling banyak memakan waktu tim Anda, dan kami bantu petakan apakah layak dibangun — termasuk kalau jawabannya belum.',
+    lede: 'Tidak perlu tahu solusinya. Ceritakan bagian yang paling banyak memakan waktu tim Anda, dan kami bantu petakan apakah layak dibangun, termasuk kalau jawabannya belum.',
     scopes: [
       { scope: 'ERP & sistem operasional' },
       { scope: 'Otomasi & AI' },
@@ -110,7 +110,7 @@ export const SECTIONS: LandingSection[] = [
         ul: [
           'Gudang pakai spreadsheet.\nTiga orang edit file yang sama. Angka yang benar tergantung siapa yang terakhir simpan.',
           'Keuangan pakai aplikasi lain.\nTiap aplikasi rapi sendiri, tapi tidak saling bicara. Tagihannya naik tiap tambah orang.',
-          'Lapangan lapor lewat grup chat.\nLaporannya ada. Mencarinya yang makan waktu — dan tidak pernah jadi data.',
+          'Lapangan lapor lewat grup chat.\nLaporannya ada. Mencarinya yang makan waktu, dan tidak pernah jadi data.',
         ],
       },
       'Semua jalan, sampai Anda butuh satu angka yang menyatukan ketiganya.',
@@ -170,12 +170,12 @@ export const SECTIONS: LandingSection[] = [
       { h3: 'Belum cocok kalau' },
       {
         ul: [
-          'Butuhnya cuma satu formulir atau satu laporan\nPakai form atau spreadsheet dulu — lebih murah.',
+          'Butuhnya cuma satu formulir atau satu laporan\nPakai form atau spreadsheet dulu, lebih murah.',
           'Prosesnya masih berubah tiap minggu\nStabilkan prosesnya dulu, baru dibangun.',
           'Belum ada yang bisa menjawab soal proses\nTunjuk satu pemilik proses di internal.',
         ],
       },
-      'Tetap boleh konsultasi — kami arahkan ke opsi yang lebih murah.',
+      'Tetap boleh konsultasi. Kami arahkan ke opsi yang lebih murah.',
     ],
   },
 ];
@@ -285,7 +285,7 @@ export const TENETS = [
     icon: 'voice',
     title: 'Opinionated, bukan obedient.',
     description:
-      'Kami akan membangun apa yang Anda minta. Tetapi jika ada cara yang lebih masuk akal untuk goal Anda, kami akan menyampaikannya di awal — bukan setelah proyek berjalan.',
+      'Kami akan membangun apa yang Anda minta. Tetapi jika ada cara yang lebih masuk akal untuk goal Anda, kami akan menyampaikannya di awal, bukan setelah proyek berjalan.',
   },
   {
     order: 3,
@@ -349,13 +349,13 @@ export const FAQS = [
     order: 9,
     question: 'Apakah tersedia model retainer?',
     answer:
-      'Tersedia, untuk sistem yang sudah live dan terus berkembang. Bukan model "pool of hours" — kami tetap scope per cycle agar fokus pada hasil yang jelas.',
+      'Tersedia, untuk sistem yang sudah live dan terus berkembang. Bukan model "pool of hours". Kami tetap scope per cycle agar fokus pada hasil yang jelas.',
   },
   {
     order: 10,
     question: 'Anda berbasis di mana?',
     answer:
-      'Remote-first, dengan tim inti di Jakarta. Klien dapat berada di mana pun di Indonesia — kami biasa berkolaborasi via Google Meet dan WhatsApp, dan datang langsung untuk kickoff serta milestone besar.',
+      'Remote-first, dengan tim inti di Jakarta. Klien dapat berada di mana pun di Indonesia. Kami biasa berkolaborasi via Google Meet dan WhatsApp, dan datang langsung untuk kickoff serta milestone besar.',
   },
   {
     order: 11,

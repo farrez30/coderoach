@@ -1,4 +1,5 @@
 import { Badge } from '../../_components/ui/Badge';
+import { Meta } from '../../_components/ui/Meta';
 import { Breadcrumbs } from '../../_components/detail/Breadcrumbs';
 import { ProseRenderer } from '../../_components/detail/ProseRenderer';
 import { CoverPlaceholder, ProjectCover } from '../../_components/archive/ProjectCover';
@@ -12,7 +13,7 @@ function ProductViz({ vizType }: { vizType?: string | null }) {
     return (
       <div className="aspect-video rounded-2xl bg-paper-100 border border-paper-200 p-6 grid grid-cols-[1.4fr_1fr] grid-rows-[auto_1fr] gap-3 font-mono text-xs tabular shadow-[inset_0_1px_0_rgba(255,255,255,0.6)]">
         <div className="col-span-full flex justify-between text-mist-600 tracking-wide text-sm">
-          <span>[ LAPORTA · OUTLET-04 ]</span>
+          <span className="whitespace-nowrap">[ LAPORTA · OUTLET-04 ]</span>
           <span title="Gambar contoh, bukan data langsung">ILUSTRASI</span>
         </div>
         <div className="bg-paper-50 rounded-lg relative overflow-hidden p-4">
@@ -51,7 +52,7 @@ function ProductViz({ vizType }: { vizType?: string | null }) {
     return (
       <div className="aspect-video rounded-2xl bg-shadow-900 text-paper p-6 font-mono text-xs flex flex-col gap-2.5 overflow-hidden tabular">
         <div className="flex justify-between text-mist-500 tracking-wider text-sm mb-2">
-          <span>[ CONTOH KAMPANYE · ILUSTRASI ]</span>
+          <Meta parts={['[ CONTOH KAMPANYE', 'ILUSTRASI ]']} />
           <span className="inline-flex items-center gap-1.5 text-[#5DD79A]">
             <span className="relative flex w-1.5 h-1.5">
               <span className="absolute inset-0 rounded-full bg-success animate-pulse-dot" />
@@ -67,7 +68,7 @@ function ProductViz({ vizType }: { vizType?: string | null }) {
             </div>
             <div>
               <div className="text-paper font-sans font-semibold text-sm">{r.name}</div>
-              <div className="text-mist-500">{r.tier}</div>
+              <Meta parts={r.tier} className="text-mist-500" />
             </div>
             <div className="text-mist-500 text-right">{r.reach}</div>
             <div className="text-right" style={{ color: r.deltaColor || 'var(--color-electric)' }}>{r.delta}</div>
@@ -130,7 +131,7 @@ export function StudioProductDetail({ project, as: Root = 'main' }: { project: P
                   rel="noopener noreferrer"
                   className="h-12 px-5 rounded-md bg-electric text-paper text-sm font-semibold inline-flex items-center gap-2 hover:bg-[#2562E0] transition-colors"
                 >
-                  {project.studio.externalLink.label || `Visit ${project.client.toLowerCase()} →`}
+                  {project.studio.externalLink.label || `Visit ${project.client.toLowerCase()}`} <span aria-hidden>→</span>
                 </a>
               )}
             </div>

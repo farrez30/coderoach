@@ -1,6 +1,7 @@
 import { SectionHead, type SectionHeadCopy } from './SectionHead';
 import { PayloadImage } from './ui/PayloadImage';
 import { formatChipLabel } from './ui/chipLabel';
+import { Meta } from './ui/Meta';
 
 type Project = {
   id: string | number;
@@ -72,12 +73,12 @@ export function Work({ cases, head }: { cases: Project[]; head?: SectionHeadCopy
             <div className="relative z-[1]">
               <div className="flex gap-2 flex-wrap mb-4">
                 {featuredBadgeLabel && (
-                  <span className="h-6 px-2.5 rounded-full inline-flex items-center font-mono text-[11px] font-medium uppercase tracking-wider bg-paper/[0.08] border border-paper/[0.08] text-paper">
+                  <span className="h-6 px-2.5 rounded-full inline-flex items-center font-mono text-[11px] font-medium uppercase tracking-wider whitespace-nowrap bg-paper/[0.08] border border-paper/[0.08] text-paper">
                     {featuredBadgeLabel}
                   </span>
                 )}
                 {featured.featuredDetails.shippedLabel && (
-                  <span className="h-6 px-2.5 rounded-full inline-flex items-center gap-1.5 font-mono text-[11px] font-medium uppercase tracking-wider bg-success/[0.14] border border-[#5DD79A]/30 text-[#5DD79A]">
+                  <span className="h-6 px-2.5 rounded-full inline-flex items-center gap-1.5 font-mono text-[11px] font-medium uppercase tracking-wider whitespace-nowrap bg-success/[0.14] border border-[#5DD79A]/30 text-[#5DD79A]">
                     <span className="w-1.5 h-1.5 rounded-full bg-success" aria-hidden />
                     {formatChipLabel(featured.featuredDetails.shippedLabel)}
                   </span>
@@ -85,7 +86,7 @@ export function Work({ cases, head }: { cases: Project[]; head?: SectionHeadCopy
               </div>
               {featured.featuredDetails.metaLine && (
                 <span className="block font-mono text-[11px] uppercase tracking-wider text-mist-500 mb-1.5 tabular">
-                  {featured.featuredDetails.metaLine}
+                  <Meta parts={featured.featuredDetails.metaLine} />
                 </span>
               )}
               {featured.featuredDetails.headline && (
@@ -116,7 +117,7 @@ export function Work({ cases, head }: { cases: Project[]; head?: SectionHeadCopy
                 href={`/work/${featured.slug}`}
                 className="h-11 px-[18px] rounded-md bg-paper text-ink text-sm font-semibold inline-flex items-center gap-2 hover:bg-mist-400 transition-colors"
               >
-                Baca case study →
+                Baca case study <span aria-hidden>→</span>
               </a>
             </div>
             <div className="relative z-[1]">
@@ -165,7 +166,7 @@ export function Work({ cases, head }: { cases: Project[]; head?: SectionHeadCopy
                 Proyek lainnya
               </span>
               <a href="/work" className="text-[11px] font-semibold uppercase tracking-[0.18em] text-electric hover:underline">
-                Lihat semua →
+                Lihat semua <span aria-hidden>→</span>
               </a>
             </div>
             <div className="flex flex-col">
@@ -197,7 +198,7 @@ export function Work({ cases, head }: { cases: Project[]; head?: SectionHeadCopy
                     {c.client}
                   </span>
                   <span className="text-[15px] text-mist-600 leading-[1.4]">{c.tagline}</span>
-                  <span className="font-mono text-[11px] tracking-wider text-mist-600 uppercase">{c.meta}</span>
+                  <Meta parts={c.meta} className="font-mono text-[11px] tracking-wider text-mist-600 uppercase" />
                   <span className="flex gap-1.5 flex-wrap">
                     {c.pills?.map((p) => (
                       <span key={p.pill} className="h-6 px-2.5 rounded-full inline-flex items-center font-mono text-[11px] font-medium uppercase tracking-wider bg-mist-400/30 text-ink">
@@ -205,7 +206,7 @@ export function Work({ cases, head }: { cases: Project[]; head?: SectionHeadCopy
                       </span>
                     ))}
                   </span>
-                  <span className="hidden lg:block text-mist-500 group-hover:text-electric group-hover:translate-x-1 transition-[color,transform] text-right">→</span>
+                  <span aria-hidden className="hidden lg:block text-mist-500 group-hover:text-electric group-hover:translate-x-1 transition-[color,transform] text-right">→</span>
                 </a>
               ))}
             </div>

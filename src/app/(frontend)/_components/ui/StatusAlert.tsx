@@ -99,7 +99,7 @@ export function StatusAlert({
         {badge && (
           <div className="px-6 pt-6">
             <span
-              className={`h-6 px-2.5 rounded-full inline-flex items-center font-mono text-[10px] font-semibold uppercase tracking-[0.2em] tabular border ${t.chip} ${t.chipText}`}
+              className={`h-6 px-2.5 rounded-full inline-flex items-center whitespace-nowrap font-mono text-[10px] font-semibold uppercase tracking-[0.2em] tabular border ${t.chip} ${t.chipText}`}
             >
               {formatChipLabel(badge)}
             </span>

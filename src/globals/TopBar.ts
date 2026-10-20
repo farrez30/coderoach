@@ -14,7 +14,7 @@ export const TopBar: GlobalConfig = {
       name: 'link',
       type: 'group',
       fields: [
-        { name: 'label', type: 'text', defaultValue: 'Start a 48-hour discovery →' },
+        { name: 'label', type: 'text', defaultValue: 'Start a 48-hour discovery' },
         { name: 'href', type: 'text', defaultValue: '#contact' },
       ],
     },

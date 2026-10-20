@@ -6,11 +6,12 @@ import { Breadcrumbs } from '../_components/detail/Breadcrumbs';
 import { PostCard } from '../_components/archive/PostCard';
 import { CompactPostRow } from '../_components/archive/CompactPostRow';
 import { Pagination } from '../_components/archive/Pagination';
+import { Meta } from '../_components/ui/Meta';
 
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Field Notes · Coderoach Studio · Engineering & Operations Notes',
+  title: 'Field Notes | Coderoach Studio | Engineering & Operations Notes',
   description: 'Notes from Coderoach Studio: engineering, operasi, dan praktik membangun software yang dipakai harian. Postgres, Next.js, otomasi, dan studi kasus produk.',
 };
 
@@ -78,7 +79,12 @@ export default async function NotesArchivePage({
               </p>
             </div>
             <div className="mt-8 font-mono text-xs uppercase tracking-wider text-mist-600 tabular">
-              {totalDocs} {totalDocs === 1 ? 'post' : 'posts'} · {totalPages} {totalPages === 1 ? 'page' : 'pages'}
+              <Meta
+                parts={[
+                  `${totalDocs} ${totalDocs === 1 ? 'post' : 'posts'}`,
+                  `${totalPages} ${totalPages === 1 ? 'page' : 'pages'}`,
+                ]}
+              />
             </div>
           </div>
         </section>

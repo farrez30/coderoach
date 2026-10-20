@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { PHASE_COPY, RESULT_COPY } from '@/lib/opsscore/copy';
 import type { Phase } from '@/lib/opsscore/scoring';
+import { Meta } from '../../_components/ui/Meta';
 
 /**
  * The phase as a persona, in pieces the results and share pages lay out on a two-column grid: the title,
@@ -14,7 +15,7 @@ export function PersonaTitle({ phase, className = '' }: Props) {
   return (
     <div className={className}>
       <p className="m-0 font-mono text-xs uppercase tracking-wider text-electric tabular">
-        {RESULT_COPY.phaseOf(phase)} · {persona.data}
+        <Meta parts={[RESULT_COPY.phaseOf(phase), persona.data]} />
       </p>
       <h1 className="text-[clamp(36px,5vw,56px)] leading-[1.02] tracking-[-0.025em] font-bold mt-2 mb-0">{persona.title}</h1>
       <p className="mt-1 mb-0 text-[20px] sm:text-[24px] font-semibold tracking-[-0.01em] text-mist-600">{persona.nickname}</p>

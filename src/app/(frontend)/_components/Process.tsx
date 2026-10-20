@@ -1,5 +1,6 @@
 import { Icon, type IconName } from '@/lib/icons';
 import { SectionHead, type SectionHeadCopy } from './SectionHead';
+import { Meta } from './ui/Meta';
 
 type Phase = {
   id: string | number;
@@ -56,7 +57,7 @@ export function Process({ phases, head }: { phases: Phase[]; head?: SectionHeadC
               <p className="text-sm text-mist-600 leading-[1.5] m-0 mb-4">{p.what}</p>
               <div className="bg-paper-50 border border-paper-200 rounded-md px-3 py-2.5 text-[13px] leading-[1.4]">
                 <span className="block text-[10px] font-semibold uppercase tracking-[0.18em] text-mist-600 mb-1">Deliverable</span>
-                {p.deliv}
+                <Meta parts={p.deliv} dotClassName="text-mist-400" />
               </div>
             </div>
           ))}

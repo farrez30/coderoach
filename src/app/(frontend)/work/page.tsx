@@ -9,7 +9,7 @@ import { CatalogClient, type CatalogProject } from './CatalogClient';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Work · Portfolio Coderoach Studio · Web, Automasi, Dashboard',
+  title: 'Work | Portfolio Coderoach Studio | Web, Automasi, Dashboard',
   description:
     'Sistem yang dibangun Coderoach Studio untuk klien dan untuk studio sendiri: ERP, aplikasi internal, otomasi, dan situs.',
   alternates: { canonical: '/work' },

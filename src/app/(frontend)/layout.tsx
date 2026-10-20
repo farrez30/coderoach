@@ -26,7 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
       : '';
     const description =
       siteSettings?.siteDescription || tagline || fallbackDescription;
-    const title = tagline ? `${siteName} · ${tagline}` : siteName;
+    const title = tagline ? `${siteName} | ${tagline}` : siteName;
     const faviconUrl = siteSettings?.favicon?.url;
     const ogImageUrl = siteSettings?.ogImage?.url;
     return {

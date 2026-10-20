@@ -571,7 +571,7 @@ export const SHARE_COPY = {
   copyPrompt: 'Salin link ini', // REVIEW
   shareTitle: 'Hasil OpsScore', // REVIEW
   shareText: 'Ini fase AI Readiness bisnis kami menurut OpsScore.', // REVIEW
-  metaTitle: (phaseTitle: string) => `${phaseTitle} · hasil OpsScore`, // REVIEW
+  metaTitle: (phaseTitle: string) => `${phaseTitle} | hasil OpsScore`, // REVIEW
   marker: '[ OPSSCORE ] · Hasil yang dibagikan', // REVIEW
   scoreLabel: 'AI Readiness bisnis ini', // REVIEW
   cta: 'Cek bisnis Anda',

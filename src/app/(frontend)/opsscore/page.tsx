@@ -8,6 +8,7 @@ import { phaseRange, type Phase } from '@/lib/opsscore/scoring';
 import { LandingTracker } from './_components/Trackers';
 import { BenefitVisual } from './_components/BenefitVisual';
 
+import { Meta } from '../_components/ui/Meta';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
@@ -40,7 +41,7 @@ export default function OpsScoreLandingPage() {
           <div className="relative max-w-[1180px] mx-auto px-8 grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-16 items-center">
             <div className="flex flex-col gap-5 sm:gap-6">
               <span className="font-mono text-xs font-medium tracking-wider text-mist-600 uppercase tabular">
-                {LANDING_COPY.marker}
+                <Meta parts={LANDING_COPY.marker} />
               </span>
               <h1 className="text-[clamp(34px,5.5vw,72px)] leading-[1.02] tracking-[-0.03em] font-bold max-w-[16ch] text-balance m-0">
                 {LANDING_COPY.headline.lead}{' '}

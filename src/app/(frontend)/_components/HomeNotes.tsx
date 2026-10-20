@@ -19,7 +19,7 @@ export function HomeNotes({ posts, head }: { posts: Post[]; head?: SectionHeadCo
             href="/notes"
             className="text-[11px] font-semibold uppercase tracking-[0.18em] text-electric hover:underline self-start lg:self-auto whitespace-nowrap"
           >
-            Lihat semua →
+            Lihat semua <span aria-hidden>→</span>
           </a>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 reveal-stagger">

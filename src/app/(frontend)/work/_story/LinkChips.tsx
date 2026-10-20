@@ -32,7 +32,7 @@ export function LinkChips({ links }: { links: LinkView[] }) {
               l.snapshot?.url ? (
                 <a href={l.snapshot.url} className={linkChip}>
                   <span aria-hidden className="h-2 w-2 rounded-full bg-error" />
-                  {l.label} sedang tidak bisa dibuka · lihat tangkapan
+                  {l.label} sedang tidak bisa dibuka. Lihat tangkapan
                   {l.snapshotTakenAt ? ` ${formatDay(l.snapshotTakenAt)}` : ''}
                 </a>
               ) : (
@@ -47,7 +47,7 @@ export function LinkChips({ links }: { links: LinkView[] }) {
                   <span aria-hidden className={`h-2 w-2 rounded-full ${l.state.status === 'hidup' ? 'bg-success' : 'bg-warning'}`} />
                 )}
                 {l.label}
-                {l.state?.status === 'login' && <span className="text-ink/65 font-normal">· perlu login</span>}
+                {l.state?.status === 'login' && <span className="text-ink/65 font-normal">(perlu login)</span>}
                 <span aria-hidden>↗</span>
                 <span className="sr-only">(tab baru)</span>
               </a>

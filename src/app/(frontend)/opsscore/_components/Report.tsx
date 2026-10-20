@@ -16,6 +16,7 @@ import { ShareButton } from './ShareButton';
 import { Suggestions } from './Suggestions';
 import { TrackedLink } from './Trackers';
 
+import { Meta } from '../../_components/ui/Meta';
 /** Full report, shown after the gate: priorities → next steps → service class → closing line → CTA. */
 export function Report({
   sessionId,
@@ -36,7 +37,7 @@ export function Report({
       <RevealReport sessionId={sessionId} />
       <div className="max-w-[1180px] mx-auto px-8">
         <span className="font-mono text-xs font-medium tracking-wider text-mist-600 uppercase tabular">
-          {REPORT_COPY.marker}
+          <Meta parts={REPORT_COPY.marker} />
         </span>
         <h2 className="text-[clamp(36px,4.5vw,56px)] leading-[1.02] tracking-[-0.025em] font-bold mt-4 mb-0">
           {REPORT_COPY.prioritiesTitle(priorities.length)}

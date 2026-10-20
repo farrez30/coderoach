@@ -92,7 +92,7 @@ export default async function OpsScorePrintPage({
 
       <div className="print:hidden max-w-[210mm] mx-auto px-4 mb-3 flex items-center justify-between gap-3 flex-wrap">
         <a href={productPath(`/hasil/${id}`)} className="text-[14px] font-semibold text-mist-600 hover:text-ink">
-          ← {PRINT_COPY.back}
+          <span aria-hidden>←</span> {PRINT_COPY.back}
         </a>
         <PrintButton label={PRINT_COPY.print} auto={cetak === '1'} />
       </div>

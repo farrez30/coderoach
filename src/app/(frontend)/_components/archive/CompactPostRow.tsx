@@ -1,5 +1,6 @@
 import { Badge } from '../ui/Badge';
 import { PayloadImage } from '../ui/PayloadImage';
+import { Meta } from '../ui/Meta';
 
 type Post = {
   id: string | number;
@@ -65,8 +66,7 @@ export function CompactPostRow({ post }: { post: Post }) {
           {post.title}
         </h3>
         <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-mist-600 tabular">
-          {formatDate(post.publishedAt)}
-          {post.readingTime ? ` · ${post.readingTime} min` : ''}
+          <Meta parts={[formatDate(post.publishedAt), post.readingTime && `${post.readingTime} min`]} />
         </span>
       </div>
     </a>

@@ -73,7 +73,7 @@ export function OfflineKit({ enabled, pages }: { enabled: boolean; pages: string
 
   const status =
     state.kind === 'ready'
-      ? `Siap offline · ${state.files} berkas · ${mb(state.bytes)} · ${state.at}`
+      ? `Siap offline: ${state.files} berkas, ${mb(state.bytes)}, diperbarui ${state.at}`
       : state.kind === 'working'
         ? `Menyiapkan ${state.done} / ${state.total}`
         : state.kind === 'unavailable'

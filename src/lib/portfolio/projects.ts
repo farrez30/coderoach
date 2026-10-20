@@ -231,11 +231,11 @@ export const PORTFOLIO: PortfolioEntry[] = [
     },
     featuredDetails: {
       badgeLabel: 'FEATURED · STUDIO PRODUCT',
-      shippedLabel: '✓ SHIPPED',
+      shippedLabel: 'SHIPPED',
       metaLine: 'F&B OPS · STUDIO PRODUCT · MULTI-CABANG',
-      headline: 'Laporta — bridging SPV dan Accounting di operasi F&B multi-cabang.',
+      headline: 'Laporta: bridging SPV dan Accounting di operasi F&B multi-cabang.',
       description:
-        'Aplikasi yang menyederhanakan alur data dari cabang ke head office. Petty Cash, Stock Opname, Waste, dan data non-POS lainnya diproses cepat melalui satu workflow — termonitor langsung oleh Area Manager, Investor, dan Decision Maker. Dibangun untuk operator F&B Indonesia yang sudah melampaui kapasitas spreadsheet, namun belum cocok dengan enterprise ERP.',
+        'Aplikasi yang menyederhanakan alur data dari cabang ke head office. Petty Cash, Stock Opname, Waste, dan data non-POS lainnya diproses cepat melalui satu workflow, termonitor langsung oleh Area Manager, Investor, dan Decision Maker. Dibangun untuk operator F&B Indonesia yang sudah melampaui kapasitas spreadsheet, namun belum cocok dengan enterprise ERP.',
       metrics: LAPORTA_METRICS.filter((m) => m.featured).map(toFeaturedMetric),
       codePanel: {
         tag: '[ .TS ]',

@@ -176,7 +176,7 @@ export const Projects: CollectionConfig = {
               },
               fields: [
                 { name: 'badgeLabel', type: 'text', defaultValue: '[ FEATURED · 2026 ]' },
-                { name: 'shippedLabel', type: 'text', defaultValue: '[ ✓ SHIPPED ]' },
+                { name: 'shippedLabel', type: 'text', defaultValue: '[ SHIPPED ]' },
                 { name: 'metaLine', type: 'text' },
                 { name: 'headline', type: 'textarea' },
                 { name: 'description', type: 'textarea' },

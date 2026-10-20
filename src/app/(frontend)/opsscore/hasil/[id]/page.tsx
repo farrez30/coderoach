@@ -18,6 +18,7 @@ import { PhaseLadder } from '../../_components/PhaseLadder';
 import { Report } from '../../_components/Report';
 import { CompleteTracker } from '../../_components/Trackers';
 
+import { Meta } from '../../../_components/ui/Meta';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
@@ -36,7 +37,7 @@ export default async function OpsScoreResultPage({ params }: { params: Promise<{
       <SectionShell>
         <main className="min-h-[60vh] grid place-items-center py-20">
           <div className="max-w-[640px] mx-auto px-8 text-center">
-            <span className="font-mono text-xs uppercase tracking-wider text-mist-600 tabular">{RESULT_COPY.marker}</span>
+            <span className="font-mono text-xs uppercase tracking-wider text-mist-600 tabular"><Meta parts={RESULT_COPY.marker} /></span>
             <h1 className="text-[clamp(36px,5vw,56px)] font-bold tracking-[-0.025em] leading-[1.05] mt-4 mb-4">
               {RESULT_COPY.incompleteTitle}
             </h1>
@@ -80,7 +81,7 @@ export default async function OpsScoreResultPage({ params }: { params: Promise<{
             <div className="relative max-w-[1180px] mx-auto px-8 flex flex-col gap-8 lg:grid lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-x-20 lg:gap-y-6">
               <header className="lg:col-start-1 lg:row-start-1">
                 <span className="font-mono text-xs font-medium tracking-wider text-mist-600 uppercase tabular">
-                  {RESULT_COPY.marker}
+                  <Meta parts={RESULT_COPY.marker} />
                 </span>
                 <h1 className="text-[clamp(36px,5vw,56px)] leading-[1.02] tracking-[-0.025em] font-bold mt-4 mb-0 text-balance">
                   {GATE_COPY.title(lead?.brand)}
@@ -123,7 +124,7 @@ export default async function OpsScoreResultPage({ params }: { params: Promise<{
           <div className="relative max-w-[1180px] mx-auto px-8 grid grid-cols-1 gap-y-6 lg:grid-cols-2 lg:gap-x-20 lg:gap-y-10">
             <div className="lg:col-start-1 lg:row-start-1">
               <span className="font-mono text-xs font-medium tracking-wider text-mist-600 uppercase tabular">
-                {RESULT_COPY.marker}
+                <Meta parts={RESULT_COPY.marker} />
               </span>
               <p className="mt-8 mb-0 text-[11px] font-semibold uppercase tracking-[0.18em] text-mist-600">
                 {RESULT_COPY.scoreLabelFor(lead?.brand)}

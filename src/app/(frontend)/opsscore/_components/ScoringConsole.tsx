@@ -48,7 +48,7 @@ export function ScoringConsole({
         <ol className="list-none m-0 px-4 py-4 min-h-[200px]">
           {lines.slice(0, shown).map((line) => (
             <li key={line.text} className="ops-line-in">
-              <span className={`${line.tone} mr-2`}>{line.prefix}</span>
+              <span aria-hidden className={`${line.tone} mr-2`}>{line.prefix}</span>
               {line.text}
             </li>
           ))}

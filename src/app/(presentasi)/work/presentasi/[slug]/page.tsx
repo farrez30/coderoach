@@ -10,7 +10,7 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const project = await getProject((await params).slug);
-  return { title: project ? `${project.client} · Presentasi` : 'Presentasi' };
+  return { title: project ? `${project.client} | Presentasi` : 'Presentasi' };
 }
 
 /**
@@ -32,7 +32,7 @@ export default async function PresentasiProjectPage({ params }: { params: Promis
     <>
       <nav aria-label="Presentasi" className="sticky top-0 z-40 flex items-center justify-between gap-3 px-4 sm:px-8 h-12 bg-ink/95 text-paper">
         <a href="/work/presentasi" className={link}>
-          ← Semua proyek · Esc
+          <span aria-hidden>←&nbsp;</span>Semua proyek (Esc)
         </a>
         <div className="flex items-center gap-1">
           {prev && (

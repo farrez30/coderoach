@@ -12,6 +12,7 @@ import { AreaScoreList } from '../../_components/AreaScoreList';
 import { PersonaArt, PersonaKey, PersonaTitle, PersonaTraits } from '../../_components/PersonaHero';
 import { PhaseLadder } from '../../_components/PhaseLadder';
 
+import { Meta } from '../../../_components/ui/Meta';
 export const dynamic = 'force-dynamic';
 
 const SLUG = /^[a-z2-9]{8}$/;
@@ -36,7 +37,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const scores = await findSharedScores(slug);
   if (!scores) return { robots: { index: false, follow: false } };
   const phase = PHASE_COPY[scores.phase];
-  const title = SHARE_COPY.metaTitle(`${phase.title} · ${phase.nickname}`);
+  const title = SHARE_COPY.metaTitle(`${phase.title}: ${phase.nickname}`);
   const images = [{ url: ogImagePath(scores.phase), width: 1200, height: 630, alt: phase.title }];
   return {
     metadataBase: process.env.NEXT_PUBLIC_SERVER_URL ? new URL(process.env.NEXT_PUBLIC_SERVER_URL) : undefined,
@@ -67,7 +68,7 @@ export default async function SharedResultPage({ params }: { params: Promise<{ s
           <div className="relative max-w-[1180px] mx-auto px-8 grid grid-cols-1 gap-y-6 lg:grid-cols-2 lg:gap-x-20 lg:gap-y-10">
             <div className="lg:col-start-1 lg:row-start-1">
               <span className="font-mono text-xs font-medium tracking-wider text-mist-600 uppercase tabular">
-                {SHARE_COPY.marker}
+                <Meta parts={SHARE_COPY.marker} />
               </span>
               <p className="mt-8 mb-0 text-[11px] font-semibold uppercase tracking-[0.18em] text-mist-600">
                 {SHARE_COPY.scoreLabel}

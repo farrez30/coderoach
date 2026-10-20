@@ -104,7 +104,7 @@ export function CatalogClient({
               href="/work/presentasi"
               className="font-mono text-xs uppercase tracking-wider text-ink/65 hover:text-ink transition-colors tabular focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric"
             >
-              Mode presentasi →
+              Mode presentasi <span aria-hidden>→</span>
             </a>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-12 items-end mb-12">
@@ -204,7 +204,7 @@ export function CatalogClient({
               href="/#contact"
               className="relative h-12 px-5 rounded-md bg-electric text-paper text-sm font-semibold inline-flex items-center hover:bg-[#2562E0] active:scale-[0.98] transition-[background,transform] flex-shrink-0 shadow-[0_8px_24px_-8px_rgba(44,112,254,0.4)]"
             >
-              Konsultasi gratis 30 menit →
+              Konsultasi gratis 30 menit <span aria-hidden>→</span>
             </a>
           </div>
         </div>

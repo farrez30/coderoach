@@ -1,4 +1,5 @@
 import type { Project } from '@/payload-types';
+import { Meta } from '../../_components/ui/Meta';
 
 export type StoredMetric = NonNullable<Project['metrics']>[number];
 
@@ -31,10 +32,14 @@ export function MetricBand({ metrics }: { metrics: StoredMetric[] }) {
                 {m.unit && <span className="ml-1.5 text-[min(28px,7cqi)] font-semibold tracking-[-0.02em] text-electric">{m.unit}</span>}
               </p>
               <p className="m-0 mt-3 font-mono text-[11px] uppercase tracking-wider text-ink/65 tabular">
-                {m.baselineValue && <>Dari {[m.baselineValue, m.baselineUnit].filter(Boolean).join(' ')} · </>}
-                <a href={`#sumber-${i + 1}`} className="inline-block -my-3 px-1.5 py-3 hover:text-ink underline-offset-4 hover:underline" aria-label={`Sumber angka ${i + 1}`}>
-                  [{i + 1}]
-                </a>
+                <Meta
+                  parts={[
+                    m.baselineValue && `Dari ${[m.baselineValue, m.baselineUnit].filter(Boolean).join(' ')}`,
+                    <a key="sumber" href={`#sumber-${i + 1}`} className="inline-block -my-3 px-1.5 py-3 hover:text-ink underline-offset-4 hover:underline" aria-label={`Sumber angka ${i + 1}`}>
+                      [{i + 1}]
+                    </a>,
+                  ]}
+                />
               </p>
             </li>
           ))}

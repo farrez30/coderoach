@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { Meta } from './ui/Meta';
 
 type EventCategory = 'build' | 'alert' | 'query' | 'trace' | 'ship';
 
@@ -9,6 +10,8 @@ type OpsEvent = {
   category: EventCategory;
   subject: string;
   status: string;
+  /** ✓ or →, drawn before the status and hidden from screen readers. */
+  mark?: string;
   resolved?: boolean; // alert state — resolves after a beat
 };
 
@@ -23,16 +26,16 @@ const CATEGORY_STYLES: Record<EventCategory, { color: string; label: string }> =
 // An illustration of the kind of work the studio's systems do, not a live feed: no versions,
 // timings, or counts that could be read as measurements (PRODUCT.md, proof over adjectives).
 const POOL: Omit<OpsEvent, 'id'>[] = [
-  { category: 'build', subject: 'laporta · tutup shift', status: '✓ data terkunci' },
-  { category: 'alert', subject: 'antrean sinkron', status: '→ pulih sendiri' },
+  { category: 'build', subject: 'laporta: tutup shift', mark: '✓', status: 'data terkunci' },
+  { category: 'alert', subject: 'antrean sinkron', mark: '→', status: 'pulih sendiri' },
   { category: 'query', subject: 'laporan laba rugi', status: 'diperbarui' },
   { category: 'trace', subject: 'serah terima kas', status: 'jejak tercatat' },
-  { category: 'ship', subject: 'situs perusahaan', status: '✓ terbit' },
-  { category: 'build', subject: 'laporan bulanan', status: '✓ dibuat' },
-  { category: 'alert', subject: 'cron pipeline', status: '→ diteruskan ke ops' },
+  { category: 'ship', subject: 'situs perusahaan', mark: '✓', status: 'terbit' },
+  { category: 'build', subject: 'laporan bulanan', mark: '✓', status: 'dibuat' },
+  { category: 'alert', subject: 'cron pipeline', mark: '→', status: 'diteruskan ke ops' },
   { category: 'query', subject: 'rekonsiliasi bank', status: 'cocok' },
   { category: 'trace', subject: 'tarik data iklan', status: 'tersinkron' },
-  { category: 'ship', subject: 'perbaikan cepat', status: '✓ dirilis' },
+  { category: 'ship', subject: 'perbaikan cepat', mark: '✓', status: 'dirilis' },
 ];
 
 const formatTime = (date: Date) => {
@@ -97,8 +100,8 @@ export function OpsConsole() {
       {/* Header */}
       <div className="flex items-center justify-between px-5 py-3 border-b border-shadow-700">
         <div className="flex items-center gap-2.5">
-          <span className="w-2 h-2 rounded-full bg-success animate-pulse-dot" />
-          <span className="text-mist-400 tracking-[0.06em]">coderoach.studio · uplink</span>
+          <span aria-hidden className="w-2 h-2 rounded-full bg-success animate-pulse-dot" />
+          <Meta parts="coderoach.studio · uplink" className="text-mist-400 tracking-[0.06em]" />
         </div>
         <span className="text-mist-600 tracking-[0.04em]">{now ? formatTime(now) : '--:--:--'}</span>
       </div>
@@ -116,7 +119,7 @@ export function OpsConsole() {
 
       {/* Footer */}
       <div className="px-5 py-2 border-t border-shadow-700 flex items-center justify-between text-[10px] text-mist-500 tracking-[0.06em]">
-        <span>contoh alur kerja · bukan data langsung</span>
+        <span>contoh alur kerja, bukan data langsung</span>
         {!reduceMotion && (
           <button
             type="button"
@@ -151,7 +154,10 @@ function OpsEventRow({
     >
       <span className={`shrink-0 ${cat.color} font-medium tracking-[0.04em] w-12`}>{cat.label}</span>
       <span className="flex-1 text-paper truncate">{event.subject}</span>
-      <span className="text-mist-500 truncate text-right">{event.status}</span>
+      <span className="text-mist-500 truncate text-right">
+        {event.mark && <span aria-hidden>{event.mark} </span>}
+        {event.status}
+      </span>
     </div>
   );
 }

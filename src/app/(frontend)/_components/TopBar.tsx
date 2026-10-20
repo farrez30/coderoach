@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { CtaLabel } from './ui/CtaLabel';
 
 type TopBarData = {
   enabled?: boolean | null;
@@ -37,17 +38,13 @@ export function TopBar({ data }: { data: TopBarData | null }) {
   return (
     <>
       {/* Desktop & tablet: inline horizontal banner */}
-      <div className="hidden md:block bg-electric text-paper text-center font-mono text-xs font-medium tracking-wide py-3 px-6 relative z-[5] tabular">
+      <div className="hidden md:flex flex-wrap justify-center gap-x-6 gap-y-1 bg-electric text-paper text-center font-mono text-xs font-medium tracking-wide py-3 px-6 relative z-[5] tabular">
         {data.tag && <span className="opacity-90">{data.tag}</span>}
-        {data.tag && <span className="opacity-60 px-3">·</span>}
         <span>{data.message}</span>
         {data.link?.href && (
-          <>
-            <span className="opacity-60 px-3">·</span>
-            <a href={data.link.href} className="font-semibold underline underline-offset-[3px]">
-              {data.link.label}
-            </a>
-          </>
+          <a href={data.link.href} className="font-semibold underline underline-offset-[3px]">
+            <CtaLabel label={data.link.label} />
+          </a>
         )}
       </div>
 
@@ -76,7 +73,7 @@ export function TopBar({ data }: { data: TopBarData | null }) {
                   onClick={dismissMobile}
                   className="inline-flex items-center gap-1 mt-2 text-[13px] font-semibold underline underline-offset-[3px] hover:opacity-90 transition-opacity"
                 >
-                  {data.link.label}
+                  <CtaLabel label={data.link.label} />
                 </a>
               )}
             </div>

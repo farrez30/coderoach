@@ -1,6 +1,8 @@
 import { MarqueePause } from './MarqueePause';
 import { OpsConsole } from './OpsConsole';
 import { OctagonMark } from './ui/OctagonMark';
+import { stripArrow } from './ui/CtaLabel';
+import { Meta } from './ui/Meta';
 
 type HeroData = {
   pillText?: string | null;
@@ -44,7 +46,7 @@ export function Hero({ data, clients }: { data: HeroData | null; clients: Client
             {data?.pillText && (
               <span className="inline-flex items-center gap-2 px-4 py-2 bg-paper-50 border border-paper-200 rounded-full text-[12px] font-medium text-ink shadow-sm self-start animate-hero-in opacity-0" style={{ animationDelay: '60ms' }}>
                 <OctagonMark size={11} strokeWidth={1.6} className="text-electric shrink-0" />
-                {data.pillText}
+                <Meta parts={data.pillText} />
               </span>
             )}
             {data?.headline && (
@@ -61,7 +63,7 @@ export function Hero({ data, clients }: { data: HeroData | null; clients: Client
             <div className="flex gap-3 flex-wrap mt-2 animate-hero-in opacity-0" style={{ animationDelay: '380ms' }}>
               {data?.ctaPrimary?.href && (
                 <a href={data.ctaPrimary.href} className="h-[52px] px-[22px] rounded-md bg-electric text-paper text-[15px] font-semibold inline-flex items-center gap-2 hover:bg-[#2562E0] transition-colors" data-cta-magnetic>
-                  {data.ctaPrimary.label}
+                  {stripArrow(data.ctaPrimary.label)}
                   <svg aria-hidden width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M5 12h14M13 5l7 7-7 7" />
                   </svg>

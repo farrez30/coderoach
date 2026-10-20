@@ -1,6 +1,7 @@
 import type { Project } from '@/payload-types';
 import { industryLabel, KIND_LABELS } from '@/lib/portfolio/taxonomy';
 import { Breadcrumbs } from '../../_components/detail/Breadcrumbs';
+import { Meta } from '../../_components/ui/Meta';
 import { DeviceFrame } from './DeviceFrame';
 import { LinkChips, type LinkView } from './LinkChips';
 import { asMedia, MediaImg } from './MediaImg';
@@ -33,7 +34,7 @@ export function StoryHero({ project, links, mode }: { project: Project; links: L
             <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Work', href: '/work' }, { label: project.client }]} />
           </div>
         )}
-        <p className="m-0 font-mono text-[11px] sm:text-xs uppercase tracking-wider text-ink/65 tabular">{eyebrow.join(' · ')}</p>
+        <p className="m-0 font-mono text-[11px] sm:text-xs uppercase tracking-wider text-ink/65 tabular"><Meta parts={eyebrow} /></p>
         <h1 className="m-0 mt-2 sm:mt-3 text-[clamp(46px,9vw,112px)] font-bold tracking-[-0.045em] leading-[0.95]">{project.client}</h1>
         <p className="m-0 mt-3 sm:mt-5 max-w-[28ch] text-[clamp(21px,2.8vw,34px)] font-semibold tracking-[-0.02em] leading-[1.18] text-pretty">
           {project.tagline}

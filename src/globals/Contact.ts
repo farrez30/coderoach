@@ -31,7 +31,7 @@ export const Contact: GlobalConfig = {
         { name: 'email', type: 'text', defaultValue: '[ // YOUR EMAIL ]' },
         { name: 'scope', type: 'text', defaultValue: '[ // SCOPE ]' },
         { name: 'brief', type: 'text', defaultValue: '[ // WHAT ARE YOU SHIPPING? ]' },
-        { name: 'submit', type: 'text', defaultValue: 'Send the brief →' },
+        { name: 'submit', type: 'text', defaultValue: 'Send the brief' },
         { name: 'emailFallback', type: 'text', defaultValue: 'hello@coderoach.studio' },
       ],
     },
