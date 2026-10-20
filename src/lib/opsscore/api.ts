@@ -12,8 +12,17 @@ export const LEADS = 'assessment-leads' as const;
 export const json = (body: Record<string, unknown>, status = 200, headers?: HeadersInit) =>
   NextResponse.json(body, { status, headers });
 
-export const clientIp = (req: NextRequest) =>
-  req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || req.headers.get('x-real-ip') || 'unknown';
+/**
+ * The visitor's address as Railway's edge reports it. X-Real-IP is set by the edge, which overwrites
+ * whatever the client sent. The first X-Forwarded-For entry is the one a client can write itself, so
+ * it never decides a rate limit; the last entry, appended by the hop in front of us, is the fallback.
+ */
+export function clientIp(req: Pick<NextRequest, 'headers'>) {
+  const real = req.headers.get('x-real-ip')?.trim();
+  if (real) return real;
+  const chain = req.headers.get('x-forwarded-for')?.split(',').map((s) => s.trim()).filter(Boolean);
+  return chain?.at(-1) || 'unknown';
+}
 
 /**
  * In-memory, per server instance, and reset by every deploy. That is deliberate: the counters lived
@@ -23,7 +32,7 @@ export const clientIp = (req: NextRequest) =>
  */
 const buckets = new Map<string, { count: number; resetAt: number }>();
 
-export function rateLimited(req: NextRequest, route: string, max: number, windowMs = 10 * 60 * 1000) {
+export function rateLimited(req: Pick<NextRequest, 'headers'>, route: string, max: number, windowMs = 10 * 60 * 1000) {
   const key = `${route}:${clientIp(req)}`;
   const now = Date.now();
   const bucket = buckets.get(key);

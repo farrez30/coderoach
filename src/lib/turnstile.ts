@@ -14,10 +14,10 @@ export type TurnstileResult = 'passed' | 'missing' | 'failed';
  * Server side of the check, with three answers instead of two:
  *
  * - `passed`: verified, or not configured, or Cloudflare could not be reached.
- * - `missing`: the visitor sent no token. The widget can fail for reasons that are not the
- *   visitor's fault — a blocked script, an extension, a misconfigured key — so callers accept
- *   these and log them rather than turn a real lead away.
- * - `failed`: Cloudflare looked at the token and rejected it. That one is worth refusing.
+ * - `missing`: the visitor sent no token. Refused: a script that posts straight to the API never
+ *   loads the widget, so accepting these would leave the check guarding nothing. A visitor whose
+ *   blocker stops the widget is told so in the form and pointed to email instead.
+ * - `failed`: Cloudflare looked at the token and rejected it. Refused too.
  */
 export async function verifyTurnstile(token: unknown, ip?: string): Promise<TurnstileResult> {
   const secret = process.env.TURNSTILE_SECRET_KEY;

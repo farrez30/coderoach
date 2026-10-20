@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { TURNSTILE_SITE_KEY } from '@/lib/turnstile';
 import { TurnstileField, type TurnstileHandle } from './TurnstileField';
 import { DeployConsole } from './DeployConsole';
 import { CtaLabel } from './ui/CtaLabel';
@@ -41,6 +42,7 @@ export function Contact({ data }: { data: ContactData | null }) {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [honeypot, setHoneypot] = useState('');
   const [turnstileToken, setTurnstileToken] = useState('');
+  const [turnstileBroken, setTurnstileBroken] = useState(false);
   const turnstile = useRef<TurnstileHandle | null>(null);
   // Set when the visitor arrives from an OpsScore report (/?hasil_id=…#contact).
   const [hasilId, setHasilId] = useState<string | null>(null);
@@ -57,6 +59,10 @@ export function Contact({ data }: { data: ContactData | null }) {
     onPrimary?: () => void;
   } | null>(null);
   const toast = useToast();
+  const emailDirect = () => {
+    window.location.href = `mailto:${data?.formLabels?.emailFallback || 'hello@coderoach.studio'}`;
+    setAlert(null);
+  };
 
   useEffect(() => {
     const id = new URLSearchParams(window.location.search).get('hasil_id');
@@ -161,6 +167,26 @@ export function Contact({ data }: { data: ContactData | null }) {
                   toast.warning('Brief terlalu pendek', 'Tuliskan minimal 10 karakter agar kami punya konteks awal.');
                   return;
                 }
+                // The server refuses a brief without a Turnstile token. Wait for a slow widget; a blocked
+                // one will never answer, so offer email straight away instead of sending.
+                if (TURNSTILE_SITE_KEY && !turnstileToken) {
+                  if (!turnstileBroken) {
+                    toast.info('Sebentar', 'Verifikasi keamanan masih berjalan. Coba kirim lagi sebentar lagi.');
+                    return;
+                  }
+                  setAlert({
+                    open: true,
+                    tone: 'warning',
+                    badge: '[ VERIFIKASI ]',
+                    title: 'Verifikasi keamanan tidak termuat.',
+                    message:
+                      'Pemblokir iklan atau ekstensi browser menahan verifikasi keamanan kami. Matikan untuk halaman ini lalu muat ulang, atau kirim brief lewat email.',
+                    primaryLabel: 'Mengerti',
+                    secondaryLabel: 'Email langsung',
+                    onSecondary: emailDirect,
+                  });
+                  return;
+                }
                 setSubmitting(true);
                 setSubmitError(null);
                 // Keep the deploy console visible long enough for the full
@@ -181,6 +207,8 @@ export function Contact({ data }: { data: ContactData | null }) {
                     }),
                   });
                   const [res] = await Promise.all([fetchTask, minVisible]);
+                  // A token is good for one request; the next send needs a fresh one.
+                  turnstile.current?.reset();
                   const json = await res.json().catch(() => ({}));
                   setSubmitting(false);
                   if (res.ok && json?.ok) {
@@ -215,10 +243,18 @@ export function Contact({ data }: { data: ContactData | null }) {
                         message: errMsg,
                         primaryLabel: 'Mengerti',
                         secondaryLabel: 'Email langsung',
-                        onSecondary: () => {
-                          window.location.href = `mailto:${data?.formLabels?.emailFallback || 'hello@coderoach.studio'}`;
-                          setAlert(null);
-                        },
+                        onSecondary: emailDirect,
+                      });
+                    } else if (code === 'turnstile') {
+                      setAlert({
+                        open: true,
+                        tone: 'warning',
+                        badge: '[ 400 · VERIFIKASI ]',
+                        title: 'Verifikasi keamanan belum lolos.',
+                        message: errMsg,
+                        primaryLabel: 'Mengerti',
+                        secondaryLabel: 'Email langsung',
+                        onSecondary: emailDirect,
                       });
                     } else if (code === 'invalid_email' || code === 'brief_too_short' || code === 'brief_too_long') {
                       setAlert({
@@ -238,14 +274,12 @@ export function Contact({ data }: { data: ContactData | null }) {
                         message: errMsg,
                         primaryLabel: 'Coba lagi',
                         secondaryLabel: 'Email langsung',
-                        onSecondary: () => {
-                          window.location.href = `mailto:${data?.formLabels?.emailFallback || 'hello@coderoach.studio'}`;
-                          setAlert(null);
-                        },
+                        onSecondary: emailDirect,
                       });
                     }
                   }
                 } catch {
+                  turnstile.current?.reset();
                   await minVisible;
                   setSubmitting(false);
                   setSubmitError('Gagal kirim. Cek koneksi dan coba lagi.');
@@ -258,15 +292,17 @@ export function Contact({ data }: { data: ContactData | null }) {
                       'Cek koneksi internet Anda lalu coba kirim lagi. Kalau masih bermasalah, kirim brief langsung via email.',
                     primaryLabel: 'Coba lagi',
                     secondaryLabel: 'Email langsung',
-                    onSecondary: () => {
-                      window.location.href = `mailto:${data?.formLabels?.emailFallback || 'hello@coderoach.studio'}`;
-                      setAlert(null);
-                    },
+                    onSecondary: emailDirect,
                   });
                 }
               }}
             >
-              <TurnstileField onToken={setTurnstileToken} handleRef={turnstile} theme="dark" />
+              <TurnstileField
+                onToken={setTurnstileToken}
+                onUnavailable={() => setTurnstileBroken(true)}
+                handleRef={turnstile}
+                theme="dark"
+              />
               {/* Honeypot — hidden from real users; bots that fill it get silently rejected */}
               <input
                 type="text"

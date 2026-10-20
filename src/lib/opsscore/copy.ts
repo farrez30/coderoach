@@ -334,6 +334,8 @@ export const GATE_COPY = {
     emailDomain: 'Domain email itu tidak menerima email. Cek lagi ketikannya.', // REVIEW
     turnstile: 'Verifikasi keamanan gagal. Muat ulang halaman, lalu coba lagi.', // REVIEW
     turnstilePending: 'Sebentar, verifikasi keamanan masih berjalan.', // REVIEW
+    turnstileMissing:
+      'Verifikasi keamanan tidak termuat di browser ini. Matikan pemblokir untuk halaman ini lalu muat ulang, atau email kami di hello@coderoach.studio.', // REVIEW
     emailDisposable: 'Pakai email yang benar-benar Anda buka, bukan email sekali pakai.', // REVIEW
     required: 'Wajib diisi.', // REVIEW
     phone: 'Nomor WA diawali 08, 10–13 digit.', // REVIEW

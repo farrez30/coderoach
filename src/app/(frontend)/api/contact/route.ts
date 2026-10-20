@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getPayload } from 'payload';
 import config from '@payload-config';
-import { crossSite, findSession } from '@/lib/opsscore/api';
+import { clientIp, crossSite, findSession, rateLimited } from '@/lib/opsscore/api';
 import { verifyTurnstile } from '@/lib/turnstile';
 
 const ALLOWED_SCOPES = new Set([
@@ -13,47 +13,27 @@ const ALLOWED_SCOPES = new Set([
   'Other',
 ]);
 
-// Simple in-memory rate limit: max 5 submissions per IP per 10 minutes.
-// Single-tenant fork — no need for Redis.
-type RateRecord = { count: number; resetAt: number };
-const rateMap = new Map<string, RateRecord>();
-const WINDOW_MS = 10 * 60 * 1000;
 const MAX_PER_WINDOW = 5;
-
-function checkRate(ip: string): { allowed: boolean; retryAfterSec: number } {
-  const now = Date.now();
-  const rec = rateMap.get(ip);
-  if (!rec || now > rec.resetAt) {
-    rateMap.set(ip, { count: 1, resetAt: now + WINDOW_MS });
-    return { allowed: true, retryAfterSec: 0 };
-  }
-  if (rec.count >= MAX_PER_WINDOW) {
-    return { allowed: false, retryAfterSec: Math.max(1, Math.ceil((rec.resetAt - now) / 1000)) };
-  }
-  rec.count += 1;
-  return { allowed: true, retryAfterSec: 0 };
-}
 
 export async function POST(req: NextRequest) {
   const foreign = crossSite(req);
   if (foreign) return foreign;
 
-  const ip =
-    req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-    req.headers.get('x-real-ip') ||
-    'unknown';
+  const ip = clientIp(req);
 
-  const rate = checkRate(ip);
-  if (!rate.allowed) {
-    const minutes = Math.ceil(rate.retryAfterSec / 60);
+  // Same per-instance counter as the OpsScore routes (lib/opsscore/api.ts), with this form's wording.
+  const limited = rateLimited(req, 'contact', MAX_PER_WINDOW);
+  if (limited) {
+    const retryAfterSec = Number(limited.headers.get('Retry-After')) || 60;
+    const minutes = Math.ceil(retryAfterSec / 60);
     return NextResponse.json(
       {
         ok: false,
         code: 'rate_limited',
         error: `Anda sudah mencapai batas ${MAX_PER_WINDOW} pengiriman dalam 10 menit terakhir. Coba lagi dalam ${minutes} menit, atau email langsung agar kami segera proses.`,
-        retryAfterSec: rate.retryAfterSec,
+        retryAfterSec,
       },
-      { status: 429, headers: { 'Retry-After': String(rate.retryAfterSec) } },
+      { status: 429, headers: { 'Retry-After': String(retryAfterSec) } },
     );
   }
 
@@ -64,16 +44,16 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: false, error: 'Invalid JSON' }, { status: 400 });
   }
 
-  // Honeypot — if filled, treat as bot but return success silently.
   const humanCheck = await verifyTurnstile(body?.turnstileToken, ip);
-  if (humanCheck === 'missing') console.warn('[contact] brief submitted without a Turnstile token');
-  if (humanCheck === 'failed') {
-    return NextResponse.json(
-      { ok: false, code: 'turnstile', error: 'Verifikasi keamanan gagal. Muat ulang halaman, lalu coba lagi.' },
-      { status: 400 },
-    );
+  if (humanCheck !== 'passed') {
+    const error =
+      humanCheck === 'missing'
+        ? 'Verifikasi keamanan tidak termuat di browser ini. Matikan pemblokir untuk halaman ini lalu muat ulang, atau kirim brief lewat email.'
+        : 'Verifikasi keamanan gagal. Muat ulang halaman, lalu coba lagi.';
+    return NextResponse.json({ ok: false, code: 'turnstile', error }, { status: 400 });
   }
 
+  // Honeypot: a filled field means a bot, answered with a quiet success and nothing saved.
   if (body?.company_url) {
     return NextResponse.json({ ok: true });
   }

@@ -63,8 +63,13 @@ export function GateForm({
       return;
     }
     // Turnstile answers on its own within a moment; only a click that beats it lands here. A widget
-    // that gave up is a different case: the server takes those and flags them, so let it through.
-    if (TURNSTILE_SITE_KEY && !turnstileToken && !turnstileBroken) {
+    // that gave up (blocked script, extension) will never send a token, and the server refuses a
+    // post without one, so say so here instead of sending.
+    if (TURNSTILE_SITE_KEY && !turnstileToken) {
+      if (turnstileBroken) {
+        setErrors({ turnstile: 'turnstileMissing' });
+        return;
+      }
       setFormError(GATE_COPY.errors.turnstilePending);
       return;
     }
