@@ -7,6 +7,7 @@ import { ProseRenderer } from '../_components/detail/ProseRenderer';
 import { Icon, type IconName } from '@/lib/icons';
 import { Badge } from '../_components/ui/Badge';
 import { Meta } from '../_components/ui/Meta';
+import { jakartaQuarter } from '@/lib/quarter';
 import { AnimatedCount } from '../_components/ui/AnimatedCount';
 import { PayloadImage } from '../_components/ui/PayloadImage';
 import { StudioTimeline } from '../_components/studio/StudioTimeline';
@@ -345,7 +346,7 @@ export default async function StudioPage() {
                   <span className="absolute inset-0 rounded-full bg-[#5DD79A] animate-ping opacity-75" />
                   <span className="relative w-2 h-2 rounded-full bg-[#5DD79A]" />
                 </span>
-                <Meta parts="OPEN · SLOT TERBATAS · Q2 2026" />
+                <Meta parts={['OPEN', 'SLOT TERBATAS', jakartaQuarter()]} />
               </div>
               <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-mist-500 block mb-3">
                 Tertarik berkolaborasi?
