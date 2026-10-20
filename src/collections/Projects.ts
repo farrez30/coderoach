@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload';
 import { safeHref } from '../lib/portfolio/links';
 import { INDUSTRIES, RETIRED_INDUSTRIES } from '../lib/portfolio/taxonomy';
+import { validateCodeLine } from '../lib/codeLine';
 import { revalidateProject } from '../lib/revalidate';
 import { autoSlug } from '../lib/slugify';
 
@@ -196,7 +197,14 @@ export const Projects: CollectionConfig = {
                   fields: [
                     { name: 'tag', type: 'text', defaultValue: '[ .TS ]' },
                     { name: 'path', type: 'text' },
-                    { name: 'lines', type: 'array', fields: [{ name: 'line', type: 'text' }] },
+                    {
+                      name: 'lines',
+                      type: 'array',
+                      admin: {
+                        description: 'Plain text. Colour a word with <span style="color:#C4C0C5">word</span>, indent with &nbsp;.',
+                      },
+                      fields: [{ name: 'line', type: 'text', validate: validateCodeLine }],
+                    },
                   ],
                 },
                 { name: 'stack', type: 'array', fields: [{ name: 'tech', type: 'text', required: true }] },

@@ -2,6 +2,7 @@ import { SectionHead, type SectionHeadCopy } from './SectionHead';
 import { PayloadImage } from './ui/PayloadImage';
 import { formatChipLabel } from './ui/chipLabel';
 import { Meta } from './ui/Meta';
+import { CodeLine } from './ui/CodeLine';
 
 type Project = {
   id: string | number;
@@ -141,7 +142,7 @@ export function Work({ cases, head }: { cases: Project[]; head?: SectionHeadCopy
                   {featured.featuredDetails.codePanel.lines?.map((l, i) => (
                     <div key={i} className="flex">
                       <span className="text-mist-600 inline-block w-[22px]">{i + 1}</span>
-                      <span dangerouslySetInnerHTML={{ __html: l.line || '' }} />
+                      <CodeLine line={l.line} />
                     </div>
                   ))}
                 </div>

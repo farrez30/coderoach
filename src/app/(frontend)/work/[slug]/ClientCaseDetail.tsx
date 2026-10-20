@@ -1,5 +1,6 @@
 import { Badge } from '../../_components/ui/Badge';
 import { Meta } from '../../_components/ui/Meta';
+import { CodeLine } from '../../_components/ui/CodeLine';
 import { Breadcrumbs } from '../../_components/detail/Breadcrumbs';
 import { ProseRenderer } from '../../_components/detail/ProseRenderer';
 import { PayloadImage } from '../../_components/ui/PayloadImage';
@@ -105,7 +106,7 @@ export function ClientCaseDetail({ project, as: Root = 'main' }: { project: Proj
                 {fd.codePanel.lines.map((l: any, i: number) => (
                   <div key={i} className="flex">
                     <span className="text-mist-600 inline-block w-[22px]">{i + 1}</span>
-                    <span dangerouslySetInnerHTML={{ __html: l.line || '' }} />
+                    <CodeLine line={l.line} />
                   </div>
                 ))}
               </div>

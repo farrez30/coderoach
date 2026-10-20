@@ -801,6 +801,9 @@ export interface Project {
     codePanel?: {
       tag?: string | null;
       path?: string | null;
+      /**
+       * Plain text. Colour a word with <span style="color:#C4C0C5">word</span>, indent with &nbsp;.
+       */
       lines?:
         | {
             line?: string | null;
